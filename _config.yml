@@ -1,0 +1,58 @@
+# Jekyll Configuration File
+remote_theme: "mmistakes/minimal-mistakes@4.27.3"
+
+# Site metadata
+title: ""
+
+# Base URL
+baseurl: "/mars-ned2" # the subpath of your site, e.g. /blog
+url: "https://2delab.github.io/mars-ned2" 
+
+
+plugins:
+  - jekyll-include-cache
+
+
+defaults:
+  # _posts
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: wide
+      author_profile: true
+      read_time: true
+      comments: true
+      share: true
+      related: false
+      
+
+
+author:
+  name: "Abdiwak Debella"
+  avatar: "/assets/images/image.png"
+  bio: "BENG Robotics and Mechatronics"
+
+  links:
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/2delab/mars-ned2"
+
+
+
+
+footer:
+  links: false
+
+
+
+paginate: 5
+paginate_path: "/blog/page:num/" 
+
+
+minimal_mistakes_skin: "dark"
+
+search: true
+enable_copy_code_button: true
+
+repository_url: "https://github.com/2delab/mars-ned2"

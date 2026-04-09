@@ -1,0 +1,595 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.27.3 by Michael Rose
+  Copyright 2013-2025 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Understanding ROS2</title>
+<meta name="description" content="Let me introduce you to ROS">
+
+
+  <meta name="author" content="Abdiwak Debella">
+  
+  <meta property="article:author" content="Abdiwak Debella">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="">
+<meta property="og:title" content="Understanding ROS2">
+<meta property="og:url" content="http://localhost:4000/mars-ned2/2026/01/23/understanding_ros2.html">
+
+
+  <meta property="og:description" content="Let me introduce you to ROS">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-01-23T00:00:00+00:00">
+
+
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/mars-ned2/2026/01/23/understanding_ros2.html">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/mars-ned2/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  window.enable_copy_code_button = true;
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/mars-ned2/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    
+<script>
+  window.enable_copy_code_button = true;
+</script>
+
+  </head>
+
+  <body class="layout--single wide" dir="ltr">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/mars-ned2/">
+          
+          
+        </a>
+       
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/mars-ned2/"
+                
+                
+              >Home</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/mars-ned2/blog/"
+                
+                
+              >Blog</a>
+            </li></ul>
+
+         <a href="https://github.com/2delab/mars-ned2" class="masthead__github-link" target="_blank" rel="noopener noreferrer" title="View source on GitHub">
+        <i class="fab fa-github" aria-hidden="true"></i>
+        </a>
+
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Understanding ROS2">
+    <meta itemprop="description" content="Let me introduce you to ROS">
+    <meta itemprop="datePublished" content="2026-01-23T00:00:00+00:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">
+            <a href="http://localhost:4000/mars-ned2/2026/01/23/understanding_ros2.html" itemprop="url">Understanding ROS2
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          6 minute read
+        
+      </span>
+    
+  </p>
+
+<div class="page__date-badge">
+            <time datetime="2026-01-23T00:00:00+00:00" itemprop="datePublished">2026-01-23</time>
+          </div></header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>Let me introduce you to ROS</p>
+
+<p>However, before any confusion</p>
+
+<p>Let me start with what ros is not
+ros is not an application, ros is not an operating system, ros is not a firmware</p>
+
+<p>ROS is a <strong>middleware</strong> that enables communication between different programs, even across multiple machines.
+<strong>A set of software libraries and tools</strong> for building robot applications
+It’s not a standalone application, but rather the backbone that connects your robotic systems. 
+<strong>A communication infrastructure</strong> that provides services like hardware abstraction, message-passing between processes, and package management.</p>
+
+<p>The DDS Layer: Why ROS2 
+Under the hood, it’s all <strong>DDS (Data Distribution Service)</strong>
+which isn’t just a transport but a complete middleware specification with:</p>
+<ul>
+  <li><strong>Discovery</strong>: Nodes find each other automatically via multicast (or discovery servers)</li>
+  <li><strong>QoS Policies</strong>: Fine-grained control over reliability, durability, history, deadlines</li>
+  <li><strong>Real-time capable</strong>: Deterministic timing when configured properly</li>
+  <li><strong>Scalability</strong>: Handles hundreds of nodes without breaking a sweat</li>
+</ul>
+
+<p>The architecture</p>
+<h3 id="nodes-your-building-blocks">Nodes: Your Building Blocks</h3>
+<p>Every piece of functionality lives in a <strong>node</strong>. A node is just a process that does one thing well. Maybe it reads from a camera. Maybe it plans a path. Maybe it controls a motor.
+ key trait: single responsibility - usually just does one thing.<br />
+e.g.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">rclpy</span>
+<span class="kn">from</span> <span class="nn">rclpy.node</span> <span class="kn">import</span> <span class="n">Node</span>
+
+<span class="k">class</span> <span class="nc">HelloWorldNode</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">().</span><span class="n">__init__</span><span class="p">(</span><span class="s">'hello_world_node'</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">get_logger</span><span class="p">().</span><span class="n">info</span><span class="p">(</span><span class="s">'Hello, world from ROS 2!'</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="n">rclpy</span><span class="p">.</span><span class="n">init</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">)</span>
+    <span class="n">node</span> <span class="o">=</span> <span class="n">HelloWorldNode</span><span class="p">()</span>
+    <span class="n">rclpy</span><span class="p">.</span><span class="n">spin</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+    <span class="n">node</span><span class="p">.</span><span class="n">destroy_node</span><span class="p">()</span>
+    <span class="n">rclpy</span><span class="p">.</span><span class="n">shutdown</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h3 id="topics-broadcast">Topics: Broadcast</h3>
+<p>think of it as a radio station where any one can tune in. so one node publishes data; any number of nodes can subscribe. No direct connection needed. No blocking. Perfect for sensor data streaming.</p>
+<ul>
+  <li><strong>Key trait:</strong> Asynchronous - no response required
+e.g.
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">MinimalPublisher</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+      <span class="nb">super</span><span class="p">().</span><span class="n">__init__</span><span class="p">(</span><span class="s">'publisher'</span><span class="p">)</span>
+      <span class="bp">self</span><span class="p">.</span><span class="n">publisher</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">create_publisher</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="s">'chatter'</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+      <span class="bp">self</span><span class="p">.</span><span class="n">timer</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">create_timer</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">timer_callback</span><span class="p">)</span>
+      <span class="bp">self</span><span class="p">.</span><span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    
+  <span class="k">def</span> <span class="nf">timer_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+      <span class="n">msg</span> <span class="o">=</span> <span class="n">String</span><span class="p">()</span>
+      <span class="n">msg</span><span class="p">.</span><span class="n">data</span> <span class="o">=</span> <span class="sa">f</span><span class="s">'Hello World: </span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">count</span><span class="si">}</span><span class="s">'</span>
+      <span class="bp">self</span><span class="p">.</span><span class="n">publisher</span><span class="p">.</span><span class="n">publish</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+      <span class="bp">self</span><span class="p">.</span><span class="n">get_logger</span><span class="p">().</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s">'Publishing: "</span><span class="si">{</span><span class="n">msg</span><span class="p">.</span><span class="n">data</span><span class="si">}</span><span class="s">"'</span><span class="p">)</span>
+      <span class="bp">self</span><span class="p">.</span><span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">MinimalSubscriber</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">().</span><span class="n">__init__</span><span class="p">(</span><span class="s">'subscriber'</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">subscription</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">create_subscription</span><span class="p">(</span>
+            <span class="n">String</span><span class="p">,</span> <span class="s">'chatter'</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">callback</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">get_logger</span><span class="p">().</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s">'I heard: "</span><span class="si">{</span><span class="n">msg</span><span class="p">.</span><span class="n">data</span><span class="si">}</span><span class="s">"'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="2-services-request-and-response">2. Services (Request and response)</h3>
+<p>The ROS2 service is functionally equivalent to an API (Application Programming Interface) in that it provides a standardized way for nodes to request and receive responses, similar to how APIs enable communication between software systems. so the client sends a request and has to wait until the server responds. They are useful for quick tasks like getting a program’s status or running a short calculation The system works with service <strong>servers</strong> and service <strong>clients</strong>. The <strong>server</strong> processes requests and sends back responses. It does not send data continuously</p>
+<ul>
+  <li><strong>Key trait:</strong> Synchronous - waits for response
+e.g.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Server
+</span><span class="bp">self</span><span class="p">.</span><span class="n">service</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">create_service</span><span class="p">(</span><span class="n">AddTwoInts</span><span class="p">,</span> <span class="s">'add_two_ints'</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">handle_service</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">handle_service</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
+    <span class="n">response</span><span class="p">.</span><span class="nb">sum</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="n">a</span> <span class="o">+</span> <span class="n">request</span><span class="p">.</span><span class="n">b</span>
+    <span class="k">return</span> <span class="n">response</span>
+
+<span class="c1"># Client
+</span><span class="bp">self</span><span class="p">.</span><span class="n">client</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">create_client</span><span class="p">(</span><span class="n">AddTwoInts</span><span class="p">,</span> <span class="s">'add_two_ints'</span><span class="p">)</span>
+<span class="n">request</span> <span class="o">=</span> <span class="n">AddTwoInts</span><span class="p">.</span><span class="n">Request</span><span class="p">()</span>
+<span class="n">request</span><span class="p">.</span><span class="n">a</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">request</span><span class="p">.</span><span class="n">b</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">future</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">call_async</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+</code></pre></div></div>
+<h3 id="3-actions">3. Actions</h3>
+<p>Actions are the sophisticated sibling, they are used for <strong>long-running tasks</strong> that need <strong>response</strong> and can be stopped if needed.</p>
+<ul>
+  <li><strong>Key trait:</strong> longer tasks, that can be cancelled mid-execution. also with progress feedback.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Action client sending a goal
+</span><span class="n">action_client</span> <span class="o">=</span> <span class="n">ActionClient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Fibonacci</span><span class="p">,</span> <span class="s">'fibonacci'</span><span class="p">)</span>
+<span class="n">goal_msg</span> <span class="o">=</span> <span class="n">Fibonacci</span><span class="p">.</span><span class="n">Goal</span><span class="p">()</span>
+<span class="n">goal_msg</span><span class="p">.</span><span class="n">order</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">future</span> <span class="o">=</span> <span class="n">action_client</span><span class="p">.</span><span class="n">send_goal_async</span><span class="p">(</span><span class="n">goal_msg</span><span class="p">,</span> <span class="n">feedback_callback</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">feedback_cb</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">feedback_cb</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feedback_msg</span><span class="p">):</span>
+    <span class="bp">self</span><span class="p">.</span><span class="n">get_logger</span><span class="p">().</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s">'Progress: </span><span class="si">{</span><span class="n">feedback_msg</span><span class="p">.</span><span class="n">feedback</span><span class="p">.</span><span class="n">sequence</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Ros2 project management
+ros demands a structured approach to workspace organization, dependency management, and build processes. 
+follow these guidelines to set up and maintain ROS 2 projects.</p>
+<h2 id="workspace-architecture">Workspace Architecture</h2>
+
+<p>The foundation of any ROS 2 project is the workspace. Think of it as your project’s container, holding all packages, dependencies, and build artifact</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> <span class="nt">-p</span> ~/ros2_ws/src
+<span class="nb">cd</span> ~/ros2_ws
+</code></pre></div></div>
+<p>This simple structure separates source code (<code class="language-plaintext highlighter-rouge">src/</code>) from build artifacts and installation files. After building, you’ll see three additional directories:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">build/</code> - Intermediate build files</li>
+  <li><code class="language-plaintext highlighter-rouge">install/</code> - Compiled packages ready to run</li>
+  <li><code class="language-plaintext highlighter-rouge">log/</code> - Build and runtime logs</li>
+</ul>
+
+<h3 id="the-colcon-build-system">The Colcon Build System</h3>
+
+<p>Colcon is the new and improved ROS 2’s build tool, it replaced catkin bringing improved performance and cleaner separation of concerns
+Basic build:</p>
+
+<pre><code class="language-bashs">cd ~/ros2_ws
+colcon build
+</code></pre>
+<p>For development workflows, symlink installation prevents rebuilding Python packages:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>colcon build <span class="nt">--symlink-install</span>
+</code></pre></div></div>
+<p>Selective building speeds up iteration:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>colcon build <span class="nt">--packages-select</span> my_package
+</code></pre></div></div>
+
+<p>Environment Setup</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">source install</span>/setup.bash
+</code></pre></div></div>
+<p>Automate this in your shell:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="s2">"source ~/ros2_ws/install/setup.bash"</span> <span class="o">&gt;&gt;</span> ~/.bashrc
+</code></pre></div></div>
+
+<h3 id="dependency-management-with-rosdep">Dependency Management with rosdep</h3>
+<p>automate the process of tracking dependencies with <code class="language-plaintext highlighter-rouge">rosdep</code> </p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> ~/ros2_ws
+rosdep update
+rosdep <span class="nb">install</span> <span class="nt">--from-paths</span> src <span class="nt">--ignore-src</span> <span class="nt">-r</span> <span class="nt">-y</span>
+</code></pre></div></div>
+<p>This scans your workspace’s <code class="language-plaintext highlighter-rouge">package.xml</code> files and installs all system dependencies. The <code class="language-plaintext highlighter-rouge">-r</code> flag continues even if some packages fail, while <code class="language-plaintext highlighter-rouge">-y</code> auto-confirms installations.</p>
+
+<h3 id="creating-packages">Creating Packages</h3>
+<p>ROS 2 supports two build types: <code class="language-plaintext highlighter-rouge">ament_cmake</code> for C++ and <code class="language-plaintext highlighter-rouge">ament_python</code> for Python
+C++ package:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>src
+ros2 pkg create <span class="nt">--build-type</span> ament_cmake <span class="nt">--license</span> Apache-2.0 <span class="nt">--node-name</span> my_node my_package
+</code></pre></div></div>
+<p>Python package with dependencies:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>src
+ros2 pkg create <span class="nt">--build-type</span> ament_python <span class="nt">--dependencies</span> rclpy std_msgs <span class="nt">--node-name</span> hello_world_node my_hello_world
+</code></pre></div></div>
+
+<h3 id="package-management-best-practices">Package Management Best Practices</h3>
+<p><strong>Dependency Declaration</strong>: Always specify dependencies in <code class="language-plaintext highlighter-rouge">package.xml</code>:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;depend&gt;</span>rclcpp<span class="nt">&lt;/depend&gt;</span>
+<span class="nt">&lt;depend&gt;</span>std_msgs<span class="nt">&lt;/depend&gt;</span>
+<span class="nt">&lt;build_depend&gt;</span>octomap<span class="nt">&lt;/build_depend&gt;</span>
+<span class="nt">&lt;run_depend&gt;</span>octomap<span class="nt">&lt;/run_depend&gt;</span>
+</code></pre></div></div>
+<p><strong>Clean Builds</strong>: When facing mysterious build issues:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">rm</span> <span class="nt">-rf</span> build/ <span class="nb">install</span>/ log/
+colcon build
+</code></pre></div></div>
+<p><strong>Version Control</strong>: Keep <code class="language-plaintext highlighter-rouge">src/</code> under Git; exclude <code class="language-plaintext highlighter-rouge">build/</code>, <code class="language-plaintext highlighter-rouge">install/</code>, and <code class="language-plaintext highlighter-rouge">log/</code></p>
+
+<h2 id="the-ecosystem">The Ecosystem</h2>
+
+<p>ROS2 isn’t just the ROS2 middleware also , it’s an ecosystem:</p>
+<ul>
+  <li><strong>Nav2</strong>: Advanced navigation stack</li>
+  <li><strong>MoveIt 2</strong>: Motion planning for manipulators</li>
+  <li><strong>Gazebo</strong>: Physics simulation</li>
+  <li><strong>RViz2</strong>: 3D visualization</li>
+  <li><strong>ros2_control</strong>: Hardware abstraction for controllers</li>
+  <li><strong>micro-ROS</strong>: For microcontrollers (ESP32, STM32)</li>
+</ul>
+
+<p>We’ll comeback to these but feel free to browse.</p>
+
+<h1 id="a-guide-to-setting-up-our-workspace">A Guide to Setting Up our Workspace</h1>
+
+<p>In this guide, we will walk through the practical workflow for initializing a ROS 2 environment, creating packages, and managing dependencies for our project.</p>
+
+<h2 id="1-initializing-your-workspace">1. Initializing Your Workspace</h2>
+<p>A ROS 2 workspace is the directory where you develop, build, and install your ROS 2 packages. By convention, developers often name this <code class="language-plaintext highlighter-rouge">ros2_ws</code>.</p>
+
+<p>Open your terminal and execute the following to create the standard directory structure:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> <span class="nt">-p</span> ~/mars_ned2/src
+<span class="nb">cd</span> ~/mars_ned2
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">src/</code> directory is critical—it is the only place where your source code should reside. The build system will automatically generate other folders (<code class="language-plaintext highlighter-rouge">build</code>, <code class="language-plaintext highlighter-rouge">install</code>, and <code class="language-plaintext highlighter-rouge">log</code>) in the root of the workspace.</p>
+
+<h2 id="2-creating-your-first-package">2. Creating Your First Package</h2>
+<p>In ROS 2, code is organized into packages. This modularity allows for easier debugging and code sharing. Depending on your project requirements, you will likely choose between Python or C++.</p>
+
+<h3 id="option-a-python-based-package">Option A: Python-Based Package</h3>
+<p>Use this for rapid prototyping and high-level logic.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> ~/mars_ned2/src
+ros2 pkg create <span class="nt">--build-type</span> ament_python <span class="nt">--dependencies</span> rclpy std_msgs <span class="nt">--node-name</span> my_node my_package
+</code></pre></div></div>
+
+<h3 id="option-b-c-based-package">Option B: C++ Based Package</h3>
+<p>Use this for performance-critical applications and real-time processing.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> ~/mars_ned2/src
+ros2 pkg create <span class="nt">--build-type</span> ament_cmake <span class="nt">--dependencies</span> rclcpp std_msgs <span class="nt">--node-name</span> my_node my_package
+</code></pre></div></div>
+
+<h2 id="3-understanding-the-package-architecture">3. Understanding the Package Architecture</h2>
+<p>A professional developer must understand the metadata that drives the build system. Your new package will contain the following structure:</p>
+
+<ul>
+  <li><strong><code class="language-plaintext highlighter-rouge">package.xml</code></strong>: Defines metadata (version, maintainer) and lists dependencies.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">CMakeLists.txt</code> / <code class="language-plaintext highlighter-rouge">setup.py</code></strong>: Instructions for the build tool (Colcon) on how to compile and install your code.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">src/</code> or <code class="language-plaintext highlighter-rouge">my_package/</code></strong>: The directory containing your source scripts or source files.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">resource/</code></strong>: Used by the indexer to identify the package in the environment.</li>
+</ul>
+
+<h2 id="4-managing-system-dependencies">4. Managing System Dependencies</h2>
+<p>One of the most common pitfalls in ROS 2 development is missing system dependencies. Use <code class="language-plaintext highlighter-rouge">rosdep</code> to automatically install the libraries required by your <code class="language-plaintext highlighter-rouge">package.xml</code>.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> ~/mars_ned2
+rosdep update
+rosdep <span class="nb">install</span> <span class="nt">--from-paths</span> src <span class="nt">--ignore-src</span> <span class="nt">-r</span> <span class="nt">-y</span>
+</code></pre></div></div>
+
+<h2 id="5-building-the-workspace">5. Building the Workspace</h2>
+<p>ROS 2 uses the <code class="language-plaintext highlighter-rouge">colcon</code> build tool. While a standard build is straightforward, we recommend using the <code class="language-plaintext highlighter-rouge">--symlink-install</code> flag during development. This allows you to modify Python scripts and configuration files (like YAMLs) and see the changes without rebuilding the entire workspace.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> ~/mars_ned2
+colcon build <span class="nt">--symlink-install</span>
+</code></pre></div></div>
+
+<h2 id="6-sourcing-the-environment">6. Sourcing the Environment</h2>
+<p>Once built, you must “source” the workspace so that your terminal recognizes the new packages and nodes.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">source install</span>/setup.bash
+</code></pre></div></div>
+
+<p><strong>Professional Tip:</strong> To avoid manually sourcing every time you open a new terminal, add this command to your shell configuration file:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="s2">"source ~/mars_ned2/install/setup.bash"</span> <span class="o">&gt;&gt;</span> ~/.bashrc
+<span class="nb">source</span> ~/.bashrc
+</code></pre></div></div>
+
+<h2 id="7-verification-and-execution">7. Verification and Execution</h2>
+<p>To ensure your environment is configured correctly, verify that ROS 2 can locate your package and execute the boilerplate node created in Step 2.</p>
+
+<p><strong>List your package:</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ros2 pkg list | <span class="nb">grep </span>my_package
+</code></pre></div></div>
+
+<p><strong>Run your node:</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ros2 run my_package my_node
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="reference-essential-cli-commands">Reference: Essential CLI Commands</h2>
+<p>To maintain a high-velocity development workflow, keep these commands in your repertoire:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Task</th>
+      <th style="text-align: left">Command</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Build Specific Package</strong></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">colcon build --packages-select &lt;pkg_name&gt;</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Clean Build</strong></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">rm -rf build/ install/ log/ &amp;&amp; colcon build</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Check Dependencies</strong></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">rosdep check --from-paths src --ignore-src</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Install Dependecies</strong></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">rosdep install --from-paths src --ignore-src -r -y</code></td>
+    </tr>
+  </tbody>
+</table>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-01-23T00:00:00+00:00">January 23, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  <h4 class="page__share-title">Share on</h4>
+
+  <a href="https://x.com/intent/tweet?text=Understanding+ROS2+%20http%3A%2F%2Flocalhost%3A4000%2Fmars-ned2%2F2026%2F01%2F23%2Funderstanding_ros2.html" class="btn btn--x" aria-label="Share on X" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on X">
+    <i class="fab fa-fw fa-x-twitter" aria-hidden="true"></i><span> X</span>
+  </a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fmars-ned2%2F2026%2F01%2F23%2Funderstanding_ros2.html" class="btn btn--facebook" aria-label="Share on Facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook">
+    <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span>
+  </a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/mars-ned2/2026/01/23/understanding_ros2.html" class="btn btn--linkedin" aria-label="Share on LinkedIn" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn">
+    <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span>
+  </a>
+
+  <a href="https://bsky.app/intent/compose?text=Understanding+ROS2+%20http%3A%2F%2Flocalhost%3A4000%2Fmars-ned2%2F2026%2F01%2F23%2Funderstanding_ros2.html" class="btn btn--bluesky" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Bluesky">
+    <i class="fab fa-fw fa-bluesky" aria-hidden="true"></i><span> Bluesky</span>
+  </a>
+</section>
+
+
+      
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+      
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    <li><a href="/marl/"> Abdiwak Debella </a></li>
+  </ul>
+</div>
+<div class="page__footer-copyright">
+  © 2026
+</div>  
+
+
+      </footer>
+    </div>
+
+    
+  <script src="/mars-ned2/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/mars-ned2/assets/js/lunr/lunr.min.js"></script>
+<script src="/mars-ned2/assets/js/lunr/lunr-store.js"></script>
+<script src="/mars-ned2/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+  </body>
+</html>

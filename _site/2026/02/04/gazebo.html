@@ -1,0 +1,454 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.27.3 by Michael Rose
+  Copyright 2013-2025 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Gazebo</title>
+<meta name="description" content="What Is Gazebo?">
+
+
+  <meta name="author" content="Abdiwak Debella">
+  
+  <meta property="article:author" content="Abdiwak Debella">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="">
+<meta property="og:title" content="Gazebo">
+<meta property="og:url" content="http://localhost:4000/mars-ned2/2026/02/04/gazebo.html">
+
+
+  <meta property="og:description" content="What Is Gazebo?">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-02-04T00:00:00+00:00">
+
+
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/mars-ned2/2026/02/04/gazebo.html">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/mars-ned2/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  window.enable_copy_code_button = true;
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/mars-ned2/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    
+<script>
+  window.enable_copy_code_button = true;
+</script>
+
+  </head>
+
+  <body class="layout--single wide" dir="ltr">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/mars-ned2/">
+          
+          
+        </a>
+       
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/mars-ned2/"
+                
+                
+              >Home</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/mars-ned2/blog/"
+                
+                
+              >Blog</a>
+            </li></ul>
+
+         <a href="https://github.com/2delab/mars-ned2" class="masthead__github-link" target="_blank" rel="noopener noreferrer" title="View source on GitHub">
+        <i class="fab fa-github" aria-hidden="true"></i>
+        </a>
+
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Gazebo">
+    <meta itemprop="description" content="What Is Gazebo?">
+    <meta itemprop="datePublished" content="2026-02-04T00:00:00+00:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">
+            <a href="http://localhost:4000/mars-ned2/2026/02/04/gazebo.html" itemprop="url">Gazebo
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          5 minute read
+        
+      </span>
+    
+  </p>
+
+<div class="page__date-badge">
+            <time datetime="2026-02-04T00:00:00+00:00" itemprop="datePublished">2026-02-04</time>
+          </div></header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <h2 id="what-is-gazebo">What Is Gazebo?</h2>
+
+<p>Gazebo is a robotics simulator that runs a full virtual environment. It can simulate physics, sensors and time while integrating natively with ROS 2. Unlike a pure dynamics engine, Gazebo can publish on the same topics, services, and TF tree that a real robot would: joint states come out of <code class="language-plaintext highlighter-rouge">/joint_states</code>, the clock drives <code class="language-plaintext highlighter-rouge">use_sim_time</code>, and the controller manager talks to a hardware plugin that writes into the physics engine. From the perspective of the rest of the software stack, simulation and hardware are indistinguishable.</p>
+
+<h2 id="use-case">Use case</h2>
+
+<p>The physical Ned2 robots aren’t always accessible, and running an untested control pipeline directly on hardware is a bad idea. Before sending trajectories to real motors, you need to know that the URDF is correct, the <code class="language-plaintext highlighter-rouge">ros2_control</code> stack loads cleanly, the controller manager finds its hardware backend, and MoveIt can plan and execute without the whole system falling over on startup.</p>
+
+<p>Gazebo lets you validate all of that without touching the robot. Launch ordering bugs, missing inertial tags, clock synchronization issues, and controller sequencing problems are all much cheaper to discover in simulation. Once the pipeline is solid in sim, the same launch files and the same controller configuration transfer directly to the physical robot — which is the goal.</p>
+
+<h1 id="from-urdf-to-gazebo-simulation">From URDF to Gazebo Simulation</h1>
+
+<p>Getting the Niryo Ned2 running in Gazebo with full ros2_control means more than just launching a simulator. It required coordinating environment configuration, robot description generation, the simulator itself, a clock bridge, a robot spawner, and a controller stack, exactly  in the right order.</p>
+
+<video width="100%" controls="" autoplay="" muted="" loop="">&gt;
+  <source src="/mars-ned2/assets/videos/gazebo.mp4" type="video/mp4" />
+  Your browser doesn't support HTML5 video.
+</video>
+
+<h2 id="environment-and-robot-description">Environment and Robot Description</h2>
+
+<p>Before anything starts, two environment variables are set. <code class="language-plaintext highlighter-rouge">GZ_SIM_RESOURCE_PATH</code> points Gazebo at the parent directory of <code class="language-plaintext highlighter-rouge">niryo_robot_description</code> so it can resolve the relative mesh paths baked into the URDF. The robot spawns broken without it. <code class="language-plaintext highlighter-rouge">RCL_LOGGING_CONFIG_DIR</code> is set to an empty string to suppress the wall of RCL output that otherwise floods the terminal on startup.</p>
+
+<p>The robot description is generated at launch time rather than pre-baked, using <code class="language-plaintext highlighter-rouge">xacro</code> via ROS 2’s <code class="language-plaintext highlighter-rouge">Command</code> substitution:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">robot_description_content</span> <span class="o">=</span> <span class="n">Command</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="n">PathJoinSubstitution</span><span class="p">([</span><span class="n">FindExecutable</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">"xacro"</span><span class="p">)]),</span>
+        <span class="s">" "</span><span class="p">,</span>
+        <span class="n">PathJoinSubstitution</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">niryo_description_share</span><span class="p">,</span> <span class="s">"urdf"</span><span class="p">,</span> <span class="s">"ned2"</span><span class="p">,</span> <span class="s">"niryo_ned2_gazebo.urdf.xacro"</span><span class="p">]</span>
+        <span class="p">),</span>
+        <span class="s">" controllers_config_file:="</span><span class="p">,</span>
+        <span class="n">PathJoinSubstitution</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">niryo_controllers_share</span><span class="p">,</span> <span class="s">"config"</span><span class="p">,</span> <span class="s">"ros2_controllers.yaml"</span><span class="p">]</span>
+        <span class="p">),</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">Command([...])</code> executes lazily when the launch file runs. The result is wrapped in <code class="language-plaintext highlighter-rouge">ParameterValue(..., value_type=str)</code> and passed to <code class="language-plaintext highlighter-rouge">robot_state_publisher</code>, which publishes it on <code class="language-plaintext highlighter-rouge">/robot_description</code> — the single source of truth for both the spawner and MoveIt. The <code class="language-plaintext highlighter-rouge">controllers_config_file</code> argument is critical: it’s passed into the xacro so the resulting URDF embeds the correct <code class="language-plaintext highlighter-rouge">&lt;ros2_control&gt;</code> hardware configuration, including controller types, joint names, and interface definitions.</p>
+
+<h2 id="starting-gazebo">Starting Gazebo</h2>
+
+<p>Gazebo is launched by including <code class="language-plaintext highlighter-rouge">ros_gz_sim</code>’s own <code class="language-plaintext highlighter-rouge">gz_sim.launch.py</code> rather than calling <code class="language-plaintext highlighter-rouge">gz sim</code> directly, which ensures the full internal lifecycle of the simulator is respected:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">IncludeLaunchDescription</span><span class="p">(</span>
+    <span class="n">PythonLaunchDescriptionSource</span><span class="p">(</span>
+        <span class="n">PathJoinSubstitution</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">FindPackageShare</span><span class="p">(</span><span class="s">"ros_gz_sim"</span><span class="p">),</span> <span class="s">"launch"</span><span class="p">,</span> <span class="s">"gz_sim.launch.py"</span><span class="p">]</span>
+        <span class="p">)</span>
+    <span class="p">),</span>
+    <span class="n">launch_arguments</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">(</span><span class="s">"gz_args"</span><span class="p">,</span> <span class="p">[</span><span class="s">" -r -v "</span><span class="p">,</span> <span class="n">gazebo_verbosity</span><span class="p">,</span> <span class="s">" "</span><span class="p">,</span> <span class="n">gazebo_world</span><span class="p">]),</span>
+        <span class="p">(</span><span class="s">"use_sim_time"</span><span class="p">,</span> <span class="n">use_sim_time</span><span class="p">),</span>
+    <span class="p">],</span>
+<span class="p">),</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">-r</code> starts the simulation running immediately rather than opening paused. <code class="language-plaintext highlighter-rouge">-v</code> sets verbosity level 4 during development gives the most output. The world defaults to Gazebo’s built-in <code class="language-plaintext highlighter-rouge">empty.sdf</code> but is overridable from the command line via <code class="language-plaintext highlighter-rouge">gazebo_world</code>.</p>
+
+<h2 id="clock-bridge">Clock Bridge</h2>
+
+<p>The clock bridge starts immediately in parallel with Gazebo because any node that tries to register with the controller manager before a clock source exists will hang:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">clock_bridge</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span>
+    <span class="n">package</span><span class="o">=</span><span class="s">"ros_gz_bridge"</span><span class="p">,</span>
+    <span class="n">executable</span><span class="o">=</span><span class="s">"parameter_bridge"</span><span class="p">,</span>
+    <span class="n">arguments</span><span class="o">=</span><span class="p">[</span><span class="s">"/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock"</span><span class="p">],</span>
+    <span class="n">output</span><span class="o">=</span><span class="s">"screen"</span><span class="p">,</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="p">[{</span><span class="s">"use_sim_time"</span><span class="p">:</span> <span class="n">use_sim_time</span><span class="p">}],</span>
+<span class="p">)</span>
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">use_sim_time: true</code> is passed to every node in the launch file so all clocks are synchronized to Gazebo’s simulation time rather than wall time.</p>
+
+<h2 id="spawning-the-robot">Spawning the Robot</h2>
+
+<p>The robot is spawned into Gazebo using <code class="language-plaintext highlighter-rouge">ros_gz_sim</code>’s <code class="language-plaintext highlighter-rouge">create</code> executable, reading from the <code class="language-plaintext highlighter-rouge">/robot_description</code> topic rather than a file:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">spawn_entity</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span>
+    <span class="n">package</span><span class="o">=</span><span class="s">"ros_gz_sim"</span><span class="p">,</span>
+    <span class="n">executable</span><span class="o">=</span><span class="s">"create"</span><span class="p">,</span>
+    <span class="n">arguments</span><span class="o">=</span><span class="p">[</span>
+        <span class="s">"-topic"</span><span class="p">,</span> <span class="s">"robot_description"</span><span class="p">,</span>
+        <span class="s">"-name"</span><span class="p">,</span> <span class="s">"niryo_ned2"</span><span class="p">,</span>
+        <span class="s">"-allow_renaming"</span><span class="p">,</span> <span class="s">"true"</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+
+<span class="n">delayed_spawn_entity</span> <span class="o">=</span> <span class="n">TimerAction</span><span class="p">(</span><span class="n">period</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span> <span class="n">actions</span><span class="o">=</span><span class="p">[</span><span class="n">spawn_entity</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>Using <code class="language-plaintext highlighter-rouge">-topic</code> guarantees the spawner uses the exact same description <code class="language-plaintext highlighter-rouge">robot_state_publisher</code> already has. The five-second <code class="language-plaintext highlighter-rouge">TimerAction</code> delay is deliberate — Gazebo needs time to fully initialize its physics engine and world before it can accept spawn requests. Reducing it risks the spawn request arriving before the service is ready.</p>
+
+<h2 id="controller-sequencing">Controller Sequencing</h2>
+
+<p>Controllers come up last, chained via <code class="language-plaintext highlighter-rouge">RegisterEventHandler</code> with <code class="language-plaintext highlighter-rouge">OnProcessExit</code> so each step only begins after the previous one fully completes:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">RegisterEventHandler</span><span class="p">(</span>
+    <span class="n">event_handler</span><span class="o">=</span><span class="n">OnProcessExit</span><span class="p">(</span>
+        <span class="n">target_action</span><span class="o">=</span><span class="n">spawn_entity</span><span class="p">,</span>
+        <span class="n">on_exit</span><span class="o">=</span><span class="p">[</span><span class="n">TimerAction</span><span class="p">(</span><span class="n">period</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">actions</span><span class="o">=</span><span class="p">[</span><span class="n">joint_state_broadcaster</span><span class="p">])],</span>
+    <span class="p">)</span>
+<span class="p">),</span>
+<span class="n">RegisterEventHandler</span><span class="p">(</span>
+    <span class="n">event_handler</span><span class="o">=</span><span class="n">OnProcessExit</span><span class="p">(</span>
+        <span class="n">target_action</span><span class="o">=</span><span class="n">joint_state_broadcaster</span><span class="p">,</span>
+        <span class="n">on_exit</span><span class="o">=</span><span class="p">[</span><span class="n">TimerAction</span><span class="p">(</span><span class="n">period</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">actions</span><span class="o">=</span><span class="p">[</span><span class="n">joint_trajectory_controller</span><span class="p">])],</span>
+    <span class="p">)</span>
+<span class="p">),</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">joint_state_broadcaster</code> must be active before <code class="language-plaintext highlighter-rouge">niryo_ned2_arm_controller</code> is spawned as the trajectory controller needs joint state feedback to initialize. <code class="language-plaintext highlighter-rouge">OnProcessExit</code> fires when the <code class="language-plaintext highlighter-rouge">spawner</code> executable exits after successfully registering the controller with <code class="language-plaintext highlighter-rouge">/controller_manager</code>, making it a reliable sequencing signal compared to a fixed timer.</p>
+
+<h2 id="the-missing-piece">The Missing Piece</h2>
+
+<p>With all of that running, the robot spawns and the controllers register but sending a joint trajectory does nothing. The controller manager has no hardware backend to write into. Two additions are required so we create a copy of the original urdf file  <code class="language-plaintext highlighter-rouge">niryo_ned2_gazebo.urdf.xacro</code> to add:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- inside the &lt;ros2_control&gt; block --&gt;</span>
+<span class="nt">&lt;ros2_control</span> <span class="na">name=</span><span class="s">"GazeboSimSystem"</span> <span class="na">type=</span><span class="s">"system"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;hardware&gt;</span>
+    <span class="nt">&lt;plugin&gt;</span>gz_ros2_control/GazeboSimSystem<span class="nt">&lt;/plugin&gt;</span>
+  <span class="nt">&lt;/hardware&gt;</span>
+  <span class="c">&lt;!-- joint command and state interfaces --&gt;</span>
+<span class="nt">&lt;/ros2_control&gt;</span>
+
+<span class="c">&lt;!-- at the top level, alongside other &lt;gazebo&gt; tags --&gt;</span>
+<span class="nt">&lt;gazebo&gt;</span>
+  <span class="nt">&lt;plugin</span> <span class="na">filename=</span><span class="s">"libgz_ros2_control-system.so"</span>
+          <span class="na">name=</span><span class="s">"gz_ros2_control::GazeboSimROS2ControlPlugin"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;parameters&gt;</span>/path/to/ros2_controllers.yaml<span class="nt">&lt;/parameters&gt;</span>
+  <span class="nt">&lt;/plugin&gt;</span>
+<span class="nt">&lt;/gazebo&gt;</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">GazeboSimSystem</code> is the hardware plugin that gives the controller manager a backend. commands are written into a void without it. <code class="language-plaintext highlighter-rouge">GazeboSimROS2ControlPlugin</code> is what instantiates the controller manager inside Gazebo’s plugin context in the first place. Without both, the control pipeline is severed at the physics layer.</p>
+
+<h2 id="why-not-just-use-rviz">Why not just use RViz</h2>
+
+<p>A physics engine adds no practical value for this project. we can use <code class="language-plaintext highlighter-rouge">mock_components/GenericSystem</code>, part of <code class="language-plaintext highlighter-rouge">ros2_control</code>’s standard library, instead of the Gazebo hardware plugin giving us the full controller stack and MoveIt a working interface with no simulator overhead. Everything validated in RViz transfers directly to the real robot. additionally Gazebo require modifying the urdf,  and pulling in <code class="language-plaintext highlighter-rouge">gz_ros2_control</code> as a dependency which adds unecessary complexitty.</p>
+
+<h2 id="common-pitfalls">Common Pitfalls</h2>
+
+<p><strong>VM Rendering: Switching from OGRE 2 to OGRE 1</strong></p>
+
+<p>Running Gazebo inside a virtual machine often produces flashing and corrupted visuals. The default render engine in modern Gazebo (Harmonic) is OGRE 2, which requires OpenGL 3.3+ features that most VM graphics drivers do not properly emulate.</p>
+
+<p><img src="/mars-ned2/assets/images/ogre2.png" alt="ogre2" class="align-center" /></p>
+
+<video width="100%" controls="" autoplay="" muted="" loop="">&gt;
+  <source src="/mars-ned2/assets/videos/broken_gazebo.mp4" type="video/mp4" />
+  Your browser doesn't support HTML5 video.
+</video>
+
+<p>The fix is to switch the render engine to OGRE 1 by editing <code class="language-plaintext highlighter-rouge">~/.gz/sim/8/gui.config</code>. Find the plugin block and change the <code class="language-plaintext highlighter-rouge">&lt;engine&gt;</code> value from <code class="language-plaintext highlighter-rouge">ogre2</code> to <code class="language-plaintext highlighter-rouge">ogre</code>:</p>
+
+<p><img src="/mars-ned2/assets/images/ogre1.png" alt="ogre1" class="align-center" /></p>
+
+<p><img src="/mars-ned2/assets/images/gazebo_empty.png" alt="gazebo empty" class="align-center" /></p>
+
+<p>After saving and restarting Gazebo, rendering is stable inside the VM.</p>
+
+<p><strong>Forgetting <code class="language-plaintext highlighter-rouge">use_sim_time</code></strong> on any node that processes sensor data or publishes transforms causes timestamp mismatches that break tf2, navigation, and MoveIt.</p>
+
+<p><strong>Missing inertial tags</strong> in the URDF will cause Gazebo to silently misbehave — links without <code class="language-plaintext highlighter-rouge">&lt;inertial&gt;</code> blocks may spawn but won’t respond correctly to forces or joint commands.</p>
+
+<hr />
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-02-04T00:00:00+00:00">February 4, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  <h4 class="page__share-title">Share on</h4>
+
+  <a href="https://x.com/intent/tweet?text=Gazebo%20http%3A%2F%2Flocalhost%3A4000%2Fmars-ned2%2F2026%2F02%2F04%2Fgazebo.html" class="btn btn--x" aria-label="Share on X" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on X">
+    <i class="fab fa-fw fa-x-twitter" aria-hidden="true"></i><span> X</span>
+  </a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fmars-ned2%2F2026%2F02%2F04%2Fgazebo.html" class="btn btn--facebook" aria-label="Share on Facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook">
+    <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span>
+  </a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/mars-ned2/2026/02/04/gazebo.html" class="btn btn--linkedin" aria-label="Share on LinkedIn" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn">
+    <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span>
+  </a>
+
+  <a href="https://bsky.app/intent/compose?text=Gazebo%20http%3A%2F%2Flocalhost%3A4000%2Fmars-ned2%2F2026%2F02%2F04%2Fgazebo.html" class="btn btn--bluesky" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Bluesky">
+    <i class="fab fa-fw fa-bluesky" aria-hidden="true"></i><span> Bluesky</span>
+  </a>
+</section>
+
+
+      
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+      
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    <li><a href="/marl/"> Abdiwak Debella </a></li>
+  </ul>
+</div>
+<div class="page__footer-copyright">
+  © 2026
+</div>  
+
+
+      </footer>
+    </div>
+
+    
+  <script src="/mars-ned2/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/mars-ned2/assets/js/lunr/lunr.min.js"></script>
+<script src="/mars-ned2/assets/js/lunr/lunr-store.js"></script>
+<script src="/mars-ned2/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,458 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.27.3 by Michael Rose
+  Copyright 2013-2025 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Fudutial Markers</title>
+<meta name="description" content="Choosing ArUco Tags insead of Classical Pose Estimation">
+
+
+  <meta name="author" content="Abdiwak Debella">
+  
+  <meta property="article:author" content="Abdiwak Debella">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="">
+<meta property="og:title" content="Fudutial Markers">
+<meta property="og:url" content="http://localhost:4000/mars-ned2/2026/02/18/fuditialmarkers.html">
+
+
+  <meta property="og:description" content="Choosing ArUco Tags insead of Classical Pose Estimation">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-02-18T00:00:00+00:00">
+
+
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/mars-ned2/2026/02/18/fuditialmarkers.html">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/mars-ned2/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  window.enable_copy_code_button = true;
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/mars-ned2/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    
+<script>
+  window.enable_copy_code_button = true;
+</script>
+
+  </head>
+
+  <body class="layout--single wide" dir="ltr">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/mars-ned2/">
+          
+          
+        </a>
+       
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/mars-ned2/"
+                
+                
+              >Home</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/mars-ned2/blog/"
+                
+                
+              >Blog</a>
+            </li></ul>
+
+         <a href="https://github.com/2delab/mars-ned2" class="masthead__github-link" target="_blank" rel="noopener noreferrer" title="View source on GitHub">
+        <i class="fab fa-github" aria-hidden="true"></i>
+        </a>
+
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Fudutial Markers">
+    <meta itemprop="description" content="Choosing ArUco Tags insead of Classical Pose Estimation">
+    <meta itemprop="datePublished" content="2026-02-18T00:00:00+00:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">
+            <a href="http://localhost:4000/mars-ned2/2026/02/18/fuditialmarkers.html" itemprop="url">Fudutial Markers
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+  </p>
+
+<div class="page__date-badge">
+            <time datetime="2026-02-18T00:00:00+00:00" itemprop="datePublished">2026-02-18</time>
+          </div></header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <h1 id="choosing-aruco-tags-insead-of-classical-pose-estimation">Choosing ArUco Tags insead of Classical Pose Estimation</h1>
+
+<h2 id="the-core-problem">The Core Problem</h2>
+
+<p>A collaborative setup requires both robots to pick items from a shared table. Both need to know <em>where</em> things are, and need to agree on those positions. Hardcoding won’t work on dynamic environments.</p>
+
+<p>The naive approach: run individual pose estimation on every pick. Classical vision pipelines introduce operational costs that compound in a two-robot system:</p>
+
+<ul>
+  <li><strong>Per-frame inconsistency</strong>: PnP solvers on RGB images yield different pose estimates frame-to-frame due to noise, especially under varying lighting</li>
+  <li><strong>Synchronization complexity</strong>: When robot A estimates an item’s pose and robot B disagrees by 2cm, who’s right? Suddenly there’s a consensus problem</li>
+  <li><strong>Real-time constraints</strong>: Object detection + feature extraction + PnP solving + filtering = latency that stacks with simultaneous queries</li>
+  <li><strong>Camera calibration sensitivity</strong>: Intrinsic parameters drift, extrinsic parameters shift with camera mounting vibrations</li>
+</ul>
+
+<p>The requirement: a baseline that’s <em>reliable, agreed-upon across both robot control nodes, and fast enough to run at 10Hz+</em>.</p>
+
+<h2 id="why-classical-methods-failed-in-practice">Why Classical Methods Failed in Practice</h2>
+
+<h3 id="pnp-and-feature-matching">PnP and Feature Matching</h3>
+
+<p>The textbook approach: detect the object (via color segmentation), extract SIFT/SURF features, match them to a reference model, then use EPnP or DLT to solve for 6-DOF pose.</p>
+
+<p><strong>Early prototype:</strong></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Prototype using cv2.solvePnP
+</span><span class="n">detector</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="n">SIFT_create</span><span class="p">()</span>
+<span class="n">kp_ref</span><span class="p">,</span> <span class="n">des_ref</span> <span class="o">=</span> <span class="n">detector</span><span class="p">.</span><span class="n">detectAndCompute</span><span class="p">(</span><span class="n">reference_image</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">estimate_pose</span><span class="p">(</span><span class="n">frame</span><span class="p">):</span>
+    <span class="n">kp</span><span class="p">,</span> <span class="n">des</span> <span class="o">=</span> <span class="n">detector</span><span class="p">.</span><span class="n">detectAndCompute</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+    <span class="n">matches</span> <span class="o">=</span> <span class="n">flann</span><span class="p">.</span><span class="n">knnMatch</span><span class="p">(</span><span class="n">des_ref</span><span class="p">,</span> <span class="n">des</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="c1"># Lowe's ratio test
+</span>    <span class="n">good</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span> <span class="k">for</span> <span class="n">m</span><span class="p">,</span><span class="n">n</span> <span class="ow">in</span> <span class="n">matches</span> <span class="k">if</span> <span class="n">m</span><span class="p">.</span><span class="n">distance</span> <span class="o">&lt;</span> <span class="mf">0.7</span><span class="o">*</span><span class="n">n</span><span class="p">.</span><span class="n">distance</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">good</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    <span class="n">src_pts</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">float32</span><span class="p">([</span><span class="n">kp_ref</span><span class="p">[</span><span class="n">m</span><span class="p">.</span><span class="n">queryIdx</span><span class="p">].</span><span class="n">pt</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">good</span><span class="p">])</span>
+    <span class="n">dst_pts</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">float32</span><span class="p">([</span><span class="n">kp</span><span class="p">[</span><span class="n">m</span><span class="p">.</span><span class="n">trainIdx</span><span class="p">].</span><span class="n">pt</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">good</span><span class="p">])</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">rvec</span><span class="p">,</span> <span class="n">tvec</span><span class="p">,</span> <span class="n">inliers</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="n">solvePnPRansac</span><span class="p">(</span>
+        <span class="n">objectPoints</span><span class="o">=</span><span class="n">model_3d_points</span><span class="p">,</span>
+        <span class="n">imagePoints</span><span class="o">=</span><span class="n">dst_pts</span><span class="p">,</span>
+        <span class="n">cameraMatrix</span><span class="o">=</span><span class="n">K</span><span class="p">,</span>
+        <span class="n">distCoeffs</span><span class="o">=</span><span class="n">dist_coeffs</span><span class="p">,</span>
+        <span class="n">iterationsCount</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+        <span class="n">reprojectionError</span><span class="o">=</span><span class="mf">8.0</span><span class="p">,</span>
+        <span class="n">confidence</span><span class="o">=</span><span class="mf">0.99</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">rvec</span><span class="p">,</span> <span class="n">tvec</span>
+</code></pre></div></div>
+
+<p><strong>Discovered issues:</strong></p>
+
+<ol>
+  <li><strong>Feature starvation on simple objects</strong>: Items with uniform colors or smooth surfaces yielded 3-5 features per frame. Below ~8 inliers, RANSAC becomes unreliable</li>
+  <li><strong>Lighting sensitivity</strong>: Arm shadows across the table tanked feature matching. Light repositioning required recalibrating feature parameters</li>
+  <li><strong>Drift under occlusion</strong>: Partial occlusion by one robot caused pose estimates from the full-view robot to jump as features disappeared and reappeared. No temporal filtering could smooth this without introducing lag</li>
+  <li><strong>Reference model maintenance</strong>: Every object type needed reference images from canonical viewpoints. Items rotated or tilted at different angles required 6+ references per object type with expensive template matching</li>
+</ol>
+
+<h3 id="template-matching-2d-approach">Template Matching (2D approach)</h3>
+
+<p>Straight template matching on the workspace—detect bounding box, estimate pose from 2D projection.</p>
+
+<p><strong>Core issue</strong>: Under-constrained problem. A 2D projection of a 3D object yields multiple valid 3D interpretations. Adding constraints (flat on table, known dimensions) requires building object-specific models anyway.</p>
+
+<p>A week spent here solving sub-problems (semantic segmentation, depth estimation) eliminated the simplicity being pursued.</p>
+
+<h2 id="why-aruco-markers-changed-everything">Why ArUco Markers Changed Everything</h2>
+
+<p>The realization: the task doesn’t require recognizing <em>arbitrary</em> objects—objects are known beforehand. They’re itemr with specific dimensions. They can be marked.</p>
+
+<p>ArUco (Augmented Reality University of Córdoba) markers provide:</p>
+
+<ul>
+  <li><strong>Binary patterns</strong>: No features to extract, no lighting sensitivity, no reference images</li>
+  <li><strong>Deterministic</strong>: Same marker on the same physical cube decodes to identical ID and corner positions frame-to-frame</li>
+  <li><strong>Fast</strong>: Marker detection is fast.</li>
+</ul>
+
+<p><strong>Implementation:</strong></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">cv2</span>
+
+<span class="c1"># Single initialization
+</span><span class="n">arucoDict</span> <span class="o">=</span> <span class="n">aruco</span><span class="p">.</span><span class="n">getPredefinedDictionary</span><span class="p">(</span><span class="n">aruco</span><span class="p">.</span><span class="n">DICT_4X4_50</span><span class="p">)</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="n">aruco</span><span class="p">.</span><span class="n">DetectorParameters</span><span class="p">()</span>
+<span class="n">detector</span> <span class="o">=</span> <span class="n">aruco</span><span class="p">.</span><span class="n">ArucoDetector</span><span class="p">(</span><span class="n">arucoDict</span><span class="p">,</span> <span class="n">parameters</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">estimate_item_pose</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">camera_matrix</span><span class="p">,</span> <span class="n">dist_coeffs</span><span class="p">,</span> <span class="n">marker_length</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
+    <span class="s">"""
+    Detect ArUco markers and estimate pose.
+    marker_length: physical size of printed marker in meters
+    Returns: (marker_id, tvec, rvec) or None
+    """</span>
+    <span class="n">corners</span><span class="p">,</span> <span class="n">ids</span><span class="p">,</span> <span class="n">rejected</span> <span class="o">=</span> <span class="n">detector</span><span class="p">.</span><span class="n">detectMarkers</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">ids</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    <span class="n">poses</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">marker_id</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ids</span><span class="p">.</span><span class="n">flatten</span><span class="p">()):</span>
+        <span class="n">rvec</span><span class="p">,</span> <span class="n">tvec</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">aruco</span><span class="p">.</span><span class="n">estimatePoseSingleMarkers</span><span class="p">(</span>
+            <span class="n">corners</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">marker_length</span><span class="p">,</span> <span class="n">camera_matrix</span><span class="p">,</span> <span class="n">dist_coeffs</span>
+        <span class="p">)</span>
+        <span class="n">poses</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">marker_id</span><span class="p">,</span> <span class="n">rvec</span><span class="p">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">tvec</span><span class="p">.</span><span class="n">flatten</span><span class="p">()))</span>
+    <span class="k">return</span> <span class="n">poses</span>
+</code></pre></div></div>
+
+<p><strong>Critical advantages for two-robot systems:</strong></p>
+
+<ol>
+  <li><strong>No per-object calibration</strong>: Every ArUco marker of the same size has identical corner geometry</li>
+  <li><strong>Cheap redundancy</strong>: 2-3 markers per cube. If one is occluded, others compensate:</li>
+</ol>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">fuse_marker_poses</span><span class="p">(</span><span class="n">poses</span><span class="p">,</span> <span class="n">marker_to_object_map</span><span class="p">,</span> <span class="n">history_buffer</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="s">"""
+    Fuse multiple marker detections into object-level poses.
+    Uses median filtering to reject noise.
+    """</span>
+    <span class="n">object_poses</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">marker_id</span><span class="p">,</span> <span class="n">rvec</span><span class="p">,</span> <span class="n">tvec</span> <span class="ow">in</span> <span class="n">poses</span><span class="p">:</span>
+        <span class="n">obj_id</span> <span class="o">=</span> <span class="n">marker_to_object_map</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">marker_id</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">obj_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">object_poses</span><span class="p">:</span>
+            <span class="n">object_poses</span><span class="p">[</span><span class="n">obj_id</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">object_poses</span><span class="p">[</span><span class="n">obj_id</span><span class="p">].</span><span class="n">append</span><span class="p">((</span><span class="n">rvec</span><span class="p">,</span> <span class="n">tvec</span><span class="p">))</span>
+    
+    <span class="n">fused</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">obj_id</span><span class="p">,</span> <span class="n">pose_list</span> <span class="ow">in</span> <span class="n">object_poses</span><span class="p">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pose_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">rvecs</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pose_list</span><span class="p">])</span>
+            <span class="n">tvecs</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pose_list</span><span class="p">])</span>
+            <span class="n">fused</span><span class="p">[</span><span class="n">obj_id</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">median</span><span class="p">(</span><span class="n">rvecs</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">np</span><span class="p">.</span><span class="n">median</span><span class="p">(</span><span class="n">tvecs</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">fused</span><span class="p">[</span><span class="n">obj_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">pose_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">fused</span>
+</code></pre></div></div>
+
+<ol>
+  <li><strong>Temporal consistency</strong>: Deterministic markers enable confident Kalman filtering with minimal frame-to-frame noise:</li>
+</ol>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">filterpy.kalman</span> <span class="kn">import</span> <span class="n">KalmanFilter</span>
+
+<span class="k">class</span> <span class="nc">ItemPoseTracker</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">process_variance</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">,</span> <span class="n">measurement_variance</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">kf</span> <span class="o">=</span> <span class="n">KalmanFilter</span><span class="p">(</span><span class="n">dim_x</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">dim_z</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>  <span class="c1"># 3 translation + 3 rotation
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">kf</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">kf</span><span class="p">.</span><span class="n">F</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>  <span class="c1"># Identity transition
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">kf</span><span class="p">.</span><span class="n">H</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">kf</span><span class="p">.</span><span class="n">P</span> <span class="o">*=</span> <span class="mi">1000</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">kf</span><span class="p">.</span><span class="n">R</span> <span class="o">=</span> <span class="n">measurement_variance</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">kf</span><span class="p">.</span><span class="n">Q</span> <span class="o">=</span> <span class="n">process_variance</span>
+    
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rvec</span><span class="p">,</span> <span class="n">tvec</span><span class="p">):</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">tvec</span><span class="p">,</span> <span class="n">rvec</span><span class="p">])</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">kf</span><span class="p">.</span><span class="n">predict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">kf</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">kf</span><span class="p">.</span><span class="n">x</span>
+</code></pre></div></div>
+
+<h2 id="accepted-trade-offs">Accepted Trade-offs</h2>
+
+<p>Trading <em>generality</em> for <em>reliability in this specific context</em>:</p>
+
+<ul>
+  <li><strong>Marker visibility</strong>: Complete marker obscuration loses that data point (could be resolved with multiple markers)</li>
+  <li><strong>Rotation ambiguity</strong>: Single markers create 180° rotation ambiguity around the marker’s normal (solved by assuming items placed flat)</li>
+  <li><strong>Not suitable for arbitrary objects</strong>: Changing to unmarked items requires a new approach(nex wooould be to train an AI model which is computetionally expensive)</li>
+</ul>
+
+<h2 id="in-summary">In summary</h2>
+
+<p>For multi-robot systems with known objects, ArUco markers provide a starting point that eliminates an entire class of fragility. Classical methods have their place but for well-defined industrial tasks with controlled items, fiducial markers deliver determinism and speed. That’s worth an afternoon of printing markers.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-02-18T00:00:00+00:00">February 18, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  <h4 class="page__share-title">Share on</h4>
+
+  <a href="https://x.com/intent/tweet?text=Fudutial+Markers%20http%3A%2F%2Flocalhost%3A4000%2Fmars-ned2%2F2026%2F02%2F18%2Ffuditialmarkers.html" class="btn btn--x" aria-label="Share on X" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on X">
+    <i class="fab fa-fw fa-x-twitter" aria-hidden="true"></i><span> X</span>
+  </a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fmars-ned2%2F2026%2F02%2F18%2Ffuditialmarkers.html" class="btn btn--facebook" aria-label="Share on Facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook">
+    <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span>
+  </a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/mars-ned2/2026/02/18/fuditialmarkers.html" class="btn btn--linkedin" aria-label="Share on LinkedIn" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn">
+    <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span>
+  </a>
+
+  <a href="https://bsky.app/intent/compose?text=Fudutial+Markers%20http%3A%2F%2Flocalhost%3A4000%2Fmars-ned2%2F2026%2F02%2F18%2Ffuditialmarkers.html" class="btn btn--bluesky" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Bluesky">
+    <i class="fab fa-fw fa-bluesky" aria-hidden="true"></i><span> Bluesky</span>
+  </a>
+</section>
+
+
+      
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+      
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    <li><a href="/marl/"> Abdiwak Debella </a></li>
+  </ul>
+</div>
+<div class="page__footer-copyright">
+  © 2026
+</div>  
+
+
+      </footer>
+    </div>
+
+    
+  <script src="/mars-ned2/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/mars-ned2/assets/js/lunr/lunr.min.js"></script>
+<script src="/mars-ned2/assets/js/lunr/lunr-store.js"></script>
+<script src="/mars-ned2/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+  </body>
+</html>

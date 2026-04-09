@@ -1,0 +1,151 @@
+/* Custom wide layout fixes for single post layout only */
+
+/* Fix .wide layout for single posts - center and remove sidebar float */
+@media (min-width: 64em) {
+  .layout--single.wide .page {
+    float: none;
+    width: 100%;
+  }
+}
+
+@media (min-width: 80em) {
+  .layout--single.wide .page {
+    float: none;
+    width: 100%;
+  }
+}
+
+/* Fix .wide layout for archive/posts - remove right padding drift */
+@media (min-width: 64em) {
+  .layout--archive.wide .archive {
+    padding-inline-end: 0;
+    margin-inline-start: auto;
+    margin-inline-end: auto;
+  }
+  
+  /* Ensure author profile sidebar is visible on archive pages */
+  .layout--archive.wide .sidebar {
+    display: block !important;
+  }
+}
+
+@media (min-width: 80em) {
+  .layout--archive.wide .archive {
+    padding-inline-end: 0;
+    margin-inline-start: auto;
+    margin-inline-end: auto;
+  }
+  
+  /* Ensure author profile sidebar is visible on archive pages */
+  .layout--archive.wide .sidebar {
+    display: block !important;
+  }
+}
+
+/* Minimal grid for posts entries */
+.entries-grid {
+  display: grid;
+  grid-template-columns: 12fr;
+  gap: 2em;
+
+  @media (min-width: 36em) {
+    grid-template-columns: repeat(2, 12fr);
+  }
+
+  @media (min-width: 64em) {
+    grid-template-columns: repeat(4, 12fr);
+  }
+}
+
+.grid__item {
+  max-width: 640px;
+  max-height: 640px;
+  overflow: hidden;
+}
+
+/* Center author profile sidebar content vertically and horizontally */
+.sidebar.sticky {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  padding: 30px 50px 30px 0;
+}
+
+/* Ensure the h-card (author profile) is centered within the sidebar */
+.sidebar.sticky .h-card {
+  width: 100%;
+  padding: 0;
+  margin-left: 0;
+}
+
+/* Enlarge and pad author profile picture container */
+.author__avatar {
+  padding: 15px !important;
+  margin-bottom: 20px !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+.author__avatar img {
+  max-width: 260px !important;
+  width: auto !important;
+  padding: 10px !important;
+  border: 2px solid rgba(14, 66, 44, 0.9223529412) !important;
+}
+
+.sidebar .author__avatar img {
+  max-width: 260px !important;
+  width: auto !important;
+}
+
+/* Enlarge author name and add spacing */
+.author__name {
+  font-size: 1.2em !important;
+  margin-top: 20px !important;
+  margin-bottom: 20px !important;
+  padding-bottom: 15px !important;
+  padding-left: 30px !important;
+  white-space: nowrap !important;
+}
+
+/* Add spacing to author bio */
+.author__bio {
+  margin-bottom: 20px !important;
+  padding-bottom: 15px !important;
+}
+
+/* Add spacing to author urls wrapper */
+.author__urls-wrapper {
+  margin-top: 20px !important;
+  padding-top: 15px !important;
+}
+
+/* Date badge styling for post metadata */
+.page__date-badge {
+  margin-top: 1em;
+  margin-bottom: 1.5em;
+  
+  time {
+    display: inline-block;
+    background-color: #346244;
+    color: #ffffff;
+    padding: 0.4em 0.75em;
+    border-radius: 20px;
+    font-size: 0.875em;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s ease;
+  }
+  
+  time:hover {
+    background-color: #4a8a5f;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    transform: translateY(-2px);
+  }
+}

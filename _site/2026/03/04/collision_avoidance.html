@@ -1,0 +1,511 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.27.3 by Michael Rose
+  Copyright 2013-2025 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Collision avoidance</title>
+<meta name="description" content="How collision aviodance works">
+
+
+  <meta name="author" content="Abdiwak Debella">
+  
+  <meta property="article:author" content="Abdiwak Debella">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="">
+<meta property="og:title" content="Collision avoidance">
+<meta property="og:url" content="http://localhost:4000/mars-ned2/2026/03/04/collision_avoidance.html">
+
+
+  <meta property="og:description" content="How collision aviodance works">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-03-04T00:00:00+00:00">
+
+
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/mars-ned2/2026/03/04/collision_avoidance.html">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/mars-ned2/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  window.enable_copy_code_button = true;
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/mars-ned2/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    
+<script>
+  window.enable_copy_code_button = true;
+</script>
+
+  </head>
+
+  <body class="layout--single wide" dir="ltr">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/mars-ned2/">
+          
+          
+        </a>
+       
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/mars-ned2/"
+                
+                
+              >Home</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/mars-ned2/blog/"
+                
+                
+              >Blog</a>
+            </li></ul>
+
+         <a href="https://github.com/2delab/mars-ned2" class="masthead__github-link" target="_blank" rel="noopener noreferrer" title="View source on GitHub">
+        <i class="fab fa-github" aria-hidden="true"></i>
+        </a>
+
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Collision avoidance">
+    <meta itemprop="description" content="How collision aviodance works">
+    <meta itemprop="datePublished" content="2026-03-04T00:00:00+00:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">
+            <a href="http://localhost:4000/mars-ned2/2026/03/04/collision_avoidance.html" itemprop="url">Collision avoidance
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          10 minute read
+        
+      </span>
+    
+  </p>
+
+<div class="page__date-badge">
+            <time datetime="2026-03-04T00:00:00+00:00" itemprop="datePublished">2026-03-04</time>
+          </div></header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <h1 id="how-collision-aviodance-works">How collision aviodance works</h1>
+
+<p>Collision avoidance in MoveIt 2 operates at planning time only. The planner produces a trajectory that was collision-free against a snapshot of the world at the moment planning ran. What happens during execution is a separate concern. Understanding this distinction requires tracing how collision checking actually works, from the geometry library at the bottom to the trajectory executor at the top.</p>
+
+<h2 id="fcl-the-collision-engine">FCL: The Collision Engine</h2>
+
+<p>MoveIt 2 delegates all geometry-versus-geometry queries to the <strong>Flexible Collision Library (FCL)</strong>. Every collision check in the planning pipeline — whether checking a sampled joint configuration against the world or checking two robot links against each other — eventually becomes an FCL query.</p>
+
+<p>FCL operates in two phases:</p>
+
+<p><strong>Broadphase</strong> uses a dynamic AABB (Axis-Aligned Bounding Box) tree to rapidly eliminate object pairs that cannot possibly be in contact. Each object’s bounding box is maintained in a persistent spatial data structure. When a query arrives, only pairs whose bounding boxes overlap advance to the next phase. For world objects, <code class="language-plaintext highlighter-rouge">CollisionEnvFCL</code> maintains a persistent <code class="language-plaintext highlighter-rouge">fcl::BroadPhaseCollisionManagerd</code> that is updated incrementally as objects are added or removed. For self-collision, a new manager is created per query from pre-computed per-link geometries — the link geometries are computed once at startup and stored; only their global transforms are recomputed per query, making repeated self-collision checks cheap.</p>
+
+<p><strong>Narrowphase</strong> handles the pairs that survived broadphase. Depending on geometry type, FCL runs GJK/EPA (for convex shapes) or mesh-mesh intersection tests to determine whether contact exists and, if requested, where.</p>
+
+<p>The result contains <code class="language-plaintext highlighter-rouge">collision</code> (bool), <code class="language-plaintext highlighter-rouge">distance</code> (closest separation between any two bodies), <code class="language-plaintext highlighter-rouge">contact_count</code>, and a contact map keyed by body-pair identifiers. Most planning queries use the default configuration  binary collision only which is the fastest path through FCL. Distance computation requires a full narrowphase pass on all surviving broadphase pairs even after a collision is found; it is not used during planning.</p>
+
+<p>Two check types exist at the <code class="language-plaintext highlighter-rouge">CollisionEnvFCL</code> level:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">checkSelfCollision(req, res, state, acm)</code> — robot links vs. other robot links, filtered by the Allowed Collision Matrix</li>
+  <li><code class="language-plaintext highlighter-rouge">checkRobotCollision(req, res, state, acm)</code> — robot links vs. world objects only; self-collision is not performed here</li>
+</ul>
+
+<p>There is also a <strong>continuous</strong> variant of <code class="language-plaintext highlighter-rouge">checkRobotCollision</code> that accepts two states and checks the swept volume between them. OMPL does not call this variant by default — it uses only the discrete checker per sampled state. The implications of this are discussed in the planning section below.</p>
+
+<hr />
+
+<h2 id="the-planning-scene-as-fcls-input">The Planning Scene as FCL’s Input</h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">PlanningScene</code> object owns the collision world and is the interface planners query. It wraps <code class="language-plaintext highlighter-rouge">CollisionEnvFCL</code> and combines the robot model, current joint state, world collision objects, and the Allowed Collision Matrix into a single queryable structure.</p>
+
+<p>Key methods available at the Python binding level (from <code class="language-plaintext highlighter-rouge">planning_scene.pyi</code> and <code class="language-plaintext highlighter-rouge">planning_scene.cpp</code>):</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>What it checks</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">check_collision(req, res)</code></td>
+      <td>Self-collision + world, padded geometry, current state</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">check_collision(req, res, state, acm)</code></td>
+      <td>Same with an explicit state and custom ACM</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">check_self_collision(req, res)</code></td>
+      <td>Robot links vs. robot links only</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">is_state_valid(state, group)</code></td>
+      <td>Collision + kinematic constraints combined</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">is_path_valid(trajectory, group)</code></td>
+      <td>Every waypoint in a trajectory; returns indices of invalid states</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>In MARS, a single <code class="language-plaintext highlighter-rouge">move_group</code> node manages the full dual-arm URDF (launched in <code class="language-plaintext highlighter-rouge">mars_ned2.launch.py</code>). Both <code class="language-plaintext highlighter-rouge">arm_1</code> and <code class="language-plaintext highlighter-rouge">arm_2</code> exist in the same planning scene and therefore the same FCL environment. There is no cross-process scene synchronisation problem — the inter-arm collision check is a native FCL query within the single scene. The static world geometry loaded at startup is a 3×3 m workspace platform box (<code class="language-plaintext highlighter-rouge">workspace_scene.yaml</code>):</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">collision_objects</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">id</span><span class="pi">:</span> <span class="s2">"</span><span class="s">workspace_platform"</span>
+    <span class="na">header</span><span class="pi">:</span>
+      <span class="na">frame_id</span><span class="pi">:</span> <span class="s2">"</span><span class="s">world"</span>
+    <span class="na">primitives</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="m">1</span>  <span class="c1"># BOX primitive</span>
+        <span class="na">dimensions</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">3.0</span><span class="pi">,</span> <span class="nv">3.0</span><span class="pi">,</span> <span class="nv">0.01</span><span class="pi">]</span>
+    <span class="na">primitive_poses</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">position</span><span class="pi">:</span> <span class="pi">{</span><span class="nv">x</span><span class="pi">:</span> <span class="nv">0.0</span><span class="pi">,</span> <span class="nv">y</span><span class="pi">:</span> <span class="nv">0.0</span><span class="pi">,</span> <span class="nv">z</span><span class="pi">:</span> <span class="nv">-0.015</span><span class="pi">}</span>
+        <span class="na">orientation</span><span class="pi">:</span> <span class="pi">{</span><span class="nv">x</span><span class="pi">:</span> <span class="nv">0.0</span><span class="pi">,</span> <span class="nv">y</span><span class="pi">:</span> <span class="nv">0.0</span><span class="pi">,</span> <span class="nv">z</span><span class="pi">:</span> <span class="nv">0.0</span><span class="pi">,</span> <span class="nv">w</span><span class="pi">:</span> <span class="nv">1.0</span><span class="pi">}</span>
+    <span class="na">operation</span><span class="pi">:</span> <span class="m">0</span>  <span class="c1"># ADD</span>
+</code></pre></div></div>
+
+<p>No sensor-driven octomap is active. All collision objects are static geometric primitives placed explicitly.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">PlanningSceneMonitor</code> maintains the live scene and provides thread-safe access via <code class="language-plaintext highlighter-rouge">read_only</code> / <code class="language-plaintext highlighter-rouge">read_write</code> context managers. It receives joint states via <code class="language-plaintext highlighter-rouge">/joint_states</code>, published by <code class="language-plaintext highlighter-rouge">JointStateManager</code> at 15 Hz (<code class="language-plaintext highlighter-rouge">publish_frequency: 15.0</code> in <code class="language-plaintext highlighter-rouge">mars_ned2.launch.py</code>). This rate sets the temporal resolution of the planner’s world model: at any given moment the robot configuration known to the planning scene may be up to 67 ms stale.</p>
+
+<hr />
+
+<h2 id="link-padding-inflating-geometry-before-any-fcl-query">Link Padding: Inflating Geometry Before Any FCL Query</h2>
+
+<p>Before FCL evaluates any pair, MoveIt inflates every link’s collision geometry by its configured padding value. This is applied in <code class="language-plaintext highlighter-rouge">CollisionEnvFCL::updatedPaddingOrScaling()</code>, which reconstructs the FCL geometry objects with enlarged dimensions. Padding is not a runtime offset — it physically changes the shape handed to FCL. A padded box becomes a larger box; a padded mesh has its surface extruded outward.</p>
+
+<p>The effect on collision queries: two links whose physical surfaces are 8 cm apart will report a collision if each carries 5 cm padding, because the padded shapes are 10 cm thick. The query result is “in collision” even though no physical contact would occur.</p>
+
+<p>In MARS, <code class="language-plaintext highlighter-rouge">niryo_ned2_dual_arm.srdf</code> defines padding for all 22 links across both arms:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- Standard arm links: 5 cm --&gt;</span>
+<span class="nt">&lt;link_padding</span> <span class="na">link=</span><span class="s">"arm_1_base_link"</span>     <span class="na">padding=</span><span class="s">"0.05"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;link_padding</span> <span class="na">link=</span><span class="s">"arm_1_shoulder_link"</span> <span class="na">padding=</span><span class="s">"0.05"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;link_padding</span> <span class="na">link=</span><span class="s">"arm_1_arm_link"</span>      <span class="na">padding=</span><span class="s">"0.05"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;link_padding</span> <span class="na">link=</span><span class="s">"arm_1_elbow_link"</span>    <span class="na">padding=</span><span class="s">"0.05"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;link_padding</span> <span class="na">link=</span><span class="s">"arm_1_forearm_link"</span>  <span class="na">padding=</span><span class="s">"0.05"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;link_padding</span> <span class="na">link=</span><span class="s">"arm_1_wrist_link"</span>    <span class="na">padding=</span><span class="s">"0.05"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;link_padding</span> <span class="na">link=</span><span class="s">"arm_1_hand_link"</span>     <span class="na">padding=</span><span class="s">"0.05"</span><span class="nt">/&gt;</span>
+<span class="c">&lt;!-- End-effector components: 7 cm --&gt;</span>
+<span class="nt">&lt;link_padding</span> <span class="na">link=</span><span class="s">"arm_1_base_gripper_1"</span> <span class="na">padding=</span><span class="s">"0.07"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;link_padding</span> <span class="na">link=</span><span class="s">"arm_1_mors_1"</span>         <span class="na">padding=</span><span class="s">"0.07"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;link_padding</span> <span class="na">link=</span><span class="s">"arm_1_mors_2"</span>         <span class="na">padding=</span><span class="s">"0.07"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;link_padding</span> <span class="na">link=</span><span class="s">"arm_1_camera_link"</span>    <span class="na">padding=</span><span class="s">"0.07"</span><span class="nt">/&gt;</span>
+<span class="c">&lt;!-- arm_2 carries identical values --&gt;</span>
+</code></pre></div></div>
+
+<p>This establishes a minimum guaranteed physical clearance between any two cross-arm links in a collision-free plan of <strong>10 cm</strong> (5 cm per arm). For gripper-to-gripper proximity the margin is <strong>14 cm</strong> (7 cm per side). The asymmetry at the end-effector reflects the higher consequence of a contact at the gripper during manipulation — a wrist contact is recoverable; a gripper contact during a pick operation likely destroys the task.</p>
+
+<p>The cost is false negatives: configurations where the physical links would not touch but the padded geometries overlap are rejected by the planner. These are not planning bugs — they are the intended conservative behaviour of a model that does not trust its own accuracy.</p>
+
+<hr />
+
+<h2 id="the-allowed-collision-matrix-scoping-what-fcl-checks">The Allowed Collision Matrix: Scoping What FCL Checks</h2>
+
+<p>Left unconstrained, FCL would check every possible link pair — including adjacent links that are permanently in contact by design, and links on opposite ends of the kinematic chain that could never physically reach each other. The Allowed Collision Matrix (ACM) filters these to prevent false positives that would make planning impossible.</p>
+
+<p>The ACM is a sparse symmetric matrix of (link_name, link_name) → allowed/not-allowed entries. <code class="language-plaintext highlighter-rouge">CollisionEnvFCL::checkSelfCollisionHelper</code> consults the ACM before dispatching any pair to the narrowphase. Pairs with an <code class="language-plaintext highlighter-rouge">ALWAYS</code> entry are skipped entirely.</p>
+
+<p>The SRDF populates the ACM at startup. MoveIt’s Setup Assistant generates <code class="language-plaintext highlighter-rouge">reason="Adjacent"</code> entries for kinematically connected links and <code class="language-plaintext highlighter-rouge">reason="Never"</code> entries for pairs it determines to be geometrically unreachable via its self-collision sampling pass. In MARS, <code class="language-plaintext highlighter-rouge">niryo_ned2_dual_arm.srdf</code> disables the following categories:</p>
+
+<p><strong>Within each arm</strong> — adjacent links (physically connected, always in contact):</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;disable_collisions</span> <span class="na">link1=</span><span class="s">"arm_1_arm_link"</span>      <span class="na">link2=</span><span class="s">"arm_1_shoulder_link"</span> <span class="na">reason=</span><span class="s">"Adjacent"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;disable_collisions</span> <span class="na">link1=</span><span class="s">"arm_1_arm_link"</span>      <span class="na">link2=</span><span class="s">"arm_1_elbow_link"</span>    <span class="na">reason=</span><span class="s">"Adjacent"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;disable_collisions</span> <span class="na">link1=</span><span class="s">"arm_1_forearm_link"</span>  <span class="na">link2=</span><span class="s">"arm_1_wrist_link"</span>    <span class="na">reason=</span><span class="s">"Adjacent"</span><span class="nt">/&gt;</span>
+<span class="c">&lt;!-- and so on for all adjacent pairs --&gt;</span>
+</code></pre></div></div>
+
+<p><strong>Within each arm</strong> — geometrically unreachable pairs:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;disable_collisions</span> <span class="na">link1=</span><span class="s">"arm_1_arm_link"</span> <span class="na">link2=</span><span class="s">"arm_1_base_link"</span> <span class="na">reason=</span><span class="s">"Never"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;disable_collisions</span> <span class="na">link1=</span><span class="s">"arm_1_arm_link"</span> <span class="na">link2=</span><span class="s">"arm_1_hand_link"</span> <span class="na">reason=</span><span class="s">"Never"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<p><strong>Between arms</strong> — the shared mounting base:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;disable_collisions</span> <span class="na">link1=</span><span class="s">"arm_1_base_link"</span> <span class="na">link2=</span><span class="s">"arm_2_base_link"</span> <span class="na">reason=</span><span class="s">"Adjacent"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<p>This last entry is the only cross-arm disabled pair. Every other combination of an <code class="language-plaintext highlighter-rouge">arm_1</code> link with an <code class="language-plaintext highlighter-rouge">arm_2</code> link remains active in the ACM. This means every inter-arm link pair is handed to FCL’s narrowphase on every self-collision check during planning. With 10 arm links per side (excluding the shared base), that is 100 potential cross-arm pairs queried at every sampled state in the planning graph.</p>
+
+<p>The ACM can be modified at runtime via <code class="language-plaintext highlighter-rouge">planning_scene.allowed_collision_matrix.set_entry(name1, name2, allowed)</code>. This is not used in MARS — the static SRDF configuration is treated as fixed.</p>
+
+<hr />
+
+<h2 id="how-ompl-calls-fcl-during-planning">How OMPL Calls FCL During Planning</h2>
+
+<p>OMPL is not aware of FCL directly. It interacts with MoveIt through a <code class="language-plaintext highlighter-rouge">StateValidityChecker</code> interface: for every state it samples or expands toward, it asks whether that state is valid. The checker calls <code class="language-plaintext highlighter-rouge">PlanningScene::isStateValid()</code>, which calls <code class="language-plaintext highlighter-rouge">checkCollision()</code>, which dispatches to <code class="language-plaintext highlighter-rouge">CollisionEnvFCL</code>. One OMPL planning call may invoke this chain thousands of times.</p>
+
+<p>The density of collision checks along path segments is controlled by <code class="language-plaintext highlighter-rouge">longest_valid_segment_fraction</code> in <code class="language-plaintext highlighter-rouge">ompl_planning_pipeline.yaml</code>:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">longest_valid_segment_fraction</span><span class="pi">:</span> <span class="m">0.005</span>
+</code></pre></div></div>
+
+<p>This parameter defines the maximum edge length — expressed as a fraction of the total joint state space diameter — that OMPL will accept without explicitly validating intermediate sub-states. A value of 0.005 means that for any edge longer than 0.5% of the state space, OMPL subdivides the edge and checks each sub-state individually. For the NED2’s 6-DOF joint space, this produces approximately one collision check per 1–2 degrees of joint motion along any edge, depending on which joints are moving.</p>
+
+<p>Setting this value too high means collision checks are sparse along edges: a narrow obstacle could be missed if both endpoints of an edge are collision-free but the interpolated path passes through the obstacle. Setting it too low means FCL is called far more frequently per planning attempt, increasing planning time proportionally.</p>
+
+<p>At 0.005, planning time for typical MARS trajectories (home to pick pose, approximately 60–90 degrees of motion across multiple joints) involves several thousand FCL queries per planning attempt. Given FCL’s broadphase culling, most of these resolve without narrowphase computation.</p>
+
+<p><strong>What OMPL does not do</strong>: OMPL uses only the discrete state checker, never FCL’s continuous <code class="language-plaintext highlighter-rouge">checkRobotCollision(state1, state2)</code> swept-volume variant. The distinction matters: discrete checking confirms that the two endpoints and a finite set of interpolated sub-states are collision-free. It does not confirm that the continuous motion between those sub-states is collision-free. The <code class="language-plaintext highlighter-rouge">longest_valid_segment_fraction</code> parameter trades off the probability of missing a collision in the interpolated segment against planning speed. At 0.5%, combined with 5–7 cm link padding, the probability of a physical collision being missed during planning is low but not zero.</p>
+
+<h2 id="what-moveit-plans-but-does-not-execute-safely">What MoveIt Plans but Does Not Execute Safely</h2>
+
+<p>Once <code class="language-plaintext highlighter-rouge">PlanningComponent::plan()</code> returns a trajectory, the trajectory passes to MoveIt’s execution layer. In MARS this is the <code class="language-plaintext highlighter-rouge">TrajectoryProxy</code> node (<code class="language-plaintext highlighter-rouge">trajectory_proxy.py</code>), which accepts a <code class="language-plaintext highlighter-rouge">FollowJointTrajectory</code> action goal from MoveIt and forwards it to the Niryo hardware controller:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hw_goal</span> <span class="o">=</span> <span class="n">FollowJointTrajectory</span><span class="p">.</span><span class="n">Goal</span><span class="p">(</span><span class="n">trajectory</span><span class="o">=</span><span class="n">unprefixed_trajectory</span><span class="p">)</span>
+<span class="n">send_future</span> <span class="o">=</span> <span class="n">hw_client</span><span class="p">.</span><span class="n">send_goal_async</span><span class="p">(</span><span class="n">hw_goal</span><span class="p">,</span> <span class="n">feedback_callback</span><span class="o">=</span><span class="n">feedback_callback</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Once the goal is accepted by the hardware controller, the trajectory executes as a <strong>time-parameterised joint interpolation</strong>. The Niryo controller tracks waypoints using its internal PID; MoveIt is not in the control loop. During execution, <code class="language-plaintext highlighter-rouge">TrajectoryProxy</code> checks only two things: whether a cancellation has been requested from the action client, and whether the configurable wall-clock timeout has been exceeded (<code class="language-plaintext highlighter-rouge">trajectory_timeout_sec: 120.0</code>).</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">goal_handle</span><span class="p">.</span><span class="n">is_cancel_requested</span><span class="p">:</span>
+    <span class="n">hw_goal_handle</span><span class="p">.</span><span class="n">cancel_goal_async</span><span class="p">()</span>
+    <span class="p">...</span>
+
+<span class="n">elapsed</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">get_clock</span><span class="p">().</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">).</span><span class="n">nanoseconds</span> <span class="o">/</span> <span class="mf">1e9</span>
+<span class="k">if</span> <span class="n">elapsed</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="p">.</span><span class="n">traj_timeout</span><span class="p">:</span>
+    <span class="n">hw_goal_handle</span><span class="p">.</span><span class="n">cancel_goal_async</span><span class="p">()</span>
+    <span class="n">goal_handle</span><span class="p">.</span><span class="n">abort</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>Neither check involves the planning scene or FCL. An obstacle added to the scene after the planning call completes will not cause the execution to stop. A joint state drift that puts the robot on a collision course mid-trajectory will not be detected. The planning scene continues updating at 15 Hz during execution, but nothing reads it for the purpose of execution safety.</p>
+
+<p>This is a known, documented limitation of MoveIt’s architecture. GitHub issue moveit/moveit#2631 identifies the root cause: the <code class="language-plaintext highlighter-rouge">ExecuteTrajectory</code> action capability bypasses <code class="language-plaintext highlighter-rouge">PlanExecution</code> and goes directly to <code class="language-plaintext highlighter-rouge">TrajectoryExecutionManager</code>, which does not include collision monitoring. Only the <code class="language-plaintext highlighter-rouge">move()</code> method on <code class="language-plaintext highlighter-rouge">MoveGroupInterface</code> — which plans and executes in a single monitored call — provides trajectory monitoring, and even this is only available via the C++ <code class="language-plaintext highlighter-rouge">MoveGroupInterface</code>, not through the <code class="language-plaintext highlighter-rouge">PlanningComponent</code> API used in MARS.</p>
+
+<p>The consequence is architectural: the guarantee MoveIt provides is that <strong>the planned trajectory was collision-free in the planning scene at planning time</strong>. It provides no guarantee about what the physical robot encounters during execution.</p>
+
+<hr />
+
+<h2 id="summary">Summary</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Stage</th>
+      <th>Collision-free?</th>
+      <th>Mechanism</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Sampled states during OMPL planning</td>
+      <td>Yes</td>
+      <td>FCL via <code class="language-plaintext highlighter-rouge">isStateValid</code> at every sub-state along each edge</td>
+    </tr>
+    <tr>
+      <td>Interpolated path between checked sub-states</td>
+      <td>Approximately</td>
+      <td>0.5% segment fraction + 5–7 cm padding reduce but do not eliminate the gap</td>
+    </tr>
+    <tr>
+      <td>Trajectory during execution</td>
+      <td>No</td>
+      <td>Open-loop <code class="language-plaintext highlighter-rouge">FollowJointTrajectory</code>; planning scene not consulted</td>
+    </tr>
+    <tr>
+      <td>New obstacles after planning completes</td>
+      <td>Not handled</td>
+      <td><code class="language-plaintext highlighter-rouge">TrajectoryProxy</code> has no scene awareness; execution continues regardless</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>MoveIt 2’s collision avoidance is a planning-time guarantee, not an execution-time guarantee. The FCL broadphase/narrowphase pipeline, the ACM, link padding, and <code class="language-plaintext highlighter-rouge">longest_valid_segment_fraction</code> together determine how thoroughly the planner searches for collision-free paths. None of these mechanisms are active once the trajectory leaves the planner.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-03-04T00:00:00+00:00">March 4, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  <h4 class="page__share-title">Share on</h4>
+
+  <a href="https://x.com/intent/tweet?text=Collision+avoidance%20http%3A%2F%2Flocalhost%3A4000%2Fmars-ned2%2F2026%2F03%2F04%2Fcollision_avoidance.html" class="btn btn--x" aria-label="Share on X" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on X">
+    <i class="fab fa-fw fa-x-twitter" aria-hidden="true"></i><span> X</span>
+  </a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fmars-ned2%2F2026%2F03%2F04%2Fcollision_avoidance.html" class="btn btn--facebook" aria-label="Share on Facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook">
+    <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span>
+  </a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/mars-ned2/2026/03/04/collision_avoidance.html" class="btn btn--linkedin" aria-label="Share on LinkedIn" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn">
+    <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span>
+  </a>
+
+  <a href="https://bsky.app/intent/compose?text=Collision+avoidance%20http%3A%2F%2Flocalhost%3A4000%2Fmars-ned2%2F2026%2F03%2F04%2Fcollision_avoidance.html" class="btn btn--bluesky" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Bluesky">
+    <i class="fab fa-fw fa-bluesky" aria-hidden="true"></i><span> Bluesky</span>
+  </a>
+</section>
+
+
+      
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+      
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    <li><a href="/marl/"> Abdiwak Debella </a></li>
+  </ul>
+</div>
+<div class="page__footer-copyright">
+  © 2026
+</div>  
+
+
+      </footer>
+    </div>
+
+    
+  <script src="/mars-ned2/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/mars-ned2/assets/js/lunr/lunr.min.js"></script>
+<script src="/mars-ned2/assets/js/lunr/lunr-store.js"></script>
+<script src="/mars-ned2/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+  </body>
+</html>

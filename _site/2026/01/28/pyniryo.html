@@ -1,0 +1,361 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.27.3 by Michael Rose
+  Copyright 2013-2025 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Pyniryo</title>
+<meta name="description" content="PyNiryo">
+
+
+  <meta name="author" content="Abdiwak Debella">
+  
+  <meta property="article:author" content="Abdiwak Debella">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="">
+<meta property="og:title" content="Pyniryo">
+<meta property="og:url" content="http://localhost:4000/mars-ned2/2026/01/28/pyniryo.html">
+
+
+  <meta property="og:description" content="PyNiryo">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-01-28T00:00:00+00:00">
+
+
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/mars-ned2/2026/01/28/pyniryo.html">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/mars-ned2/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  window.enable_copy_code_button = true;
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/mars-ned2/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    
+<script>
+  window.enable_copy_code_button = true;
+</script>
+
+  </head>
+
+  <body class="layout--single wide" dir="ltr">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/mars-ned2/">
+          
+          
+        </a>
+       
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/mars-ned2/"
+                
+                
+              >Home</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/mars-ned2/blog/"
+                
+                
+              >Blog</a>
+            </li></ul>
+
+         <a href="https://github.com/2delab/mars-ned2" class="masthead__github-link" target="_blank" rel="noopener noreferrer" title="View source on GitHub">
+        <i class="fab fa-github" aria-hidden="true"></i>
+        </a>
+
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Pyniryo">
+    <meta itemprop="description" content="PyNiryo">
+    <meta itemprop="datePublished" content="2026-01-28T00:00:00+00:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">
+            <a href="http://localhost:4000/mars-ned2/2026/01/28/pyniryo.html" itemprop="url">Pyniryo
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+  </p>
+
+<div class="page__date-badge">
+            <time datetime="2026-01-28T00:00:00+00:00" itemprop="datePublished">2026-01-28</time>
+          </div></header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <h2 id="pyniryo">PyNiryo</h2>
+
+<p>PyNiryo presents an appeling pythonic interface. The library abstracts ROS1 firmware complexity with clean Python APIs, offers straightforward robot control methods like <code class="language-plaintext highlighter-rouge">move_pose()</code> and <code class="language-plaintext highlighter-rouge">vision_pick()</code>, and provides async capabilities through Python’s native concurrency primitives. Initial proof-of-concept code demonstrated that single-robot operation and multiple robots can work with python elegantly.</p>
+
+<p>While the PyNiryo library provides an accessible entry point for controlling the Niryo Ned2, its utility is primarily limited to standalone applications. As project requirements scale from individual units to coordinated multi-robot frameworks, the library’s architectural limitations often create technical deadends that hinder system integration.</p>
+
+<h2 id="why-pyniryo-is-not-enough">Why PyNiryo is not enough</h2>
+
+<h3 id="the-communication-architecture-gap">The Communication Architecture Gap</h3>
+<p>PyNiryo operates through TCP connections to the robot’s internal server. The <code class="language-plaintext highlighter-rouge">NiryoRobot</code> class uses <code class="language-plaintext highlighter-rouge">connect()</code> to establish TCP sessions and sends commands over this proprietary protocol. Examining the API reveals no ROS2 topic publishers, no transform broadcasters, no DDS middleware integration.</p>
+
+<p>Methods like <code class="language-plaintext highlighter-rouge">get_joints()</code>, <code class="language-plaintext highlighter-rouge">get_pose()</code>, and <code class="language-plaintext highlighter-rouge">collision_detected</code> return state synchronously through function calls. There’s no mechanism to subscribe to joint states as they update, no way to monitor end-effector poses on a continuous topic, and no broadcast transforms for spatial reasoning.</p>
+
+<p>For multi-robot coordination, this creates problems because</p>
+
+<ul>
+  <li><strong>No shared spatial awareness:</strong> Without <code class="language-plaintext highlighter-rouge">tf2</code> integration, determining “where is the other robot’s gripper relative to my workspace?” requires manual coordinate transformations. PyNiryo provides <code class="language-plaintext highlighter-rouge">get_pose()</code> and <code class="language-plaintext highlighter-rouge">forward_kinematics()</code>, but these return point-in-time snapshots, not continuous spatial state.</li>
+  <li><strong>No pub/sub coordination patterns:</strong> Task allocation in multi-robot systems typically uses topic-based queues. One node publishes tasks; multiple robots subscribe and claim them. PyNiryo’s TCP model requires either polling both robots constantly or implementing custom message passing—essentially rebuilding ROS2’s middleware.</li>
+  <li><strong>Isolated error handling:</strong> When PyNiryo encounters errors, it raises exceptions like <code class="language-plaintext highlighter-rouge">NiryoRobotException</code>. These are Python-local events. There’s no system-level error propagation, no way for one robot to signal the other about collision risks or workspace conflicts through standardized messages.</li>
+</ul>
+
+<h2 id="what-ros2-native-actually-provides">What ROS2 Native Actually Provides</h2>
+
+<p>The native ROS2 driver shifts the paradigm from request/response control to publish/subscribe middleware. Here is what that architectural difference enables:</p>
+
+<h3 id="transform-tree-tf2-as-spatial-database">Transform Tree (TF2) as Spatial Database</h3>
+<p>Both robots publish their complete kinematic chains to <code class="language-plaintext highlighter-rouge">/tf</code> and <code class="language-plaintext highlighter-rouge">/tf_static</code> topics. Every joint publishes its transform relative to its parent link. The end-effector’s pose propagates through this chain automatically.</p>
+
+<p>Collision detection becomes a <code class="language-plaintext highlighter-rouge">tf2</code> query:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Get transform between robot 1's end effector and robot 2's base
+</span><span class="n">transform</span> <span class="o">=</span> <span class="n">tf_buffer</span><span class="p">.</span><span class="n">lookup_transform</span><span class="p">(</span>
+    <span class="s">'robot_2/base_link'</span><span class="p">,</span>
+    <span class="s">'robot_1/ee_link'</span><span class="p">,</span>
+    <span class="n">rclpy</span><span class="p">.</span><span class="n">time</span><span class="p">.</span><span class="n">Time</span><span class="p">()</span>
+<span class="p">)</span>
+<span class="n">distance</span> <span class="o">=</span> <span class="n">calculate_distance</span><span class="p">(</span><span class="n">transform</span><span class="p">)</span>
+</code></pre></div></div>
+<p>No manual matrix math. No polling both robots for current poses. The <code class="language-plaintext highlighter-rouge">tf2</code> system maintains this spatial graph with temporal interpolation.</p>
+
+<h3 id="topic-based-state-distribution">Topic-Based State Distribution</h3>
+<p>Joint states flow on <code class="language-plaintext highlighter-rouge">/robot_1/joint_states</code> and <code class="language-plaintext highlighter-rouge">/robot_2/joint_states</code> as <code class="language-plaintext highlighter-rouge">sensor_msgs/JointState</code> messages. Any node can subscribe. A collision avoidance node can monitor both simultaneously. A task allocator can detect exactly when a robot becomes available based on its status flags. This is fundamentally different from PyNiryo’s <code class="language-plaintext highlighter-rouge">get_joints()</code>, which requires explicit polling.</p>
+
+<h3 id="action-servers-for-preemptable-operations">Action Servers for Preemptable Operations</h3>
+<p>ROS2 actions provide goal-oriented, cancelable commands with continuous feedback. A pick-and-place action accepts a target pose, publishes progress updates (approaching, grasping, retracting), and can be preempted if a collision risk emerges. PyNiryo’s <code class="language-plaintext highlighter-rouge">pick_from_pose()</code> is fire-and-forget; once called, the motion completes or crashes.</p>
+
+<h2 id="the-ecosystem-integration-factor">The Ecosystem Integration Factor</h2>
+
+<p>The native driver unlocks tools designed specifically for ROS2 multi-robot systems:</p>
+
+<ol>
+  <li>
+    <p><strong>MoveIt2:</strong> Motion planning with collision avoidance. It accepts planning scene updates from both robots’ joint states and generates trajectories that avoid both self-collision and robot-robot collision.</p>
+  </li>
+  <li>
+    <p><strong>Sensor Fusion:</strong> External cameras or other custom sensors can publish to standard message types. Nodes fuse this data with robot state. PyNiryo’s vision system is self-contained and does not integrate with external perception.</p>
+  </li>
+  <li>
+    <p><strong>Debugging Tools:</strong> <code class="language-plaintext highlighter-rouge">rqt_graph</code> visualizes node communication; <code class="language-plaintext highlighter-rouge">rviz2</code> renders the tf tree and robot models in real-time. With PyNiryo, debugging is limited to print statements and custom logging.</p>
+  </li>
+</ol>
+
+<h2 id="the-concrete-tradeoff">The Concrete Tradeoff</h2>
+
+<p><strong>PyNiryo abstracts complexity.</strong> One robot, one script, straightforward control flow. Methods like <code class="language-plaintext highlighter-rouge">pick_and_place()</code> encapsulate entire sequences. No middleware configuration, no launch files, no QoS policies to understand.</p>
+
+<p><strong>ROS2 native exposes complexity.</strong> Launch files for namespaced nodes. YAML configs for parameters. Understanding DDS QoS for reliable communication. Manual coordination of multiple launch processes.</p>
+
+<p>But that exposed complexity is <strong>structured complexity.</strong> It involves documented patterns, debuggable with standard tools, and reproducible across projects. Building multi-robot coordination on PyNiryo means creating custom middleware from scratch—coordination protocols, state synchronization, and spatial awareness. That is <strong>unstructured complexity</strong> with project-specific solutions.</p>
+
+<h2 id="the-decision-point-scaling-beyond-the-single-script">The Decision Point: Scaling Beyond the Single Script</h2>
+
+<p>The decision to pivot to ROS2 was ultimately a choice between <strong>convenience</strong> and <strong>capability</strong>.</p>
+
+<p>For our multi-robot Ned2 project, the native ROS2 driver provides a features rich foundation.</p>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-01-28T00:00:00+00:00">January 28, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  <h4 class="page__share-title">Share on</h4>
+
+  <a href="https://x.com/intent/tweet?text=Pyniryo%20http%3A%2F%2Flocalhost%3A4000%2Fmars-ned2%2F2026%2F01%2F28%2Fpyniryo.html" class="btn btn--x" aria-label="Share on X" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on X">
+    <i class="fab fa-fw fa-x-twitter" aria-hidden="true"></i><span> X</span>
+  </a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fmars-ned2%2F2026%2F01%2F28%2Fpyniryo.html" class="btn btn--facebook" aria-label="Share on Facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook">
+    <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span>
+  </a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/mars-ned2/2026/01/28/pyniryo.html" class="btn btn--linkedin" aria-label="Share on LinkedIn" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn">
+    <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span>
+  </a>
+
+  <a href="https://bsky.app/intent/compose?text=Pyniryo%20http%3A%2F%2Flocalhost%3A4000%2Fmars-ned2%2F2026%2F01%2F28%2Fpyniryo.html" class="btn btn--bluesky" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Bluesky">
+    <i class="fab fa-fw fa-bluesky" aria-hidden="true"></i><span> Bluesky</span>
+  </a>
+</section>
+
+
+      
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+      
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    <li><a href="/marl/"> Abdiwak Debella </a></li>
+  </ul>
+</div>
+<div class="page__footer-copyright">
+  © 2026
+</div>  
+
+
+      </footer>
+    </div>
+
+    
+  <script src="/mars-ned2/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/mars-ned2/assets/js/lunr/lunr.min.js"></script>
+<script src="/mars-ned2/assets/js/lunr/lunr-store.js"></script>
+<script src="/mars-ned2/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+  </body>
+</html>

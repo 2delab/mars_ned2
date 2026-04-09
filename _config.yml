@@ -5,7 +5,7 @@ remote_theme: "mmistakes/minimal-mistakes@4.27.3"
 title: ""
 
 # Base URL
-baseurl: "/mars-ned2" # the subpath of your site, e.g. /blog
+baseurl: "/page" 
 url: "https://2delab.github.io/mars-ned2" 
 
 

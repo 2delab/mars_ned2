@@ -215,31 +215,67 @@
 
 <p>Reproduces horizontal shoulder rotation, allowing the arm to rotate around its vertical base axis. This movement is essential for positioning the arm across a wide working surface and provides the robot’s primary azimuthal (yaw) motion. This is the fastest joint with a maximum velocity of 10.0 rad/s.</p>
 
-<p><img src="/mars_ned2/assets/images/ned2_base.png" alt="Base rotation diagram" /></p>
+<div style="text-align: center;">
+  <video width="25%" controls="" autoplay="" muted="" loop="">
+    <source src="/mars_ned2/assets/videos/joint1.mp4" type="video/mp4" />
+    Your browser doesn't support HTML5 video.
+  </video>
+</div>
 
 <h3 id="axis-2--shoulder-lift">Axis 2 — Shoulder Lift</h3>
 
 <p>Simulates raising and lowering of the shoulder, enabling vertical movement of the arm. This axis adjusts the operating height so the robot can grasp or manipulate objects at different levels. Working with joint 3, it determines the overall arm height and reach.</p>
 
-<p><img src="/mars_ned2/assets/images/ned2_sholder.png" alt="Shoulder movement diagram" /></p>
+<div style="text-align: center;">
+  <video width="25%" controls="" autoplay="" muted="" loop="">
+    <source src="/mars_ned2/assets/videos/joint2.mp4" type="video/mp4" />
+    Your browser doesn't support HTML5 video.
+  </video>
+</div>
 
 <h3 id="axis-3--elbow-extension">Axis 3 — Elbow Extension</h3>
 
 <p>Allows the arm to extend and retract, imitating elbow flexion and extension. Combined with joint 2, the elbow joint determines the arm’s overall reach and therefore how far the robot can interact from its base. Both shoulder and elbow joints operate at 8.0 rad/s.</p>
 
-<p><img src="/mars_ned2/assets/images/ned2_elbow.png" alt="Elbow diagram" /></p>
+<div style="text-align: center;">
+  <video width="25%" controls="" autoplay="" muted="" loop="">
+    <source src="/mars_ned2/assets/videos/joint3.mp4" type="video/mp4" />
+    Your browser doesn't support HTML5 video.
+  </video>
+</div>
 
 <h3 id="axis-4--forearm-rotation">Axis 4 — Forearm Rotation</h3>
 
 <p>Rotates the forearm around its longitudinal axis, enabling tool orientation changes independent of wrist position. This joint operates at slower speeds (2.0 rad/s) suitable for precise tool control.</p>
 
+<div style="text-align: center;">
+  <video width="25%" controls="" autoplay="" muted="" loop="">
+    <source src="/mars_ned2/assets/videos/joint4.mp4" type="video/mp4" />
+    Your browser doesn't support HTML5 video.
+  </video>
+</div>
+
 <h3 id="axis-5--wrist-lift">Axis 5 — Wrist Lift</h3>
 
 <p>Permits up/down movement (pitch) of the wrist. This axis is important in tasks where the end-effector angle must change without moving the arm position, such as varying grasp angles or approach directions during manipulation.</p>
 
+<div style="text-align: center;">
+  <video width="25%" controls="" autoplay="" muted="" loop="">
+    <source src="/mars_ned2/assets/videos/joint5.mp4" type="video/mp4" />
+    Your browser doesn't support HTML5 video.
+  </video>
+</div>
+
 <h3 id="axis-6--wrist-rotation">Axis 6 — Wrist Rotation</h3>
 
 <p>Enables rotation (roll) of the wrist around its longitudinal axis, analogous to rolling or twisting the human hand. This movement fine-tunes tool orientation and is used in assembly, inspection, or precision placement tasks. Like all wrist joints, it operates at 2.0 rad/s for controlled, precise motion.</p>
+
+<div style="text-align: center;">
+  <video width="25%" controls="" autoplay="" muted="" loop="">
+    <source src="/mars_ned2/assets/videos/joint6.mp4" type="video/mp4" />
+    Your browser doesn't support HTML5 video.
+  </video>
+</div>
 
 <p><img src="/mars_ned2/assets/images/ned2_6axes.png" alt="all six axes" class="align-center" /></p>
 
@@ -351,7 +387,7 @@
 
 <h3 id="collision-detection-and-response">Collision Detection and Response</h3>
 
-<p>The robot integrates accelerometers and gyroscopes for real-time collision monitoring. When sudden deceleration (indicating impact with an obstacle or person) is detected, the robot immediately enters a safe state—stopping motion and awaiting operator intervention. This passive safety mechanism reduces the risk of injury during human-robot interaction in laboratory environments.</p>
+<p>The Ned2 integrates an <strong>accelerometer and gyroscope in the control panel</strong> for real-time collision monitoring. These sensors detect sudden deceleration caused by impact with obstacles or persons. Upon detection, the robot immediately stops and enters a safe state, awaiting operator intervention. This <strong>reactive safety mechanism</strong> complements motion planning algorithms (MoveIt) that compute collision-free paths during autonomous operation. Unlike predictive systems, this approach prioritizes inherent safety through mechanical compliance and real-time monitoring rather than complex vision-based obstacle avoidance.</p>
 
 <h3 id="operating-modes-and-constraints">Operating Modes and Constraints</h3>
 

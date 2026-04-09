@@ -174,7 +174,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          3 minute read
+          7 minute read
         
       </span>
     
@@ -208,6 +208,147 @@
 
 <hr />
 
+<h2 id="planning-scene-queries-during-motion-planning">Planning Scene Queries During Motion Planning</h2>
+
+<p>When MoveIt2’s motion planner (RRTConnect or other sampling-based planner) generates a trajectory, it continuously queries the planning scene. The planning loop operates like this:</p>
+
+<ol>
+  <li><strong>Sample</strong> a configuration (random point in joint space or biased toward goal)</li>
+  <li><strong>Query</strong> the planning scene: “Is this configuration collision-free?”</li>
+  <li><strong>Receive</strong> a binary response: collision detected or not</li>
+  <li><strong>Accept or reject</strong> the sample based on the response</li>
+  <li><strong>Repeat</strong> thousands of times until a path to the goal is found</li>
+</ol>
+
+<p>Each query asks the planning scene’s collision checker: “Given the current robot geometry (from joint states) and current world state (obstacles, other robots), does this configuration cause contact between any checked link pairs?”</p>
+
+<p>The critical point: <strong>the planning scene is a snapshot of the world taken at the moment planning begins</strong>. If the world changes during planning (an obstacle moves, the other robot shifts position), the planner is unaware. This is acceptable because:</p>
+
+<ul>
+  <li>Planning typically completes in milliseconds (100–500 ms for complex trajectories)</li>
+  <li>Execution also happens on a millisecond timescale</li>
+  <li>The time window between planning and execution is small relative to robot dynamics</li>
+  <li>MARS validation shows zero unplanned collisions across 86 executed trajectories—evidence that the snapshot model is conservative enough in practice</li>
+</ul>
+
+<hr />
+
+<h2 id="dual-arm-planning-scene-mars-architecture">Dual-Arm Planning Scene (MARS Architecture)</h2>
+
+<p>The key for MARS lies in how dual-arm collision checking emerges naturally from a single architectural choice: <strong>one URDF containing both arms, managed by one move_group node, sharing one planning scene.</strong></p>
+
+<h3 id="how-it-works">How It Works</h3>
+
+<p><strong>The URDF unifies the geometry:</strong></p>
+<ul>
+  <li>The composite URDF file defines arm_1’s complete kinematic chain (base → joint_1 → link_1 → joint_2 → … → end_effector)</li>
+  <li>The same URDF defines arm_2’s complete kinematic chain starting from its own base</li>
+  <li>All 22 links (11 per arm) exist in a single kinematic model</li>
+</ul>
+
+<p><strong>The move_group loads the composite model:</strong></p>
+<ul>
+  <li>A single <code class="language-plaintext highlighter-rouge">move_group</code> node launches with the composite URDF as its robot model</li>
+  <li>It creates one <code class="language-plaintext highlighter-rouge">PlanningScene</code> object</li>
+  <li>This scene contains the geometry of all 22 links from both arms</li>
+</ul>
+
+<p><strong>The planning scene contains one FCL world:</strong></p>
+<ul>
+  <li>When the planner queries the planning scene, it’s querying a single Flexible Collision Library (FCL) collision world</li>
+  <li>This world contains collision geometry for all links from both arms</li>
+  <li>All link pairs—arm_1 links against arm_2 links, arm_1 links against themselves, arm_2 links against themselves—are checked in the same FCL database</li>
+</ul>
+
+<p><strong>Inter-arm collisions are automatic:</strong></p>
+<ul>
+  <li>There is no special logic or messaging to check “does arm_1 collide with arm_2?”</li>
+  <li>The Allowed Collision Matrix (ACM) already contains entries for every link pair across the two arms</li>
+  <li>When planning the <code class="language-plaintext highlighter-rouge">dual</code> group (12-DOF composite group), a sampled configuration includes all 12 joint angles from both arms</li>
+  <li>That configuration is collision-checked against the shared FCL world; if arm_1_link_3 collides with arm_2_link_2 in the current geometry, the check returns true—collision detected</li>
+</ul>
+
+<video width="100%" controls="" autoplay="" muted="" loop="">
+  <source src="/mars_ned2/assets/videos/planning_scene.mp4" type="video/mp4" />
+  Your browser doesn't support HTML5 video.
+</video>
+
+<h3 id="why-choose-this-approach">Why choose this approach?</h3>
+
+<p>The alternative—maintaining separate planning scenes for each robot and synchronizing collision checks across a network boundary—would require:</p>
+<ul>
+  <li>Two independent <code class="language-plaintext highlighter-rouge">move_group</code> nodes, one per arm</li>
+  <li>Custom message passing to communicate inter-arm collision queries</li>
+  <li>Eventual consistency problems (which robot’s model of the other’s position is authoritative?)</li>
+</ul>
+
+<p>MARS sidesteps all of this. Both arms are unified at the URDF level, so both are inherently visible to a single collision checker. The planning scene is one unified data structure; no cross-process synchronization is needed.</p>
+
+<hr />
+
+<h2 id="visualizing-and-debugging-the-planning-scene">Visualizing and Debugging the Planning Scene</h2>
+
+<p>Understanding why the planner accepts or rejects a configuration requires seeing the planning scene in action.</p>
+
+<h3 id="rviz2-visualization">RViz2 Visualization</h3>
+
+<p>Launch RViz2 with the MARS configuration and enable these visualization layers:</p>
+
+<p><strong>Scene Geometry:</strong></p>
+<ul>
+  <li>Shows the static world objects (workspace boundaries, tables, fixtures)</li>
+  <li>Checkbox: <code class="language-plaintext highlighter-rouge">MarkerArray → Scene Geometry</code></li>
+</ul>
+
+<p><strong>Scene Collision Objects:</strong></p>
+<ul>
+  <li>Shows any dynamically added collision objects in the planning scene</li>
+  <li>Checkbox: <code class="language-plaintext highlighter-rouge">MarkerArray → Scene Collision Objects</code></li>
+</ul>
+
+<p><strong>Link Collision Geometry:</strong></p>
+<ul>
+  <li>Shows the actual collision geometry of every robot link, <strong>with padding applied</strong></li>
+  <li>This is critical for understanding rejections: the padded volumes are what FCL actually checks, not the visual meshes</li>
+  <li>Checkbox: <code class="language-plaintext highlighter-rouge">RobotModel → Link Collision Geometry</code></li>
+</ul>
+
+<p>When enabled together, RViz2 displays the exact geometry the planner sees: the two arms’ collision-padded volumes in their current configuration, plus all world obstacles. If two padded volumes overlap visually in RViz2, the planner will detect a collision at that configuration.</p>
+
+<h3 id="inspecting-planning-scene-state-via-ros2-cli">Inspecting Planning Scene State via ROS2 CLI</h3>
+
+<p>The planning scene is managed by a set of ROS2 services and topics. You can query its state directly from the command line:</p>
+
+<p><strong>List planning scene services:</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ros2 service list | <span class="nb">grep </span>planning_scene
+</code></pre></div></div>
+
+<p>This returns services like <code class="language-plaintext highlighter-rouge">/get_planning_scene</code>, <code class="language-plaintext highlighter-rouge">/apply_planning_scene</code>, etc.</p>
+
+<p><strong>Dump the current planning scene:</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ros2 service call /get_planning_scene moveit_msgs/srv/GetPlanningScene <span class="o">{}</span>
+</code></pre></div></div>
+
+<p>This returns the complete planning scene state: all link geometries, all collision objects, the ACM, padding values—everything the planner sees.</p>
+
+<p><strong>Check if a specific configuration is valid:</strong>
+Most MoveIt2 setups expose a <code class="language-plaintext highlighter-rouge">/check_state_validity</code> service or similar. Consult the deployed move_group node’s service list for the exact name.</p>
+
+<h3 id="understanding-planning-scene-rejections">Understanding Planning Scene Rejections</h3>
+
+<p>When the planner rejects a configuration (collision detected), the cause is visible in RViz2:</p>
+
+<ol>
+  <li>Enable “Link Collision Geometry” in RViz2</li>
+  <li>Manually command the robot (via interactive markers or joint sliders) to the rejected configuration</li>
+  <li>Observe: do any padded link volumes overlap? If yes, that’s why the planner rejected it</li>
+  <li>If no overlap is visible, the rejection might be due to self-collision constraints or other non-collision checks</li>
+</ol>
+
+<p>This visual feedback is the primary debugging tool for understanding planner behavior.</p>
+
+<hr />
+
 <h2 id="what-the-planning-scene-is-not">What the Planning Scene Is Not</h2>
 
 <h3 id="it-is-not-real-time">It Is Not Real-Time</h3>
@@ -230,7 +371,7 @@
 
 <p>Their mechanics — how the ACM is consulted by <code class="language-plaintext highlighter-rouge">CollisionEnvFCL::checkSelfCollisionHelper</code>, how padding is applied via <code class="language-plaintext highlighter-rouge">updatedPaddingOrScaling()</code>, and the specific values used in MARS — are covered in the <a href="/2026/03/04/collision_avoidance.html">Collision Avoidance</a> post.</p>
 
-<hr />
+<h2><img src="/mars_ned2/assets/images/padding.png" alt="Padding" class="align-center" /></h2>
 
 <h2 id="the-planning-scene-is-a-model">The Planning Scene Is a Model</h2>
 

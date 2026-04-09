@@ -1,12 +1,12 @@
 var store = [{
         "title": "Introduction",
-        "excerpt":"What Is MARS? I started this project with a deceptively simple premise: Get two Niryo Ned2 robots to collaborate autonomosly. Instead of one robot working alone, Multi-Arm Robotic Systems (MARS) multiple robotic manipulators operating in a shared workspace to collaboratively complete tasks that would be difficult, inefficient, or impossible for...","categories": [],
+        "excerpt":"What Is MARS? This project explores a deceptively simple premise: Get two Niryo Ned2 robots to collaborate autonomously. Multi-Arm Robotic Systems (MARS) is about multiple robotic manipulators operating in a shared workspace to collaboratively complete tasks that would be difficult, inefficient, or impossible for a single arm. &gt; Your browser...","categories": [],
         "tags": [],
         "url": "/mars_ned2/2026/01/19/what_is_mars.html",
         "teaser": null
       },{
         "title": "Understanding ROS2 ",
-        "excerpt":"Let me introduce you to ROS However, before any confusion Let me start with what ros is not ros is not an application, ros is not an operating system, ros is not a firmware ROS is a middleware that enables communication between different programs, even across multiple machines. A set of software...","categories": [],
+        "excerpt":"What is ROS2? ROS2 is not an operating system, not firmware, not a standalone application. Instead, it’s middleware—the connective tissue that enables distributed programs to communicate seamlessly, even across multiple machines. For MARS, this matters because: we need two independent robot control loops, a motion planner, a collision detector, and...","categories": [],
         "tags": [],
         "url": "/mars_ned2/2026/01/23/understanding_ros2.html",
         "teaser": null
@@ -59,8 +59,8 @@ var store = [{
         "url": "/mars_ned2/2026/02/13/transportFrames.html",
         "teaser": null
       },{
-        "title": "Fudutial Markers",
-        "excerpt":"Choosing ArUco Tags insead of Classical Pose Estimation The Core Problem A collaborative setup requires both robots to pick items from a shared table. Both need to know where things are, and need to agree on those positions. Hardcoding won’t work on dynamic environments. The naive approach: run individual pose...","categories": [],
+        "title": "Fiducial Markers",
+        "excerpt":"Choosing ArUco Tags Instead of Classical Pose Estimation A dual-arm system requires consensus on object locations. This post documents why classical pose estimation failed in practice and how ArUco fiducial markers solved the problem for MARS. The Core Problem A collaborative setup requires both robots to pick items from a...","categories": [],
         "tags": [],
         "url": "/mars_ned2/2026/02/18/fuditialmarkers.html",
         "teaser": null
@@ -125,44 +125,44 @@ var store = [{
         "url": "/mars_ned2/2026/03/16/state_management.html",
         "teaser": null
       },{
-        "title": "The TrajectoryProxy Pattern",
+        "title": "The Trajectory Proxy ",
         "excerpt":"MoveIt2 generates trajectories for a unified 12-DOF robot. The hardware expects two separate 6-DOF trajectory commands, delivered to independent action servers in different namespaces. The TrajectoryProxy is the layer that performs this translation — splitting, stripping, and dispatching planned trajectories to the correct hardware controllers. The Problem After planning, MoveIt2...","categories": [],
         "tags": [],
         "url": "/mars_ned2/2026/03/20/trajectory_proxy.html",
         "teaser": null
       },{
         "title": "Sync and Async Tests",
-        "excerpt":"MARS has two coordination modes. synchronised and asynchronous motion. Both modes ran on physical Niryo NED2 hardware with joint state data logged at 15 Hz from /arm_1/joint_states and /arm_2/joint_states. The fundamental difference between the two modes is the planning group used: the dual 12-DOF group produces a single shared trajectory;...","categories": [],
+        "excerpt":"MARS has two coordination modes: synchronised and asynchronous motion. Both modes ran on physical Niryo NED2 hardware with joint state data logged at 15 Hz from /arm_1/joint_states and /arm_2/joint_states. The fundamental difference is architectural: the dual 12-DOF planning group produces a single shared trajectory that moves both arms together; the...","categories": [],
         "tags": [],
         "url": "/mars_ned2/2026/03/23/test_sync_n_async.html",
         "teaser": null
       },{
-        "title": "The TrajectoryProxy Pattern",
-        "excerpt":"The collision safety validation is the most straightforward result in MARS: 100 hardware tests across two scenarios, zero unplanned collisions. Test Setup Two collision test scenarios were executed: Dynamic tests (50 configurations): arm_2 moves between two configurations while arm_1 is free to move from its position. Static tests (50 configurations):...","categories": [],
+        "title": "Collision tests",
+        "excerpt":"The collision safety validation is the most straightforward result in MARS: 100 hardware tests across two scenarios, zero unplanned collisions. Test Setup Two collision test scenarios were executed to validate inter-arm collision detection at the planning-time level and confirm zero collisions during execution: Scenario Arm 1 State Arm 2 Motion...","categories": [],
         "tags": [],
         "url": "/mars_ned2/2026/03/26/test_collision.html",
         "teaser": null
       },{
-        "title": "Repeatability test",
-        "excerpt":"The most important result from the pick-and-place validation is not the 28.6% throughput gain. It is the 0.5% coefficient of variation across repeated dual-arm tasks. This is the result that determines whether the system is deployable. its not how fast it is, but how consistently it behaves. Why Repeatability Is...","categories": [],
+        "title": "Accuracy tests",
+        "excerpt":"This post measures how accurately the Niryo Ned2 arms execute commanded trajectories. Given a target joint configuration, how close does the actual joint position get? How much does this vary across repeated trials? Accuracy is measured as the range (min-max spread) of achieved positions across 9 test cycles. Why Command...","categories": [],
         "tags": [],
-        "url": "/mars_ned2/2026/03/29/test_accurracy.html",
+        "url": "/mars_ned2/2026/03/29/test_accuracy.html",
         "teaser": null
       },{
         "title": "What MARS Can Do and What It Cannot: A Practical Summary",
-        "excerpt":"This is the complete picture of what the final MARS implementation delivers and where the boundaries are. If you are considering MARS for your own dual-arm system, this post tells you what you are getting and what you are not. What It Does Three Coordination Modes MARS provides three selectable...","categories": [],
+        "excerpt":"What It Does Three Coordination Modes MARS provides three selectable modes at runtime, each with different guarantees: Asynchronous mode — both arms plan and execute independently, 6-DOF each. No cross-arm collision checking. This is the mode that delivers the headline result: 28.6% cycle time reduction in parallel pick-and-place compared to...","categories": [],
         "tags": [],
         "url": "/mars_ned2/2026/04/02/featuresandlimits.html",
         "teaser": null
       },{
         "title": " Future Work",
-        "excerpt":"MARS solves a specific problem: coordinated dual-arm manipulation on namespace-isolated ROS2 hardware, with planning-time collision safety and three selectable coordination modes. It does not solve the general multi-arm coordination problem. This post maps the open problems and the directions where the architecture extends naturally versus where new work is needed....","categories": [],
+        "excerpt":"MARS solves a specific problem: coordinated dual-arm manipulation on namespace-isolated ROS2 hardware, with planning-time collision safety and three selectable coordination modes. It does not solve the general multi-arm coordination problem. The Immediately Solvable Driver-Level Synchronisation The largest gap between simulation and hardware for synchronised mode is the 20–50 ms inter-arm...","categories": [],
         "tags": [],
         "url": "/mars_ned2/2026/04/05/future_work.html",
         "teaser": null
       },{
         "title": "Demos",
-        "excerpt":"The MARS validation campaign uses six demonstrations, each designed to prove a specific claim about the coordination architecture. This post maps each demonstration to the claim it validates and explains the design choice behind it. Demo 1: Pick and Place (Asynchronous Mode) Claim: dual-arm asynchronous operation achieves measurable throughput gains...","categories": [],
+        "excerpt":"The MARS validation campaign uses six demonstrations, each designed to prove a specific claim about the coordination architecture. Demo 1: Pick and Place Claim: dual-arm asynchronous operation achieves measurable throughput gains over sequential single-arm operation. Design: both arms execute pick-and-place cycles simultaneously on spatially partitioned targets. A single-arm baseline (same...","categories": [],
         "tags": [],
         "url": "/mars_ned2/2026/04/08/demo.html",
         "teaser": null

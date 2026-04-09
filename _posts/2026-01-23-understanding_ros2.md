@@ -6,17 +6,17 @@ classes : wide
 author_profile: false
 ---
 
-Let me introduce you to ROS
+## What is ROS2?
 
-However, before any confusion
+ROS2 is not an operating system, not firmware, not a standalone application. Instead, it's **middleware**—the connective tissue that enables distributed programs to communicate seamlessly, even across multiple machines.
 
-Let me start with what ros is not
-ros is not an application, ros is not an operating system, ros is not a firmware
+For MARS, this matters because: we need two independent robot control loops, a motion planner, a collision detector, and a perception pipeline all running in parallel. ROS2 provides the standardized communication layer that lets these components talk without tight coupling.
 
-ROS is a **middleware** that enables communication between different programs, even across multiple machines.
-**A set of software libraries and tools** for building robot applications
-It's not a standalone application, but rather the backbone that connects your robotic systems. 
-**A communication infrastructure** that provides services like hardware abstraction, message-passing between processes, and package management.
+**In practical terms:**
+- A set of software libraries and tools for building robot applications
+- Hardware abstraction layer between the robots' firmware and your control code
+- Message-passing infrastructure for inter-process communication
+- Package and dependency management system
 
 The DDS Layer: Why ROS2 
 Under the hood, it's all **DDS (Data Distribution Service)**
@@ -28,9 +28,13 @@ which isn't just a transport but a complete middleware specification with:
 
 The architecture
 ### Nodes: Your Building Blocks
-Every piece of functionality lives in a **node**. A node is just a process that does one thing well. Maybe it reads from a camera. Maybe it plans a path. Maybe it controls a motor.
- key trait: single responsibility - usually just does one thing.  
-e.g.
+Every piece of functionality lives in a **node**. A node is just a process that does one thing well. Maybe it reads from a camera. Maybe it plans a path. Maybe it controls a motor.
+
+In MARS, we run separate nodes for each robot's control loop, a unified motion planner, a collision checker, and vision processing. This modularity means we can restart the planner without crashing the hardware interface, or swap the collision detection algorithm without touching the control code.
+
+**Key trait:** Single responsibility—usually just does one thing.
+
+Example:
 ```python
 import rclpy
 from rclpy.node import Node
@@ -49,10 +53,20 @@ def main(args=None):
 ```
 
 
-### Topics: Broadcast
-think of it as a radio station where any one can tune in. so one node publishes data; any number of nodes can subscribe. No direct connection needed. No blocking. Perfect for sensor data streaming.
-- **Key trait:** Asynchronous - no response required
-e.g.
+### Topics: Broadcast Communication
+Think of a topic as a radio station where any node can tune in. One node publishes data; any number of nodes subscribe. No direct connection needed, no blocking. Perfect for continuous sensor data and state updates.
+
+In MARS:
+- **Robot 1** publishes its joint states to `/robot_1/joint_states` at 100Hz
+- **Robot 2** publishes its joint states to `/robot_2/joint_states` at 100Hz
+- The **motion planner** subscribes to both, always aware of the current configuration
+- The **collision detector** subscribes to both, continuously checking for inter-arm conflicts
+
+This decoupling means a slow node won't block the others. If the planner stalls, the joint state publishers keep flowing.
+
+**Key trait:** Asynchronous—no response required.
+
+Example:
 ```python
 class MinimalPublisher(Node):
     def __init__(self):
@@ -81,10 +95,19 @@ class MinimalSubscriber(Node):
 ```
 
 
-### 2. Services (Request and response)
-The ROS2 service is functionally equivalent to an API (Application Programming Interface) in that it provides a standardized way for nodes to request and receive responses, similar to how APIs enable communication between software systems. so the client sends a request and has to wait until the server responds. They are useful for quick tasks like getting a program’s status or running a short calculation The system works with service **servers** and service **clients**. The **server** processes requests and sends back responses. It does not send data continuously
-- **Key trait:** Synchronous - waits for response
-e.g.
+### Services: Request-Response Communication
+A service is a request-response pattern. The client sends a request and waits for the server to respond. Unlike topics (fire-and-forget), services are synchronous and guarantee you get an answer.
+
+In MARS:
+- A high-level task planner calls `/request_pick` service to ask robot 1 to pick an object
+- Robot 1's gripper controller processes the request and returns success or failure
+- The planner waits for this response before proceeding to the next step
+
+Services are ideal for discrete tasks that require confirmation, not continuous streaming.
+
+**Key trait:** Synchronous—client waits for a response.
+
+Example:
 
 ```python
 # Server
@@ -101,9 +124,18 @@ request.a = 5
 request.b = 3
 future = self.client.call_async(request)
 ```
-### 3. Actions
-Actions are the sophisticated sibling, they are used for **long-running tasks** that need **response** and can be stopped if needed.
-- **Key trait:** longer tasks, that can be cancelled mid-execution. also with progress feedback.
+### Actions: Long-Running Goals with Feedback
+Actions are built for **long-running tasks** that need real-time feedback and can be cancelled mid-execution. They're more sophisticated than services because they provide progress updates and can be preempted.
+
+In MARS:
+- A high-level task sends a `MoveIt2` action goal: "move arm 1 to pose (x, y, z)"
+- The motion planner immediately returns feedback: "planning 20% complete", "planning 80% complete"
+- Once planned, execution feedback flows: "trajectory 10% complete", "trajectory 50% complete"
+- If a collision risk emerges, the high-level task can cancel the goal before completion
+
+This feedback loop is essential for monitoring long-running manipulation tasks and responding to dynamic changes.
+
+**Key trait:** Long-running tasks with progress feedback and cancellation support.
 
 ```python
 # Action client sending a goal
@@ -201,35 +233,55 @@ colcon build
 
 ## The Ecosystem
 
-ROS2 isn't just the ROS2 middleware also , it's an ecosystem:
-- **Nav2**: Advanced navigation stack
-- **MoveIt 2**: Motion planning for manipulators
-- **Gazebo**: Physics simulation
-- **RViz2**: 3D visualization
-- **ros2_control**: Hardware abstraction for controllers
-- **micro-ROS**: For microcontrollers (ESP32, STM32)
+ROS2 is more than middleware—it's a growing ecosystem of specialized packages:
+- **Nav2**: Advanced navigation stack (mobile robots)
+- **MoveIt2**: Motion planning and collision checking for manipulators—critical for MARS
+- **Gazebo**: Physics simulation for testing dual-arm scenarios safely
+- **RViz2**: 3D visualization of robot state, trajectories, and transforms
+- **ros2_control**: Hardware abstraction layer (enables switching between simulation and real hardware)
+- **tf2**: Transform management (essential for multi-robot spatial reasoning)
 
-We'll comeback to these but feel free to browse.
+For MARS specifically, **MoveIt2** and **tf2** are the backbone. MoveIt2 handles collision-aware planning for the dual 6-DOF system, while tf2 maintains the transform tree linking both arms' end-effectors to a shared world frame.
+
+## How MARS Uses ROS2
+
+In a concrete MARS workflow:
+
+1. **Hardware Interface Node** (ros2_control): Reads `/joint_commands` from controllers, writes actual joint positions to `/robot_1/joint_states` and `/robot_2/joint_states`
+
+2. **Motion Planning Node** (MoveIt2): Subscribes to both joint state topics, accepts planning requests via action server, checks collision against both arms simultaneously
+
+3. **Collision Detection Node**: Subscribes to both joint states, monitors `/tf` transforms, raises alerts if inter-arm distance drops below safety threshold
+
+4. **High-Level Task Coordinator**: Orchestrates multi-step assembly tasks by sending goals to the motion planner, monitoring feedback, and handling synchronization between arms
+
+5. **Vision Node**: Publishes detected object poses on `/detected_objects`, enabling pick-and-place targeting
+
+This modular architecture is what enables MARS to function as a cohesive system while remaining flexible and testable.
 
 
 
-# A Guide to Setting Up our Workspace
+# Setting Up the MARS Workspace
 
-
-In this guide, we will walk through the practical workflow for initializing a ROS 2 environment, creating packages, and managing dependencies for our project.
-
+This guide walks through initializing a ROS2 environment for MARS: creating packages, managing dependencies, and structuring the workspace for multi-arm control.
 
 ## 1. Initializing Your Workspace
-A ROS 2 workspace is the directory where you develop, build, and install your ROS 2 packages. By convention, developers often name this `ros2_ws`. 
 
-Open your terminal and execute the following to create the standard directory structure:
+The MARS workspace is where you develop and build all ROS2 packages. The standard structure separates source code from build artifacts.
 
 ```bash
 mkdir -p ~/mars_ned2/src
 cd ~/mars_ned2
 ```
 
-The `src/` directory is critical—it is the only place where your source code should reside. The build system will automatically generate other folders (`build`, `install`, and `log`) in the root of the workspace.
+The `src/` directory holds all source code. The build system automatically generates `build/`, `install/`, and `log/` directories after compilation.
+
+For MARS, you'll typically have packages like:
+- `niryo_ned2_interface`: Hardware abstraction for both robots
+- `mars_motion_planning`: MoveIt2 configuration and planning
+- `mars_collision_checker`: Custom collision detection
+- `mars_vision`: ArUco marker detection and object localization
+- `mars_task_coordinator`: High-level multi-arm task execution
 
 
 ## 2. Creating Your First Package
@@ -313,7 +365,7 @@ ros2 run my_package my_node
 ---
 
 ## Reference: Essential CLI Commands
-To maintain a high-velocity development workflow, keep these commands in your repertoire:
+To maintain a development workspace, keep these commands in your repertoire:
 
 | Task | Command |
 | :--- | :--- |

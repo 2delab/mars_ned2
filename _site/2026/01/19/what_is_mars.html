@@ -174,7 +174,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          3 minute read
+          4 minute read
         
       </span>
     
@@ -189,9 +189,9 @@
         
         <h2 id="what-is-mars">What Is MARS?</h2>
 
-<p>I started this project with a deceptively simple premise: Get two Niryo Ned2 robots to <strong>collaborate autonomosly.</strong></p>
+<p>This project explores a deceptively simple premise: Get two Niryo Ned2 robots to <strong>collaborate autonomously</strong>.</p>
 
-<p>Instead of one robot working alone, Multi-Arm Robotic Systems (MARS)  multiple robotic manipulators operating in a shared workspace to collaboratively complete tasks that would be difficult, inefficient, or impossible for a single arm.</p>
+<p>Multi-Arm Robotic Systems (MARS) is about multiple robotic manipulators operating in a shared workspace to collaboratively complete tasks that would be difficult, inefficient, or impossible for a single arm.</p>
 
 <video width="100%" controls="" autoplay="" muted="" loop="">&gt;
   <source src="/mars_ned2/assets/videos/mars.mp4" type="video/mp4" />
@@ -199,15 +199,15 @@
 </video>
 <p>See more: <a href="https://github.com/moveit/moveit/pull/2810">MoveIt PR #2810</a></p>
 
-<p>Each arm with its own degrees of freedom, sensors, and control systems, yet they must work together toward common goals.  These systems aren’t just about having more arms but about enabling capabilities that emerge only through collaboration: i.e performing assembly tasks requiring simultaneous actions from multiple angles, or executing parallel operations that dramatically reduce cycle times.</p>
+<p>Each arm has its own degrees of freedom, sensors, and control systems, yet they must work together toward common goals. Multi-arm systems aren’t just about having more actuators—they enable capabilities that emerge only through collaboration: assembly tasks requiring simultaneous actions from multiple angles, or parallel operations that dramatically reduce cycle times.</p>
 
-<h2 id="the-key-challenges-were-tackling">The key challenges we’re tackling</h2>
+<h2 id="core-challenges">Core Challenges</h2>
 
 <h3 id="shared-workspace-management"><strong>Shared Workspace Management</strong></h3>
 
-<p>In Multi-Arm Robotic Systems, the primary bottleneck for operational efficiency is collision avoidance. Unlike isolated single-arm setups, MARS requires persistent spatial negotiation within a shared work envelope. The core challenge lies in the real-time synchronization of every arm’s position and projected trajectory to prevent path intersections.</p>
+<p>In multi-arm systems, the primary bottleneck for operational efficiency is collision avoidance. Unlike single-arm setups, MARS requires persistent spatial negotiation within a shared workspace. The core challenge is real-time synchronization of every arm’s position and projected trajectory to prevent path intersections.</p>
 
-<p>To address this complexity, contemporary solutions utilise the several strategies:</p>
+<p>To address this, several strategies exist:</p>
 
 <p><strong>Centralized collision avoidance</strong>:  A unified planning scene aggregates every joint from all manipulators into a single, high-degree-of-freedom configuration space. Rather than solving for arms individually, the system uses sampling-based or optimization-based planners to compute trajectories that are globally aware of the entire system’s geometry, ensuring that the motion of one arm is always valid relative to the current and future positions of all others.</p>
 
@@ -220,15 +220,13 @@
 
 <p><strong>Synchronous behavior</strong> is achieved through unified trajectory time-parameterization and synchronized controller execution. The framework ensures that multiple arms coordinate with each other and with moving objects by aligning their time-stamps within a single execution pipeline. This allows the system to meet the precise timing required for complex maneuvers where every arm must arrive at a target configuration simultaneously with the correct orientation.</p>
 
-<p><strong>Asynchronous behavior</strong> allows each arm to perform independent point-to-point motions without strict timing constraints. This mode maximizes efficiency when tasks vary in duration. One arm might be executing a complex assembly while another performs quick pick-and-place operations.</p>
+<p><strong>Asynchronous behavior</strong> allows each arm to perform independent point-to-point motions without strict timing constraints. This maximizes efficiency when tasks vary in duration—one arm executes complex assembly while another performs quick pick-and-place.</p>
 
-<p>The magic happens in transitioning between these modes through hierarchical task management. By utilizing a control variable the system can smoothly shift behavior based on context.  This integration allows a multi-arm setup to “re-synchronize and adapt the motion of each arm while avoiding self-collision within milliseconds,” moving fluidly between independent operations and tight temporal coordination.</p>
-
-<p>Recent approaches also explore:
-<strong>Graph-based task allocation</strong>: By integrating graph-based logic—such as behavioral trees or reinforcement learning within the core motion planning pipeline, the system can perform joint task scheduling and collision-free path generation simultaneously. This allows the framework to solve complex, obstacle-rich scenarios by decomposing global goals into a series of coordinated, collision-aware sub-tasks that are allocated and scheduled across the available manipulators.</p>
+<p><strong>Mode selection</strong> can be automated through hierarchical task management. The system monitors arm separation and workspace sharing, switching to synchronous mode when arms approach each other and asynchronous when they’re in separate zones. This allows fluid transitions between independent operation and tight coordination.</p>
 
 <h3 id="joint-state-management"><strong>Joint State Management</strong></h3>
-<p>Multi-arm systems also create an addiinal state management problem. With multiple arms, each possessing 6 DOF, the composite state space becomes vast. A dual-arm system with 6-DOF manipulators operates in a 12-dimensional joint space. Scale to three or four arms, and the complexity and computational load becomes vast.</p>
+
+<p>Multi-arm systems create an additional state management problem. With multiple arms, each possessing 6 DOF, the composite state space becomes vast. A dual-arm system operates in 12-dimensional joint space. Scale to three or four arms, and complexity and computational load grow exponentially.</p>
 
 <p>The core challenges:</p>
 
@@ -245,8 +243,15 @@
 
 <p><strong>Low-level control</strong>: Once a plan is generated, the framework deploys control policies that execute manipulation tasks in physically realistic environments. This layer ensures that the hardware follows the planned trajectory while strictly maintaining safety and performance constraints, such as joint limits and obstacle proximity.</p>
 
-<h2 id="in-conclusion">In conclusion</h2>
-<p>The transition to Multi-Arm Robotic Systems (MARS) represents a new paradigm in automation. While single-arm setups excel at isolated, repetitive tasks, MARS architectures unlock collaborative manipulation at a higher level.</p>
+<h2 id="conclusion">Conclusion</h2>
+
+<p>The transition to multi-arm robotic systems represents a fundamental shift in automation capability. While single-arm setups optimize for isolated, repetitive tasks, MARS architectures enable collaborative manipulation that transcends simple repetition.</p>
+
+<p>This project demonstrates that with proper spatial coordination, synchronized execution, and robust state management, two Niryo Ned2 robots can operate as a unified system. The result: tasks that would be inefficient or impossible for a single arm become manageable—assembly requiring simultaneous access from multiple angles, parallel operations that halve cycle times, and collaborative workflows that mirror human team dynamics.</p>
+
+<p>The key insight is that coordination isn’t a single problem to solve, but a layered challenge: collision avoidance in shared space, synchronization across multiple timelines, state management in high-dimensional joint spaces, and planning that orchestrates it all. Each layer is critical; weakness in any breaks the entire system.</p>
+
+<p>Multi-arm robotics is no longer theoretical. With proper architecture and careful design, it’s achievable with commercial hardware and open-source frameworks.</p>
 
         
       </section>

@@ -11,7 +11,7 @@
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>What MARS Can Do and What It Cannot: A Practical Summary</title>
-<meta name="description" content="This is the complete picture of what the final MARS implementation delivers and where the boundaries are. If you are considering MARS for your own dual-arm system, this post tells you what you are getting and what you are not.">
+<meta name="description" content="What It Does">
 
 
   <meta name="author" content="Abdiwak Debella">
@@ -27,7 +27,7 @@
 <meta property="og:url" content="http://localhost:4000/mars_ned2/2026/04/02/featuresandlimits.html">
 
 
-  <meta property="og:description" content="This is the complete picture of what the final MARS implementation delivers and where the boundaries are. If you are considering MARS for your own dual-arm system, this post tells you what you are getting and what you are not.">
+  <meta property="og:description" content="What It Does">
 
 
 
@@ -149,7 +149,7 @@
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="What MARS Can Do and What It Cannot: A Practical Summary">
-    <meta itemprop="description" content="This is the complete picture of what the final MARS implementation delivers and where the boundaries are. If you are considering MARS for your own dual-arm system, this post tells you what you are getting and what you are not.">
+    <meta itemprop="description" content="What It Does">
     <meta itemprop="datePublished" content="2026-04-02T00:00:00+01:00">
     
 
@@ -174,7 +174,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          6 minute read
+          5 minute read
         
       </span>
     
@@ -187,11 +187,7 @@
 
       <section class="page__content" itemprop="text">
         
-        <p>This is the complete picture of what the final MARS implementation delivers and where the boundaries are. If you are considering MARS for your own dual-arm system, this post tells you what you are getting and what you are not.</p>
-
-<hr />
-
-<h2 id="what-it-does">What It Does</h2>
+        <h2 id="what-it-does">What It Does</h2>
 
 <h3 id="three-coordination-modes">Three Coordination Modes</h3>
 
@@ -270,15 +266,9 @@
 
 <hr />
 
-<h2 id="practical-outlook">Practical outlook</h2>
+<h2 id="practically">Practically</h2>
 
 <p>MARS delivers what it sets out to do: namespace-isolated dual-arm coordination on the NED2 with three modes and planning-time safety. The system is well-validated, the limitations are clearly mapped, and the architecture extends naturally to richer problems (three arms, dynamic obstacles, adaptive safety margins).</p>
-
-<p><strong>Asynchronous mode is the workhorse.</strong> It is simpler to plan (6-DOF × 2), faster to compute, and delivers the headline benefit (28.6% throughput). Use it whenever your task naturally partitions into independent zones.</p>
-
-<p><strong>Hybrid mode is for collision-aware tasks.</strong> Plan with full collision awareness, execute with per-arm controllers. Tolerate the geometric planning rejection rate at the workspace boundary (it is a feature, not a bug). This is the mode that makes dual-arm coordination safe and practical.</p>
-
-<p><strong>Synchronous mode is niche.</strong> It is useful for simulation and for conceptual demonstration, less useful for hardware where the 20–50 ms offset is a constraint you have to design around. If your task needs bimanual synchronisation, hybrid mode with a 50 ms offset may still work — measure it.</p>
 
 
         

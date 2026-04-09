@@ -135,8 +135,8 @@ Always catch and handle these appropriately.
 **View the current tree:**
 ```bash
 ros2 run tf2_tools view_frames
-# Generates frames.pdf
 ```
+![tf](/mars_ned2/assets/images/tf_tree.png){: .align-center}
 
 **Echo transforms in real-time:**
 ```bash
@@ -182,4 +182,4 @@ This three-tier structure separates:
 - Handle exceptions gracefully
 - Keep your tree simple and well-structured
 
-Transform management might seem mundane, but it's what turns a collection of sensors into a spatially-aware robot. Get it right, and everything else falls into place.
+Transform management might seem mundane, but it's what turns a collection of sensors into a spatially-aware robot.

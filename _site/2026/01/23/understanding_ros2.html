@@ -11,7 +11,7 @@
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>Understanding ROS2</title>
-<meta name="description" content="Let me introduce you to ROS">
+<meta name="description" content="What is ROS2?">
 
 
   <meta name="author" content="Abdiwak Debella">
@@ -27,7 +27,7 @@
 <meta property="og:url" content="http://localhost:4000/mars_ned2/2026/01/23/understanding_ros2.html">
 
 
-  <meta property="og:description" content="Let me introduce you to ROS">
+  <meta property="og:description" content="What is ROS2?">
 
 
 
@@ -149,7 +149,7 @@
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Understanding ROS2">
-    <meta itemprop="description" content="Let me introduce you to ROS">
+    <meta itemprop="description" content="What is ROS2?">
     <meta itemprop="datePublished" content="2026-01-23T00:00:00+00:00">
     
 
@@ -174,7 +174,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          6 minute read
+          8 minute read
         
       </span>
     
@@ -187,17 +187,19 @@
 
       <section class="page__content" itemprop="text">
         
-        <p>Let me introduce you to ROS</p>
+        <h2 id="what-is-ros2">What is ROS2?</h2>
 
-<p>However, before any confusion</p>
+<p>ROS2 is not an operating system, not firmware, not a standalone application. Instead, it’s <strong>middleware</strong>—the connective tissue that enables distributed programs to communicate seamlessly, even across multiple machines.</p>
 
-<p>Let me start with what ros is not
-ros is not an application, ros is not an operating system, ros is not a firmware</p>
+<p>For MARS, this matters because: we need two independent robot control loops, a motion planner, a collision detector, and a perception pipeline all running in parallel. ROS2 provides the standardized communication layer that lets these components talk without tight coupling.</p>
 
-<p>ROS is a <strong>middleware</strong> that enables communication between different programs, even across multiple machines.
-<strong>A set of software libraries and tools</strong> for building robot applications
-It’s not a standalone application, but rather the backbone that connects your robotic systems. 
-<strong>A communication infrastructure</strong> that provides services like hardware abstraction, message-passing between processes, and package management.</p>
+<p><strong>In practical terms:</strong></p>
+<ul>
+  <li>A set of software libraries and tools for building robot applications</li>
+  <li>Hardware abstraction layer between the robots’ firmware and your control code</li>
+  <li>Message-passing infrastructure for inter-process communication</li>
+  <li>Package and dependency management system</li>
+</ul>
 
 <p>The DDS Layer: Why ROS2 
 Under the hood, it’s all <strong>DDS (Data Distribution Service)</strong>
@@ -211,9 +213,13 @@ which isn’t just a transport but a complete middleware specification with:</p>
 
 <p>The architecture</p>
 <h3 id="nodes-your-building-blocks">Nodes: Your Building Blocks</h3>
-<p>Every piece of functionality lives in a <strong>node</strong>. A node is just a process that does one thing well. Maybe it reads from a camera. Maybe it plans a path. Maybe it controls a motor.
- key trait: single responsibility - usually just does one thing.<br />
-e.g.</p>
+<p>Every piece of functionality lives in a <strong>node</strong>. A node is just a process that does one thing well. Maybe it reads from a camera. Maybe it plans a path. Maybe it controls a motor.</p>
+
+<p>In MARS, we run separate nodes for each robot’s control loop, a unified motion planner, a collision checker, and vision processing. This modularity means we can restart the planner without crashing the hardware interface, or swap the collision detection algorithm without touching the control code.</p>
+
+<p><strong>Key trait:</strong> Single responsibility—usually just does one thing.</p>
+
+<p>Example:</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">rclpy</span>
 <span class="kn">from</span> <span class="nn">rclpy.node</span> <span class="kn">import</span> <span class="n">Node</span>
 
@@ -230,27 +236,36 @@ e.g.</p>
     <span class="n">rclpy</span><span class="p">.</span><span class="n">shutdown</span><span class="p">()</span>
 </code></pre></div></div>
 
-<h3 id="topics-broadcast">Topics: Broadcast</h3>
-<p>think of it as a radio station where any one can tune in. so one node publishes data; any number of nodes can subscribe. No direct connection needed. No blocking. Perfect for sensor data streaming.</p>
+<h3 id="topics-broadcast-communication">Topics: Broadcast Communication</h3>
+<p>Think of a topic as a radio station where any node can tune in. One node publishes data; any number of nodes subscribe. No direct connection needed, no blocking. Perfect for continuous sensor data and state updates.</p>
+
+<p>In MARS:</p>
 <ul>
-  <li><strong>Key trait:</strong> Asynchronous - no response required
-e.g.
-    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">MinimalPublisher</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
-  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-      <span class="nb">super</span><span class="p">().</span><span class="n">__init__</span><span class="p">(</span><span class="s">'publisher'</span><span class="p">)</span>
-      <span class="bp">self</span><span class="p">.</span><span class="n">publisher</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">create_publisher</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="s">'chatter'</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
-      <span class="bp">self</span><span class="p">.</span><span class="n">timer</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">create_timer</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">timer_callback</span><span class="p">)</span>
-      <span class="bp">self</span><span class="p">.</span><span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
-    
-  <span class="k">def</span> <span class="nf">timer_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-      <span class="n">msg</span> <span class="o">=</span> <span class="n">String</span><span class="p">()</span>
-      <span class="n">msg</span><span class="p">.</span><span class="n">data</span> <span class="o">=</span> <span class="sa">f</span><span class="s">'Hello World: </span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">count</span><span class="si">}</span><span class="s">'</span>
-      <span class="bp">self</span><span class="p">.</span><span class="n">publisher</span><span class="p">.</span><span class="n">publish</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-      <span class="bp">self</span><span class="p">.</span><span class="n">get_logger</span><span class="p">().</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s">'Publishing: "</span><span class="si">{</span><span class="n">msg</span><span class="p">.</span><span class="n">data</span><span class="si">}</span><span class="s">"'</span><span class="p">)</span>
-      <span class="bp">self</span><span class="p">.</span><span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
-</code></pre></div>    </div>
-  </li>
+  <li><strong>Robot 1</strong> publishes its joint states to <code class="language-plaintext highlighter-rouge">/robot_1/joint_states</code> at 100Hz</li>
+  <li><strong>Robot 2</strong> publishes its joint states to <code class="language-plaintext highlighter-rouge">/robot_2/joint_states</code> at 100Hz</li>
+  <li>The <strong>motion planner</strong> subscribes to both, always aware of the current configuration</li>
+  <li>The <strong>collision detector</strong> subscribes to both, continuously checking for inter-arm conflicts</li>
 </ul>
+
+<p>This decoupling means a slow node won’t block the others. If the planner stalls, the joint state publishers keep flowing.</p>
+
+<p><strong>Key trait:</strong> Asynchronous—no response required.</p>
+
+<p>Example:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">MinimalPublisher</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">().</span><span class="n">__init__</span><span class="p">(</span><span class="s">'publisher'</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">publisher</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">create_publisher</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="s">'chatter'</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">timer</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">create_timer</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">timer_callback</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    
+    <span class="k">def</span> <span class="nf">timer_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="n">String</span><span class="p">()</span>
+        <span class="n">msg</span><span class="p">.</span><span class="n">data</span> <span class="o">=</span> <span class="sa">f</span><span class="s">'Hello World: </span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">count</span><span class="si">}</span><span class="s">'</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">publisher</span><span class="p">.</span><span class="n">publish</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">get_logger</span><span class="p">().</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s">'Publishing: "</span><span class="si">{</span><span class="n">msg</span><span class="p">.</span><span class="n">data</span><span class="si">}</span><span class="s">"'</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+</code></pre></div></div>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">MinimalSubscriber</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -262,12 +277,21 @@ e.g.
         <span class="bp">self</span><span class="p">.</span><span class="n">get_logger</span><span class="p">().</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s">'I heard: "</span><span class="si">{</span><span class="n">msg</span><span class="p">.</span><span class="n">data</span><span class="si">}</span><span class="s">"'</span><span class="p">)</span>
 </code></pre></div></div>
 
-<h3 id="2-services-request-and-response">2. Services (Request and response)</h3>
-<p>The ROS2 service is functionally equivalent to an API (Application Programming Interface) in that it provides a standardized way for nodes to request and receive responses, similar to how APIs enable communication between software systems. so the client sends a request and has to wait until the server responds. They are useful for quick tasks like getting a program’s status or running a short calculation The system works with service <strong>servers</strong> and service <strong>clients</strong>. The <strong>server</strong> processes requests and sends back responses. It does not send data continuously</p>
+<h3 id="services-request-response-communication">Services: Request-Response Communication</h3>
+<p>A service is a request-response pattern. The client sends a request and waits for the server to respond. Unlike topics (fire-and-forget), services are synchronous and guarantee you get an answer.</p>
+
+<p>In MARS:</p>
 <ul>
-  <li><strong>Key trait:</strong> Synchronous - waits for response
-e.g.</li>
+  <li>A high-level task planner calls <code class="language-plaintext highlighter-rouge">/request_pick</code> service to ask robot 1 to pick an object</li>
+  <li>Robot 1’s gripper controller processes the request and returns success or failure</li>
+  <li>The planner waits for this response before proceeding to the next step</li>
 </ul>
+
+<p>Services are ideal for discrete tasks that require confirmation, not continuous streaming.</p>
+
+<p><strong>Key trait:</strong> Synchronous—client waits for a response.</p>
+
+<p>Example:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Server
 </span><span class="bp">self</span><span class="p">.</span><span class="n">service</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">create_service</span><span class="p">(</span><span class="n">AddTwoInts</span><span class="p">,</span> <span class="s">'add_two_ints'</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">handle_service</span><span class="p">)</span>
@@ -283,11 +307,20 @@ e.g.</li>
 <span class="n">request</span><span class="p">.</span><span class="n">b</span> <span class="o">=</span> <span class="mi">3</span>
 <span class="n">future</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">call_async</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
 </code></pre></div></div>
-<h3 id="3-actions">3. Actions</h3>
-<p>Actions are the sophisticated sibling, they are used for <strong>long-running tasks</strong> that need <strong>response</strong> and can be stopped if needed.</p>
+<h3 id="actions-long-running-goals-with-feedback">Actions: Long-Running Goals with Feedback</h3>
+<p>Actions are built for <strong>long-running tasks</strong> that need real-time feedback and can be cancelled mid-execution. They’re more sophisticated than services because they provide progress updates and can be preempted.</p>
+
+<p>In MARS:</p>
 <ul>
-  <li><strong>Key trait:</strong> longer tasks, that can be cancelled mid-execution. also with progress feedback.</li>
+  <li>A high-level task sends a <code class="language-plaintext highlighter-rouge">MoveIt2</code> action goal: “move arm 1 to pose (x, y, z)”</li>
+  <li>The motion planner immediately returns feedback: “planning 20% complete”, “planning 80% complete”</li>
+  <li>Once planned, execution feedback flows: “trajectory 10% complete”, “trajectory 50% complete”</li>
+  <li>If a collision risk emerges, the high-level task can cancel the goal before completion</li>
 </ul>
+
+<p>This feedback loop is essential for monitoring long-running manipulation tasks and responding to dynamic changes.</p>
+
+<p><strong>Key trait:</strong> Long-running tasks with progress feedback and cancellation support.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Action client sending a goal
 </span><span class="n">action_client</span> <span class="o">=</span> <span class="n">ActionClient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Fibonacci</span><span class="p">,</span> <span class="s">'fibonacci'</span><span class="p">)</span>
@@ -374,32 +407,64 @@ colcon build
 
 <h2 id="the-ecosystem">The Ecosystem</h2>
 
-<p>ROS2 isn’t just the ROS2 middleware also , it’s an ecosystem:</p>
+<p>ROS2 is more than middleware—it’s a growing ecosystem of specialized packages:</p>
 <ul>
-  <li><strong>Nav2</strong>: Advanced navigation stack</li>
-  <li><strong>MoveIt 2</strong>: Motion planning for manipulators</li>
-  <li><strong>Gazebo</strong>: Physics simulation</li>
-  <li><strong>RViz2</strong>: 3D visualization</li>
-  <li><strong>ros2_control</strong>: Hardware abstraction for controllers</li>
-  <li><strong>micro-ROS</strong>: For microcontrollers (ESP32, STM32)</li>
+  <li><strong>Nav2</strong>: Advanced navigation stack (mobile robots)</li>
+  <li><strong>MoveIt2</strong>: Motion planning and collision checking for manipulators—critical for MARS</li>
+  <li><strong>Gazebo</strong>: Physics simulation for testing dual-arm scenarios safely</li>
+  <li><strong>RViz2</strong>: 3D visualization of robot state, trajectories, and transforms</li>
+  <li><strong>ros2_control</strong>: Hardware abstraction layer (enables switching between simulation and real hardware)</li>
+  <li><strong>tf2</strong>: Transform management (essential for multi-robot spatial reasoning)</li>
 </ul>
 
-<p>We’ll comeback to these but feel free to browse.</p>
+<p>For MARS specifically, <strong>MoveIt2</strong> and <strong>tf2</strong> are the backbone. MoveIt2 handles collision-aware planning for the dual 6-DOF system, while tf2 maintains the transform tree linking both arms’ end-effectors to a shared world frame.</p>
 
-<h1 id="a-guide-to-setting-up-our-workspace">A Guide to Setting Up our Workspace</h1>
+<h2 id="how-mars-uses-ros2">How MARS Uses ROS2</h2>
 
-<p>In this guide, we will walk through the practical workflow for initializing a ROS 2 environment, creating packages, and managing dependencies for our project.</p>
+<p>In a concrete MARS workflow:</p>
+
+<ol>
+  <li>
+    <p><strong>Hardware Interface Node</strong> (ros2_control): Reads <code class="language-plaintext highlighter-rouge">/joint_commands</code> from controllers, writes actual joint positions to <code class="language-plaintext highlighter-rouge">/robot_1/joint_states</code> and <code class="language-plaintext highlighter-rouge">/robot_2/joint_states</code></p>
+  </li>
+  <li>
+    <p><strong>Motion Planning Node</strong> (MoveIt2): Subscribes to both joint state topics, accepts planning requests via action server, checks collision against both arms simultaneously</p>
+  </li>
+  <li>
+    <p><strong>Collision Detection Node</strong>: Subscribes to both joint states, monitors <code class="language-plaintext highlighter-rouge">/tf</code> transforms, raises alerts if inter-arm distance drops below safety threshold</p>
+  </li>
+  <li>
+    <p><strong>High-Level Task Coordinator</strong>: Orchestrates multi-step assembly tasks by sending goals to the motion planner, monitoring feedback, and handling synchronization between arms</p>
+  </li>
+  <li>
+    <p><strong>Vision Node</strong>: Publishes detected object poses on <code class="language-plaintext highlighter-rouge">/detected_objects</code>, enabling pick-and-place targeting</p>
+  </li>
+</ol>
+
+<p>This modular architecture is what enables MARS to function as a cohesive system while remaining flexible and testable.</p>
+
+<h1 id="setting-up-the-mars-workspace">Setting Up the MARS Workspace</h1>
+
+<p>This guide walks through initializing a ROS2 environment for MARS: creating packages, managing dependencies, and structuring the workspace for multi-arm control.</p>
 
 <h2 id="1-initializing-your-workspace">1. Initializing Your Workspace</h2>
-<p>A ROS 2 workspace is the directory where you develop, build, and install your ROS 2 packages. By convention, developers often name this <code class="language-plaintext highlighter-rouge">ros2_ws</code>.</p>
 
-<p>Open your terminal and execute the following to create the standard directory structure:</p>
+<p>The MARS workspace is where you develop and build all ROS2 packages. The standard structure separates source code from build artifacts.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> <span class="nt">-p</span> ~/mars_ned2/src
 <span class="nb">cd</span> ~/mars_ned2
 </code></pre></div></div>
 
-<p>The <code class="language-plaintext highlighter-rouge">src/</code> directory is critical—it is the only place where your source code should reside. The build system will automatically generate other folders (<code class="language-plaintext highlighter-rouge">build</code>, <code class="language-plaintext highlighter-rouge">install</code>, and <code class="language-plaintext highlighter-rouge">log</code>) in the root of the workspace.</p>
+<p>The <code class="language-plaintext highlighter-rouge">src/</code> directory holds all source code. The build system automatically generates <code class="language-plaintext highlighter-rouge">build/</code>, <code class="language-plaintext highlighter-rouge">install/</code>, and <code class="language-plaintext highlighter-rouge">log/</code> directories after compilation.</p>
+
+<p>For MARS, you’ll typically have packages like:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">niryo_ned2_interface</code>: Hardware abstraction for both robots</li>
+  <li><code class="language-plaintext highlighter-rouge">mars_motion_planning</code>: MoveIt2 configuration and planning</li>
+  <li><code class="language-plaintext highlighter-rouge">mars_collision_checker</code>: Custom collision detection</li>
+  <li><code class="language-plaintext highlighter-rouge">mars_vision</code>: ArUco marker detection and object localization</li>
+  <li><code class="language-plaintext highlighter-rouge">mars_task_coordinator</code>: High-level multi-arm task execution</li>
+</ul>
 
 <h2 id="2-creating-your-first-package">2. Creating Your First Package</h2>
 <p>In ROS 2, code is organized into packages. This modularity allows for easier debugging and code sharing. Depending on your project requirements, you will likely choose between Python or C++.</p>
@@ -467,7 +532,7 @@ colcon build <span class="nt">--symlink-install</span>
 <hr />
 
 <h2 id="reference-essential-cli-commands">Reference: Essential CLI Commands</h2>
-<p>To maintain a high-velocity development workflow, keep these commands in your repertoire:</p>
+<p>To maintain a development workspace, keep these commands in your repertoire:</p>
 
 <table>
   <thead>

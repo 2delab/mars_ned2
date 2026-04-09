@@ -6,10 +6,6 @@ classes: wide
 author_profile: false
 ---
 
-This is the complete picture of what the final MARS implementation delivers and where the boundaries are. If you are considering MARS for your own dual-arm system, this post tells you what you are getting and what you are not.
-
----
-
 ## What It Does
 
 ### Three Coordination Modes
@@ -89,13 +85,9 @@ Together, these mean the system cannot support reactive replanning cycles faster
 
 ---
 
-## Practical outlook
+## Practically
 
 MARS delivers what it sets out to do: namespace-isolated dual-arm coordination on the NED2 with three modes and planning-time safety. The system is well-validated, the limitations are clearly mapped, and the architecture extends naturally to richer problems (three arms, dynamic obstacles, adaptive safety margins).
 
-**Asynchronous mode is the workhorse.** It is simpler to plan (6-DOF × 2), faster to compute, and delivers the headline benefit (28.6% throughput). Use it whenever your task naturally partitions into independent zones.
 
-**Hybrid mode is for collision-aware tasks.** Plan with full collision awareness, execute with per-arm controllers. Tolerate the geometric planning rejection rate at the workspace boundary (it is a feature, not a bug). This is the mode that makes dual-arm coordination safe and practical.
-
-**Synchronous mode is niche.** It is useful for simulation and for conceptual demonstration, less useful for hardware where the 20–50 ms offset is a constraint you have to design around. If your task needs bimanual synchronisation, hybrid mode with a 50 ms offset may still work — measure it.
 

@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "The TrajectoryProxy Pattern"
+title: "The Trajectory Proxy "
 date: 2026-03-20
 classes: wide
 author_profile: false

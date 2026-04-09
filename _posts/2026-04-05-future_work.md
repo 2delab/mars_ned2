@@ -6,7 +6,7 @@ classes: wide
 author_profile: false
 ---
 
-MARS solves a specific problem: coordinated dual-arm manipulation on namespace-isolated ROS2 hardware, with planning-time collision safety and three selectable coordination modes. It does not solve the general multi-arm coordination problem. This post maps the open problems and the directions where the architecture extends naturally versus where new work is needed.
+MARS solves a specific problem: coordinated dual-arm manipulation on namespace-isolated ROS2 hardware, with planning-time collision safety and three selectable coordination modes. It does not solve the general multi-arm coordination problem. 
 
 ---
 
@@ -68,16 +68,3 @@ Currently, the coordination mode is a user-specified parameter. Automating mode 
 
 The inputs to this decision are available at runtime: both arms' current joint configurations (from the JointStateManager), the planned target poses, and the workspace geometry. Building an automaton that maps these inputs to coordination mode selection is a bounded engineering problem with a clear interface.
 
-### Generalisation Beyond Pick-and-Place
-
-The MARS validation uses pick-and-place as the primary benchmark. This is appropriate for the coordination architecture question but leaves unexplored whether the system performs correctly on tasks requiring continuous path following (welding, painting, deburring) rather than point-to-point motion. Continuous path tasks impose tighter timing requirements on synchronised mode and tighter spatial requirements on asynchronous workspace partitioning.
-
----
-
-## The Case for Adaptive Safety Margins
-
-Of all the future work directions, adaptive safety margins have the highest ratio of impact to engineering cost. The current fixed padding produces correct results at the cost of a 14% planning rejection rate at workspace boundaries. Variable padding — larger near the shared boundary, tighter in free space — would reduce false negatives without compromising safety.
-
-The implementation path is clear: a `PaddingManager` node that monitors arm proximity via the planning scene and updates link padding in the SRDF parameters at runtime. The MoveIt2 planning scene supports parameter updates; the challenge is determining the correct padding schedule as a function of arm configuration and task type.
-
-This is the extension that would most directly improve the system's practical utility for real coordination tasks.

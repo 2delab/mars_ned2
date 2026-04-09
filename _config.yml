@@ -5,7 +5,7 @@ remote_theme: "mmistakes/minimal-mistakes@4.27.3"
 title: ""
 
 # Base URL
-baseurl: "/page" 
+baseurl: "/mars_ned2" 
 url: "https://2delab.github.io/mars-ned2" 
 
 

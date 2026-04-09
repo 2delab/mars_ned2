@@ -318,7 +318,7 @@ colcon build --packages-select niryo_ned2_dual_moveit_config
 ros2 launch niryo_ned2_dual_moveit_config demo.launch.py
 
 ```
-![Dual arm moveit config](/mars-ned2/assets/images/dual_arm_moveit.png)
+![Dual arm moveit config](/mars_ned2/assets/images/dual_arm_moveit.png)
 
 
 RViz displayed both arms correctly positioned with the table surface.

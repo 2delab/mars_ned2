@@ -1,0 +1,565 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.27.3 by Michael Rose
+  Copyright 2013-2025 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>MoveItPy</title>
+<meta name="description" content="MoveItPy">
+
+
+  <meta name="author" content="Abdiwak Debella">
+  
+  <meta property="article:author" content="Abdiwak Debella">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="">
+<meta property="og:title" content="MoveItPy">
+<meta property="og:url" content="http://localhost:4000/mars_ned2/2026/03/10/moveitpy.html">
+
+
+  <meta property="og:description" content="MoveItPy">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-03-10T00:00:00+00:00">
+
+
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/mars_ned2/2026/03/10/moveitpy.html">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/mars_ned2/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  window.enable_copy_code_button = true;
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/mars_ned2/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    
+<script>
+  window.enable_copy_code_button = true;
+</script>
+
+  </head>
+
+  <body class="layout--single wide" dir="ltr">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/mars_ned2/">
+          
+          
+        </a>
+       
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/mars_ned2/"
+                
+                
+              >Home</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/mars_ned2/blog/"
+                
+                
+              >Blog</a>
+            </li></ul>
+
+         <a href="https://github.com/2delab/mars-ned2" class="masthead__github-link" target="_blank" rel="noopener noreferrer" title="View source on GitHub">
+        <i class="fab fa-github" aria-hidden="true"></i>
+        </a>
+
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="MoveItPy">
+    <meta itemprop="description" content="MoveItPy">
+    <meta itemprop="datePublished" content="2026-03-10T00:00:00+00:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">
+            <a href="http://localhost:4000/mars_ned2/2026/03/10/moveitpy.html" itemprop="url">MoveItPy
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          9 minute read
+        
+      </span>
+    
+  </p>
+
+<div class="page__date-badge">
+            <time datetime="2026-03-10T00:00:00+00:00" itemprop="datePublished">2026-03-10</time>
+          </div></header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <h1 id="moveitpy">MoveItPy</h1>
+
+<p>MoveItPy is the official Python binding layer for MoveIt2’s C++ core, implemented via pybind11. It is not a wrapper around the <code class="language-plaintext highlighter-rouge">move_group</code> action interface. Where the action interface communicates with a separately running <code class="language-plaintext highlighter-rouge">move_group</code> node over ROS2 actions, MoveItPy embeds the MoveIt2 planning stack directly in-process — planning, scene management, and execution all happen inside the same Python process.</p>
+
+<p>The consequence is that there is no inter-process serialisation between your script and the planner. The planning scene is a live in-memory object you can read and write directly. Collision objects added through the Python API are visible to the next <code class="language-plaintext highlighter-rouge">plan()</code> call without any ROS2 publish/subscribe round-trip.</p>
+
+<p>When <code class="language-plaintext highlighter-rouge">MoveItPy</code> is instantiated it starts its own ROS2 node, spins that node on a detached <code class="language-plaintext highlighter-rouge">SingleThreadedExecutor</code> background thread, and then exposes the planning API synchronously to the calling thread. From that point, planning and execution are driven by the calling code — the background thread handles ROS2 communications (joint state updates, controller action clients) transparently.</p>
+
+<hr />
+
+<h2 id="configuration-moveit_py_paramsyaml">Configuration: <code class="language-plaintext highlighter-rouge">moveit_py_params.yaml</code></h2>
+
+<p>Everything MoveItPy needs is declared in a single params file passed at construction time. The file is loaded from the <code class="language-plaintext highlighter-rouge">niryo_ned2_dual_arm_moveit_config</code> package:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">config_file</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">join</span><span class="p">(</span>
+    <span class="n">get_package_share_directory</span><span class="p">(</span><span class="s">"niryo_ned2_dual_arm_moveit_config"</span><span class="p">),</span>
+    <span class="s">"config"</span><span class="p">,</span>
+    <span class="s">"moveit_py_params.yaml"</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">moveit_py</span> <span class="o">=</span> <span class="n">MoveItPy</span><span class="p">(</span><span class="n">node_name</span><span class="o">=</span><span class="s">"moveit_py_test"</span><span class="p">,</span> <span class="n">launch_params_filepaths</span><span class="o">=</span><span class="p">[</span><span class="n">config_file</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>The file is structured into several independent sections.</p>
+
+<h3 id="planning-scene-monitor">Planning Scene Monitor</h3>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">planning_scene_monitor_options</span><span class="pi">:</span>
+  <span class="na">robot_description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">robot_description"</span>
+  <span class="na">robot_description_semantic</span><span class="pi">:</span> <span class="s2">"</span><span class="s">robot_description_semantic"</span>
+  <span class="na">joint_state_topic</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/joint_states"</span>
+  <span class="na">wait_for_initial_state_timeout</span><span class="pi">:</span> <span class="m">15.0</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">robot_description</code> and <code class="language-plaintext highlighter-rouge">robot_description_semantic</code> are the ROS2 parameter names under which the URDF and SRDF are published by <code class="language-plaintext highlighter-rouge">robot_state_publisher</code>. MoveItPy reads these at startup to build the robot model.</p>
+
+<p><code class="language-plaintext highlighter-rouge">joint_state_topic: /joint_states</code> is the aggregated topic produced by <code class="language-plaintext highlighter-rouge">JointStateManager</code> — the single topic carrying prefixed joint names for all 12 active joints of both arms. The planning scene monitor subscribes here to keep its internal robot state current. This is why the <code class="language-plaintext highlighter-rouge">JointStateManager</code> must be running before MoveItPy is used — if no message has arrived on this topic, the monitor has no state to plan from.</p>
+
+<p><code class="language-plaintext highlighter-rouge">wait_for_initial_state_timeout: 15.0</code> controls how long MoveItPy blocks at startup waiting for that first joint state message. If the timeout expires without a message the node continues but the initial state is undefined.</p>
+
+<h3 id="planning-pipelines">Planning Pipelines</h3>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">planning_pipelines</span><span class="pi">:</span>
+  <span class="na">pipeline_names</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">ompl"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">pilz_industrial_motion_planner"</span><span class="pi">]</span>
+  <span class="na">default_planning_pipeline</span><span class="pi">:</span> <span class="s2">"</span><span class="s">ompl"</span>
+
+<span class="na">plan_request_params</span><span class="pi">:</span>
+  <span class="na">planning_pipeline</span><span class="pi">:</span> <span class="s">ompl</span>
+  <span class="na">planner_id</span><span class="pi">:</span> <span class="s2">"</span><span class="s">RRTConnectkConfigDefault"</span>
+  <span class="na">max_velocity_scaling_factor</span><span class="pi">:</span> <span class="m">0.7</span>
+  <span class="na">max_acceleration_scaling_factor</span><span class="pi">:</span> <span class="m">0.7</span>
+  <span class="na">planning_time</span><span class="pi">:</span> <span class="m">1.0</span>
+</code></pre></div></div>
+
+<p>Both pipelines are loaded simultaneously at startup. The <code class="language-plaintext highlighter-rouge">default_planning_pipeline</code> determines which is used when <code class="language-plaintext highlighter-rouge">plan()</code> is called with no explicit parameters. Named parameter sets (<code class="language-plaintext highlighter-rouge">pilz_lin</code>, <code class="language-plaintext highlighter-rouge">pilz_ptp</code>) are pre-built profiles that can be passed directly to <code class="language-plaintext highlighter-rouge">plan()</code> to switch pipeline at the call site.</p>
+
+<p>The OMPL section configures request and response adapter chains. The key adapter on the response side is <code class="language-plaintext highlighter-rouge">AddTimeOptimalParameterization</code> — OMPL finds a collision-free path shape in joint space, and this adapter fits time-optimal velocity/acceleration profiles to the waypoints, respecting the joint limits declared elsewhere in the file. The path shape and the timing are computed separately.</p>
+
+<p><code class="language-plaintext highlighter-rouge">longest_valid_segment_fraction: 0.005</code> means the planner performs collision checks at every 0.5% increment of normalised path length — approximately every 0.03 rad per joint at typical travel distances. This is what makes planning-time collision avoidance a hard geometric guarantee: a trajectory only reaches execution if every point along it is collision-free.</p>
+
+<h3 id="kinematics">Kinematics</h3>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">robot_description_kinematics</span><span class="pi">:</span>
+  <span class="na">arm_1</span><span class="pi">:</span>
+    <span class="na">kinematics_solver</span><span class="pi">:</span> <span class="s">kdl_kinematics_plugin/KDLKinematicsPlugin</span>
+    <span class="na">kinematics_solver_search_resolution</span><span class="pi">:</span> <span class="m">0.005</span>
+    <span class="na">kinematics_solver_timeout</span><span class="pi">:</span> <span class="m">0.005</span>
+  <span class="na">arm_2</span><span class="pi">:</span>
+    <span class="na">kinematics_solver</span><span class="pi">:</span> <span class="s">kdl_kinematics_plugin/KDLKinematicsPlugin</span>
+    <span class="na">kinematics_solver_search_resolution</span><span class="pi">:</span> <span class="m">0.005</span>
+    <span class="na">kinematics_solver_timeout</span><span class="pi">:</span> <span class="m">0.005</span>
+</code></pre></div></div>
+
+<p>KDL (Kinematics and Dynamics Library) is configured independently for each arm group. It operates on each arm’s own 6-DOF kinematic chain using an iterative Jacobian pseudoinverse method. Cross-arm collision awareness is not part of IK — that happens at the OMPL planning level where the full planning scene including both arms is visible.</p>
+
+<p><code class="language-plaintext highlighter-rouge">kinematics_solver_search_resolution: 0.005</code> rad is the step size for the iterative search. <code class="language-plaintext highlighter-rouge">kinematics_solver_timeout: 0.005</code> s is the per-call timeout. For Cartesian goals, IK is called to convert the Cartesian pose to a joint configuration before planning begins in joint space.</p>
+
+<h3 id="joint-limits">Joint Limits</h3>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">robot_description_planning</span><span class="pi">:</span>
+  <span class="na">joint_limits</span><span class="pi">:</span>
+    <span class="na">arm_1_joint_1</span><span class="pi">:</span>
+      <span class="na">has_velocity_limits</span><span class="pi">:</span> <span class="no">true</span>
+      <span class="na">max_velocity</span><span class="pi">:</span> <span class="m">1.57</span>
+      <span class="na">has_acceleration_limits</span><span class="pi">:</span> <span class="no">true</span>
+      <span class="na">max_acceleration</span><span class="pi">:</span> <span class="m">2.0</span>
+    <span class="na">arm_1_joint_2</span><span class="pi">:</span>
+      <span class="na">max_velocity</span><span class="pi">:</span> <span class="m">1.047</span>   <span class="c1"># shoulder, mechanically limited</span>
+      <span class="na">max_acceleration</span><span class="pi">:</span> <span class="m">0.8</span>
+    <span class="na">arm_1_joint_4</span><span class="pi">:</span>
+      <span class="na">max_velocity</span><span class="pi">:</span> <span class="m">3.14</span>    <span class="c1"># wrist joints</span>
+      <span class="na">max_acceleration</span><span class="pi">:</span> <span class="m">3.0</span>
+    <span class="c1"># ... mirrored for arm_2</span>
+</code></pre></div></div>
+
+<p>Per-joint velocity and acceleration limits are declared for all 12 active joints. The <code class="language-plaintext highlighter-rouge">AddTimeOptimalParameterization</code> adapter uses these as hard ceilings when fitting trajectory timing. The <code class="language-plaintext highlighter-rouge">max_velocity_scaling_factor: 0.7</code> in the plan request params scales these limits down at runtime — a system-wide safety margin that individual requests can further reduce.</p>
+
+<h3 id="controller-manager">Controller Manager</h3>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">moveit_controller_manager</span><span class="pi">:</span> <span class="s">moveit_simple_controller_manager/MoveItSimpleControllerManager</span>
+
+<span class="na">moveit_simple_controller_manager</span><span class="pi">:</span>
+  <span class="na">controller_names</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">arm_1</span>
+    <span class="pi">-</span> <span class="s">arm_2</span>
+    <span class="pi">-</span> <span class="s">dual</span>
+  <span class="na">arm_1</span><span class="pi">:</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">FollowJointTrajectory</span>
+    <span class="na">joints</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">arm_1_joint_1</span><span class="pi">,</span> <span class="nv">...</span><span class="pi">,</span> <span class="nv">arm_1_joint_6</span><span class="pi">]</span>
+    <span class="na">action_ns</span><span class="pi">:</span> <span class="s">follow_joint_trajectory_prefixed</span>
+  <span class="na">arm_2</span><span class="pi">:</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">FollowJointTrajectory</span>
+    <span class="na">joints</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">arm_2_joint_1</span><span class="pi">,</span> <span class="nv">...</span><span class="pi">,</span> <span class="nv">arm_2_joint_6</span><span class="pi">]</span>
+    <span class="na">action_ns</span><span class="pi">:</span> <span class="s">follow_joint_trajectory_prefixed</span>
+  <span class="na">dual</span><span class="pi">:</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">FollowJointTrajectory</span>
+    <span class="na">joints</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">arm_1_joint_1</span><span class="pi">,</span> <span class="nv">...</span><span class="pi">,</span> <span class="nv">arm_1_joint_6</span><span class="pi">,</span> <span class="nv">arm_2_joint_1</span><span class="pi">,</span> <span class="nv">...</span><span class="pi">,</span> <span class="nv">arm_2_joint_6</span><span class="pi">]</span>
+    <span class="na">action_ns</span><span class="pi">:</span> <span class="s">follow_joint_trajectory_prefixed</span>
+</code></pre></div></div>
+
+<p>Three controller entries are registered. <code class="language-plaintext highlighter-rouge">TrajectoryExecutionManager</code> selects the controller that owns the joints in a planned trajectory. A trajectory planned against the <code class="language-plaintext highlighter-rouge">dual</code> group contains all 12 joints — it matches the <code class="language-plaintext highlighter-rouge">dual</code> controller entry, which dispatches to <code class="language-plaintext highlighter-rouge">follow_joint_trajectory_prefixed</code> under both arm namespaces. A trajectory planned against <code class="language-plaintext highlighter-rouge">arm_1</code> alone matches only the <code class="language-plaintext highlighter-rouge">arm_1</code> controller entry.</p>
+
+<p><code class="language-plaintext highlighter-rouge">action_ns: follow_joint_trajectory_prefixed</code> is the action server name within each arm’s namespace — so MoveIt2 sends goals to <code class="language-plaintext highlighter-rouge">/arm_1/follow_joint_trajectory_prefixed</code> and <code class="language-plaintext highlighter-rouge">/arm_2/follow_joint_trajectory_prefixed</code>.</p>
+
+<hr />
+
+<h2 id="the-srdf-niryo_ned2_dual_armsrdf">The SRDF: <code class="language-plaintext highlighter-rouge">niryo_ned2_dual_arm.srdf</code></h2>
+
+<p>The SRDF encodes planning semantics that the URDF cannot express. It has three responsibilities in this system.</p>
+
+<h3 id="planning-groups">Planning Groups</h3>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;group</span> <span class="na">name=</span><span class="s">"arm_1"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;joint</span> <span class="na">name=</span><span class="s">"arm_1_joint_world"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;joint</span> <span class="na">name=</span><span class="s">"arm_1_joint_1"</span><span class="nt">/&gt;</span>
+    ...
+    <span class="nt">&lt;joint</span> <span class="na">name=</span><span class="s">"arm_1_joint_6"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/group&gt;</span>
+<span class="nt">&lt;group</span> <span class="na">name=</span><span class="s">"arm_2"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;joint</span> <span class="na">name=</span><span class="s">"arm_2_joint_world"</span><span class="nt">/&gt;</span>
+    ...
+<span class="nt">&lt;/group&gt;</span>
+<span class="nt">&lt;group</span> <span class="na">name=</span><span class="s">"dual"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;group</span> <span class="na">name=</span><span class="s">"arm_1"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;group</span> <span class="na">name=</span><span class="s">"arm_2"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/group&gt;</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">arm_1</code> and <code class="language-plaintext highlighter-rouge">arm_2</code> are independent 6-DOF kinematic chains. The <code class="language-plaintext highlighter-rouge">dual</code> group is declared by subgroup inclusion — it does not enumerate joints directly, it composes the two single-arm groups. This gives the <code class="language-plaintext highlighter-rouge">dual</code> group a 12-DOF joint space. The planner sees both arms as a single system when planning against <code class="language-plaintext highlighter-rouge">dual</code>, which is what enables inter-arm collision checking during planning.</p>
+
+<h3 id="link-padding">Link Padding</h3>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;link_padding</span> <span class="na">link=</span><span class="s">"arm_1_base_link"</span>     <span class="na">padding=</span><span class="s">"0.05"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;link_padding</span> <span class="na">link=</span><span class="s">"arm_1_arm_link"</span>      <span class="na">padding=</span><span class="s">"0.05"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;link_padding</span> <span class="na">link=</span><span class="s">"arm_1_forearm_link"</span>  <span class="na">padding=</span><span class="s">"0.05"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;link_padding</span> <span class="na">link=</span><span class="s">"arm_1_wrist_link"</span>    <span class="na">padding=</span><span class="s">"0.05"</span><span class="nt">/&gt;</span>
+<span class="c">&lt;!-- end-effector and sensor links --&gt;</span>
+<span class="nt">&lt;link_padding</span> <span class="na">link=</span><span class="s">"arm_1_base_gripper_1"</span> <span class="na">padding=</span><span class="s">"0.07"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;link_padding</span> <span class="na">link=</span><span class="s">"arm_1_mors_1"</span>         <span class="na">padding=</span><span class="s">"0.07"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;link_padding</span> <span class="na">link=</span><span class="s">"arm_1_camera_link"</span>    <span class="na">padding=</span><span class="s">"0.07"</span><span class="nt">/&gt;</span>
+<span class="c">&lt;!-- mirrored for arm_2 --&gt;</span>
+</code></pre></div></div>
+
+<p>Padding inflates each link’s collision geometry by the specified amount. FCL does not check the physical mesh surface — it checks the padded volume. Standard arm links receive 0.05 m; end-effector and sensor links receive 0.07 m to account for their larger effective geometry.</p>
+
+<p>Because padding is symmetric, two opposing standard links trigger a collision detection event when their physical surfaces are separated by as little as 10 cm (0.05 + 0.05 m). End-effector pairs trigger at up to 14 cm. The planner routes every trajectory through configurations that satisfy this clearance — it is a geometric constraint enforced during planning, not a runtime check.</p>
+
+<h3 id="collision-exclusions">Collision Exclusions</h3>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- Adjacent: kinematically connected, physical overlap is by design --&gt;</span>
+<span class="nt">&lt;disable_collisions</span> <span class="na">link1=</span><span class="s">"arm_1_arm_link"</span>      <span class="na">link2=</span><span class="s">"arm_1_elbow_link"</span>    <span class="na">reason=</span><span class="s">"Adjacent"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;disable_collisions</span> <span class="na">link1=</span><span class="s">"arm_1_forearm_link"</span>  <span class="na">link2=</span><span class="s">"arm_1_wrist_link"</span>    <span class="na">reason=</span><span class="s">"Adjacent"</span><span class="nt">/&gt;</span>
+
+<span class="c">&lt;!-- Never: geometrically impossible to collide given the robot's kinematics --&gt;</span>
+<span class="nt">&lt;disable_collisions</span> <span class="na">link1=</span><span class="s">"arm_1_base_link"</span>     <span class="na">link2=</span><span class="s">"arm_2_forearm_link"</span>  <span class="na">reason=</span><span class="s">"Never"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;disable_collisions</span> <span class="na">link1=</span><span class="s">"arm_1_arm_link"</span>      <span class="na">link2=</span><span class="s">"arm_2_base_link"</span>     <span class="na">reason=</span><span class="s">"Never"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<p>145 pairs are disabled in total. Without these, every planning sample would trigger an O(n²) narrow-phase test across all link combinations in the system — for 22 links per arm pair, that is potentially hundreds of GJK tests per configuration sample. Disabling the 145 known-safe pairs reduces narrow-phase tests per sample by approximately 75%. In a 12-DOF search space where RRTConnect generates thousands of samples per planning call, this reduction is significant.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">Adjacent</code> category covers kinematically connected links where overlap is structurally intentional. The <code class="language-plaintext highlighter-rouge">Never</code> category covers pairs that are geometrically separated by enough kinematic distance that collision is impossible regardless of joint configuration.</p>
+
+<hr />
+
+<h2 id="collision-objects-in-code">Collision Objects in Code</h2>
+
+<p>The SRDF encodes the robot’s own geometry and the relationships between its links. It has no mechanism for expressing the external environment. Surfaces, tables, workspace boundaries — anything that exists in the physical world but is not part of the robot description — must be added to the planning scene programmatically as <code class="language-plaintext highlighter-rouge">CollisionObject</code> messages.</p>
+
+<h3 id="why-add-them-in-code-rather-than-at-launch">Why add them in code rather than at launch</h3>
+
+<p>MoveItPy’s <code class="language-plaintext highlighter-rouge">PlanningSceneMonitor</code> exposes direct read-write access to the live in-process planning scene. Adding collision objects through the Python API writes them into the same scene object that the planner queries. No ROS2 publish/subscribe round-trip is involved. The change is visible to the planner on the next <code class="language-plaintext highlighter-rouge">plan()</code> call immediately.</p>
+
+<p>This is different from the <code class="language-plaintext highlighter-rouge">move_group</code> action interface, where collision objects must be published to the planning scene topic and the external <code class="language-plaintext highlighter-rouge">move_group</code> node updates its own scene copy asynchronously. With MoveItPy, the scene and the planner share memory.</p>
+
+<h3 id="workspace_sceneyaml"><code class="language-plaintext highlighter-rouge">workspace_scene.yaml</code></h3>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">collision_objects</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">id</span><span class="pi">:</span> <span class="s2">"</span><span class="s">workspace_platform"</span>
+    <span class="na">header</span><span class="pi">:</span>
+      <span class="na">frame_id</span><span class="pi">:</span> <span class="s2">"</span><span class="s">world"</span>
+    <span class="na">primitives</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="m">1</span>        <span class="c1"># BOX</span>
+        <span class="na">dimensions</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">3.0</span><span class="pi">,</span> <span class="nv">3.0</span><span class="pi">,</span> <span class="nv">0.01</span><span class="pi">]</span>
+    <span class="na">primitive_poses</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">position</span><span class="pi">:</span> <span class="pi">{</span><span class="nv">x</span><span class="pi">:</span> <span class="nv">0.0</span><span class="pi">,</span> <span class="nv">y</span><span class="pi">:</span> <span class="nv">0.0</span><span class="pi">,</span> <span class="nv">z</span><span class="pi">:</span> <span class="nv">-0.015</span><span class="pi">}</span>
+        <span class="na">orientation</span><span class="pi">:</span> <span class="pi">{</span><span class="nv">x</span><span class="pi">:</span> <span class="nv">0.0</span><span class="pi">,</span> <span class="nv">y</span><span class="pi">:</span> <span class="nv">0.0</span><span class="pi">,</span> <span class="nv">z</span><span class="pi">:</span> <span class="nv">0.0</span><span class="pi">,</span> <span class="nv">w</span><span class="pi">:</span> <span class="nv">1.0</span><span class="pi">}</span>
+    <span class="na">operation</span><span class="pi">:</span> <span class="m">0</span>       <span class="c1"># ADD</span>
+</code></pre></div></div>
+
+<p>The workspace floor is a 3m × 3m × 10mm box centred at z = -0.015 m in the world frame — just below the robot bases. <code class="language-plaintext highlighter-rouge">type: 1</code> is the <code class="language-plaintext highlighter-rouge">SolidPrimitive</code> constant for BOX. <code class="language-plaintext highlighter-rouge">operation: 0</code> is ADD. The geometry is a primitive rather than a mesh because primitive collision shapes are cheaper to check against and sufficient for a flat workspace surface.</p>
+
+<h3 id="the-read_write-context-manager">The <code class="language-plaintext highlighter-rouge">read_write()</code> context manager</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">planning_scene_monitor</span> <span class="o">=</span> <span class="n">moveit_py</span><span class="p">.</span><span class="n">get_planning_scene_monitor</span><span class="p">()</span>
+
+<span class="k">with</span> <span class="n">planning_scene_monitor</span><span class="p">.</span><span class="n">read_write</span><span class="p">()</span> <span class="k">as</span> <span class="n">scene</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">obj_data</span> <span class="ow">in</span> <span class="n">scene_data</span><span class="p">[</span><span class="s">"collision_objects"</span><span class="p">]:</span>
+        <span class="n">collision_obj</span> <span class="o">=</span> <span class="n">create_collision_object</span><span class="p">(</span><span class="n">obj_data</span><span class="p">)</span>
+        <span class="n">scene</span><span class="p">.</span><span class="n">apply_collision_object</span><span class="p">(</span><span class="n">collision_obj</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">read_write()</code> acquires a write lock on the in-process planning scene for the duration of the <code class="language-plaintext highlighter-rouge">with</code> block. <code class="language-plaintext highlighter-rouge">apply_collision_object()</code> inserts the object. The lock is released on exit. All subsequent <code class="language-plaintext highlighter-rouge">plan()</code> calls — for either arm group, synchronous or asynchronous — will treat the workspace floor as a hard collision obstacle. Trajectories that would intersect it are rejected at planning time.</p>
+
+<p>Without this object, the planner has no knowledge of the physical platform. The robot’s links would be checked against each other and against the SRDF-declared environment, but nothing prevents the planner from generating a trajectory that passes through the floor surface.</p>
+
+<hr />
+
+<h2 id="the-execution-flow-moveit5py">The Execution Flow: <code class="language-plaintext highlighter-rouge">moveit5.py</code></h2>
+
+<p>The implementation demonstrates synchronous dual-arm execution using the <code class="language-plaintext highlighter-rouge">dual</code> planning group.</p>
+
+<p><strong>Initialisation</strong></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">moveit_py</span> <span class="o">=</span> <span class="n">MoveItPy</span><span class="p">(</span><span class="n">node_name</span><span class="o">=</span><span class="s">"moveit_py_test"</span><span class="p">,</span> <span class="n">launch_params_filepaths</span><span class="o">=</span><span class="p">[</span><span class="n">config_file</span><span class="p">])</span>
+<span class="n">load_and_add_collision_objects</span><span class="p">(</span><span class="n">moveit_py</span><span class="p">)</span>
+
+<span class="n">dual_arm</span> <span class="o">=</span> <span class="n">moveit_py</span><span class="p">.</span><span class="n">get_planning_component</span><span class="p">(</span><span class="s">"dual"</span><span class="p">)</span>
+<span class="n">robot_model</span> <span class="o">=</span> <span class="n">moveit_py</span><span class="p">.</span><span class="n">get_robot_model</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">MoveItPy</code> starts the background executor and waits for the initial joint state. <code class="language-plaintext highlighter-rouge">load_and_add_collision_objects</code> adds the workspace floor before any planning occurs. <code class="language-plaintext highlighter-rouge">get_planning_component("dual")</code> returns a <code class="language-plaintext highlighter-rouge">PlanningComponent</code> scoped to the 12-DOF dual group — this is the object that holds planning context (start state, goal state) between calls.</p>
+
+<p><strong>Setting a goal state</strong></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">robot_state</span> <span class="o">=</span> <span class="n">RobotState</span><span class="p">(</span><span class="n">robot_model</span><span class="p">)</span>
+<span class="n">robot_state</span><span class="p">.</span><span class="n">set_joint_group_positions</span><span class="p">(</span><span class="s">"arm_1"</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">robot_state</span><span class="p">.</span><span class="n">set_joint_group_positions</span><span class="p">(</span><span class="s">"arm_2"</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">dual_arm</span><span class="p">.</span><span class="n">set_goal_state</span><span class="p">(</span><span class="n">robot_state</span><span class="o">=</span><span class="n">robot_state</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">RobotState</code> is a complete configuration of the robot — all joints. <code class="language-plaintext highlighter-rouge">set_joint_group_positions</code> populates the positions for the named group’s joints within that state. Both arms’ goal positions are set on the same <code class="language-plaintext highlighter-rouge">RobotState</code> object, which is then passed as the goal for the <code class="language-plaintext highlighter-rouge">dual</code> planning group. The planner searches for a path in 12-DOF space from the current state to this combined goal.</p>
+
+<p><strong>Planning and executing</strong></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dual_arm</span><span class="p">.</span><span class="n">set_start_state_to_current_state</span><span class="p">()</span>
+<span class="n">plan_result</span> <span class="o">=</span> <span class="n">dual_arm</span><span class="p">.</span><span class="n">plan</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">plan_result</span><span class="p">:</span>
+    <span class="n">moveit_py</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">plan_result</span><span class="p">.</span><span class="n">trajectory</span><span class="p">,</span> <span class="n">controllers</span><span class="o">=</span><span class="p">[])</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">set_start_state_to_current_state()</code> reads the current joint positions from the planning scene monitor (fed by <code class="language-plaintext highlighter-rouge">/joint_states</code>) and sets them as the planning start. <code class="language-plaintext highlighter-rouge">plan()</code> runs OMPL RRTConnect in the 12-DOF space, applies the adapter chain, and returns a <code class="language-plaintext highlighter-rouge">MotionPlanResponse</code>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">execute(plan_result.trajectory, controllers=[])</code> passes the trajectory to <code class="language-plaintext highlighter-rouge">TrajectoryExecutionManager</code>. <code class="language-plaintext highlighter-rouge">controllers=[]</code> instructs it to use the controller manager configuration to determine which controller to use — it matches the trajectory’s joint list against the registered controller entries and selects <code class="language-plaintext highlighter-rouge">dual</code>, which dispatches to both arm action servers. The Python GIL is released during execution, and <code class="language-plaintext highlighter-rouge">execute()</code> returns when the trajectory completes or fails.</p>
+
+<p><strong>Chaining moves</strong></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Phase 2: set new goal, plan from current state, execute
+</span><span class="n">dual_arm</span><span class="p">.</span><span class="n">set_start_state_to_current_state</span><span class="p">()</span>
+<span class="n">robot_state</span> <span class="o">=</span> <span class="n">RobotState</span><span class="p">(</span><span class="n">robot_model</span><span class="p">)</span>
+<span class="n">target_radians</span> <span class="o">=</span> <span class="n">math</span><span class="p">.</span><span class="n">radians</span><span class="p">(</span><span class="mf">50.0</span><span class="p">)</span>
+<span class="n">robot_state</span><span class="p">.</span><span class="n">set_joint_group_positions</span><span class="p">(</span><span class="s">"arm_1"</span><span class="p">,</span> <span class="p">[</span><span class="n">target_radians</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">robot_state</span><span class="p">.</span><span class="n">set_joint_group_positions</span><span class="p">(</span><span class="s">"arm_2"</span><span class="p">,</span> <span class="p">[</span><span class="n">target_radians</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">dual_arm</span><span class="p">.</span><span class="n">set_goal_state</span><span class="p">(</span><span class="n">robot_state</span><span class="o">=</span><span class="n">robot_state</span><span class="p">)</span>
+<span class="n">plan_result</span> <span class="o">=</span> <span class="n">dual_arm</span><span class="p">.</span><span class="n">plan</span><span class="p">()</span>
+<span class="k">if</span> <span class="n">plan_result</span><span class="p">:</span>
+    <span class="n">moveit_py</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">plan_result</span><span class="p">.</span><span class="n">trajectory</span><span class="p">,</span> <span class="n">controllers</span><span class="o">=</span><span class="p">[])</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">set_start_state_to_current_state()</code> is called again before each new plan. After execution the robot is at a new configuration — the planning scene monitor has updated via <code class="language-plaintext highlighter-rouge">/joint_states</code>. Calling this method ensures the next plan starts from the actual post-execution state rather than the previous goal. Skipping this would cause the planner to plan from where it thought the robot would be, which may diverge from where it actually is.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-03-10T00:00:00+00:00">March 10, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  <h4 class="page__share-title">Share on</h4>
+
+  <a href="https://x.com/intent/tweet?text=MoveItPy%20http%3A%2F%2Flocalhost%3A4000%2Fmars_ned2%2F2026%2F03%2F10%2Fmoveitpy.html" class="btn btn--x" aria-label="Share on X" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on X">
+    <i class="fab fa-fw fa-x-twitter" aria-hidden="true"></i><span> X</span>
+  </a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fmars_ned2%2F2026%2F03%2F10%2Fmoveitpy.html" class="btn btn--facebook" aria-label="Share on Facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook">
+    <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span>
+  </a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/mars_ned2/2026/03/10/moveitpy.html" class="btn btn--linkedin" aria-label="Share on LinkedIn" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn">
+    <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span>
+  </a>
+
+  <a href="https://bsky.app/intent/compose?text=MoveItPy%20http%3A%2F%2Flocalhost%3A4000%2Fmars_ned2%2F2026%2F03%2F10%2Fmoveitpy.html" class="btn btn--bluesky" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Bluesky">
+    <i class="fab fa-fw fa-bluesky" aria-hidden="true"></i><span> Bluesky</span>
+  </a>
+</section>
+
+
+      
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+      
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    <li><a href="/marl/"> Abdiwak Debella </a></li>
+  </ul>
+</div>
+<div class="page__footer-copyright">
+  © 2026
+</div>  
+
+
+      </footer>
+    </div>
+
+    
+  <script src="/mars_ned2/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/mars_ned2/assets/js/lunr/lunr.min.js"></script>
+<script src="/mars_ned2/assets/js/lunr/lunr-store.js"></script>
+<script src="/mars_ned2/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+  </body>
+</html>

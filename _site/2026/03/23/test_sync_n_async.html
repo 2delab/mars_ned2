@@ -1,0 +1,485 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.27.3 by Michael Rose
+  Copyright 2013-2025 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Sync and Async Tests</title>
+<meta name="description" content="MARS has two coordination modes. synchronised and asynchronous motion. Both modes ran on physical Niryo NED2 hardware with joint state data logged at 15 Hz from /arm_1/joint_states and /arm_2/joint_states.">
+
+
+  <meta name="author" content="Abdiwak Debella">
+  
+  <meta property="article:author" content="Abdiwak Debella">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="">
+<meta property="og:title" content="Sync and Async Tests">
+<meta property="og:url" content="http://localhost:4000/mars_ned2/2026/03/23/test_sync_n_async.html">
+
+
+  <meta property="og:description" content="MARS has two coordination modes. synchronised and asynchronous motion. Both modes ran on physical Niryo NED2 hardware with joint state data logged at 15 Hz from /arm_1/joint_states and /arm_2/joint_states.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-03-23T00:00:00+00:00">
+
+
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/mars_ned2/2026/03/23/test_sync_n_async.html">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/mars_ned2/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  window.enable_copy_code_button = true;
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/mars_ned2/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    
+<script>
+  window.enable_copy_code_button = true;
+</script>
+
+  </head>
+
+  <body class="layout--single wide" dir="ltr">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/mars_ned2/">
+          
+          
+        </a>
+       
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/mars_ned2/"
+                
+                
+              >Home</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/mars_ned2/blog/"
+                
+                
+              >Blog</a>
+            </li></ul>
+
+         <a href="https://github.com/2delab/mars-ned2" class="masthead__github-link" target="_blank" rel="noopener noreferrer" title="View source on GitHub">
+        <i class="fab fa-github" aria-hidden="true"></i>
+        </a>
+
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Sync and Async Tests">
+    <meta itemprop="description" content="MARS has two coordination modes. synchronised and asynchronous motion. Both modes ran on physical Niryo NED2 hardware with joint state data logged at 15 Hz from /arm_1/joint_states and /arm_2/joint_states.">
+    <meta itemprop="datePublished" content="2026-03-23T00:00:00+00:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">
+            <a href="http://localhost:4000/mars_ned2/2026/03/23/test_sync_n_async.html" itemprop="url">Sync and Async Tests
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+  </p>
+
+<div class="page__date-badge">
+            <time datetime="2026-03-23T00:00:00+00:00" itemprop="datePublished">2026-03-23</time>
+          </div></header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>MARS has two coordination modes. synchronised and asynchronous motion. Both modes ran on physical Niryo NED2 hardware with joint state data logged at 15 Hz from <code class="language-plaintext highlighter-rouge">/arm_1/joint_states</code> and <code class="language-plaintext highlighter-rouge">/arm_2/joint_states</code>.</p>
+
+<p>The fundamental difference between the two modes is the planning group used: the <code class="language-plaintext highlighter-rouge">dual</code> 12-DOF group produces a single shared trajectory; the independent <code class="language-plaintext highlighter-rouge">arm_1</code> / <code class="language-plaintext highlighter-rouge">arm_2</code> 6-DOF groups produce separate schedules with no shared clock.</p>
+
+<hr />
+
+<h2 id="synchronised-motion">Synchronised Motion</h2>
+
+<h3 id="test-design">Test Design</h3>
+
+<p>Ten trials were planned using the unified 12-DOF <code class="language-plaintext highlighter-rouge">dual</code> planning group. Joint-space goals were issued for both arms simultaneously: J1 = 10°, J2 = −25°, J3 = 15°, J4 = −20°, J5 = −50°. Joint 6 was excluded from analysis due to hardware sensor noise. One trial (test 6) was excluded from timing analysis due to an incomplete recording, leaving 9 valid trials.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Phase alignment was measured using motion onset detection. The first timestep where</td>
+      <td>Δθ</td>
+      <td>&gt; 0 per joint initiates a start phase shift between arms.</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>Test</th>
+      <th style="text-align: right">Arm 1 Duration (s)</th>
+      <th style="text-align: right">Arm 2 Duration (s)</th>
+      <th style="text-align: right">Duration Diff (s)</th>
+      <th style="text-align: right">Start Phase Shift (s)</th>
+      <th style="text-align: right">End Phase Shift (s)</th>
+      <th style="text-align: right">Avg Start Shift (s)</th>
+      <th style="text-align: right">Avg End Shift (s)</th>
+      <th style="text-align: right">Sync Score (%)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>sync_joint_test_0</td>
+      <td style="text-align: right">5.3215</td>
+      <td style="text-align: right">5.1878</td>
+      <td style="text-align: right">0.1337</td>
+      <td style="text-align: right">-1.1206</td>
+      <td style="text-align: right">-1.2543</td>
+      <td style="text-align: right">0.0445</td>
+      <td style="text-align: right">-1.2368</td>
+      <td style="text-align: right">97.49</td>
+    </tr>
+    <tr>
+      <td>sync_joint_test_1</td>
+      <td style="text-align: right">5.3804</td>
+      <td style="text-align: right">5.4171</td>
+      <td style="text-align: right">0.0367</td>
+      <td style="text-align: right">0.3581</td>
+      <td style="text-align: right">0.3948</td>
+      <td style="text-align: right">0.6444</td>
+      <td style="text-align: right">0.4033</td>
+      <td style="text-align: right">99.32</td>
+    </tr>
+    <tr>
+      <td>sync_joint_test_2</td>
+      <td style="text-align: right">5.2335</td>
+      <td style="text-align: right">5.4815</td>
+      <td style="text-align: right">0.2479</td>
+      <td style="text-align: right">1.1958</td>
+      <td style="text-align: right">1.4437</td>
+      <td style="text-align: right">1.0877</td>
+      <td style="text-align: right">2.3245</td>
+      <td style="text-align: right">95.48</td>
+    </tr>
+    <tr>
+      <td>sync_joint_test_3</td>
+      <td style="text-align: right">5.4406</td>
+      <td style="text-align: right">5.4348</td>
+      <td style="text-align: right">0.0058</td>
+      <td style="text-align: right">1.5362</td>
+      <td style="text-align: right">1.5304</td>
+      <td style="text-align: right">1.2124</td>
+      <td style="text-align: right">1.1647</td>
+      <td style="text-align: right">99.89</td>
+    </tr>
+    <tr>
+      <td>sync_joint_test_4</td>
+      <td style="text-align: right">5.3566</td>
+      <td style="text-align: right">5.4526</td>
+      <td style="text-align: right">0.0960</td>
+      <td style="text-align: right">0.0402</td>
+      <td style="text-align: right">0.1362</td>
+      <td style="text-align: right">-0.0267</td>
+      <td style="text-align: right">0.8015</td>
+      <td style="text-align: right">98.24</td>
+    </tr>
+    <tr>
+      <td>sync_joint_test_5</td>
+      <td style="text-align: right">5.2917</td>
+      <td style="text-align: right">5.2811</td>
+      <td style="text-align: right">0.0105</td>
+      <td style="text-align: right">1.3288</td>
+      <td style="text-align: right">1.3183</td>
+      <td style="text-align: right">0.8205</td>
+      <td style="text-align: right">1.3193</td>
+      <td style="text-align: right">99.80</td>
+    </tr>
+    <tr>
+      <td>sync_joint_test_7</td>
+      <td style="text-align: right">5.5164</td>
+      <td style="text-align: right">5.3856</td>
+      <td style="text-align: right">0.1308</td>
+      <td style="text-align: right">-1.5889</td>
+      <td style="text-align: right">-1.7197</td>
+      <td style="text-align: right">-1.3436</td>
+      <td style="text-align: right">-1.7373</td>
+      <td style="text-align: right">97.63</td>
+    </tr>
+    <tr>
+      <td>sync_joint_test_8</td>
+      <td style="text-align: right">5.5205</td>
+      <td style="text-align: right">5.5633</td>
+      <td style="text-align: right">0.0428</td>
+      <td style="text-align: right">1.6182</td>
+      <td style="text-align: right">1.6610</td>
+      <td style="text-align: right">1.2552</td>
+      <td style="text-align: right">1.7274</td>
+      <td style="text-align: right">99.23</td>
+    </tr>
+    <tr>
+      <td>sync_joint_test_9</td>
+      <td style="text-align: right">5.4194</td>
+      <td style="text-align: right">5.3731</td>
+      <td style="text-align: right">0.0463</td>
+      <td style="text-align: right">-1.1638</td>
+      <td style="text-align: right">-1.2102</td>
+      <td style="text-align: right">-1.0782</td>
+      <td style="text-align: right">-0.5456</td>
+      <td style="text-align: right">99.15</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="the-start-phase-shift">The Start Phase Shift</h3>
+
+<p>The start phase shift (mean 1.175 s, range 0.095–1.725 s) is a hardware-layer characteristic, not a planning failure. The <code class="language-plaintext highlighter-rouge">TrajectoryProxy</code> dispatches trajectories to each arm’s hardware controller sequentially over TCP/IP — arm_2 receives its goal 20–50 ms to over a second after arm_1 depending on network timing. Because both trajectories are time-parameterised identically by the planner, this offset is constant throughout execution and does not accumulate. The end-position alignment (max 2.50°) confirms the offset does not cause tracking divergence and both arms arrive at the same position regardless of when they started.</p>
+
+<p><strong>Objective 2.1: Met.</strong> Duration ratio ≥ 0.95 across all 9 trials; inter-arm joint difference at end position ≤ 2.50° across all joints.</p>
+
+<hr />
+
+<h2 id="asynchronous-motion-aim-2-objective-22">Asynchronous Motion (Aim 2, Objective 2.2)</h2>
+
+<h3 id="test-design-1">Test Design</h3>
+
+<p>Ten trials used separate <code class="language-plaintext highlighter-rouge">arm_1</code> and <code class="language-plaintext highlighter-rouge">arm_2</code> 6-DOF planning groups with independent action clients running in parallel threads. Both arms were commanded to the same joint-space goals (J1 = 50°, J2 = 0°, J3 = 0°, J4 = 0°, J5 = 0°) from the same home configuration. Independence is demonstrated through execution timing variability — if the arms shared a control schedule, duration differences between trials would be near zero.</p>
+
+<h3 id="duration-variability">Duration Variability</h3>
+
+<p><strong>Table 5.6 — Asynchronous Motion Duration Variability</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Metric</th>
+      <th>Arm 1</th>
+      <th>Arm 2</th>
+      <th>Duration Difference</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Mean (s)</td>
+      <td>1.170</td>
+      <td>1.193</td>
+      <td>0.117</td>
+    </tr>
+    <tr>
+      <td>Std Dev (s)</td>
+      <td>0.124</td>
+      <td>0.087</td>
+      <td>0.121</td>
+    </tr>
+    <tr>
+      <td>Range (s)</td>
+      <td>0.920–1.409</td>
+      <td>1.080–1.345</td>
+      <td>0.016–0.425</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The duration difference standard deviation of 0.121 s, with a range of 0.016–0.425 s, provides the primary evidence of independent execution. A coupled system would produce near-zero duration differences across trials. This magnitude of variability is only possible if each arm is executing its own time-parameterised trajectory without synchronisation to the other.</p>
+
+<h2 id="comparing-the-two-modes">Comparing the Two Modes</h2>
+
+<p>The contrast between synchronised and asynchronous results reveals the coordination modes working as designed:</p>
+
+<p><strong>Synchronised</strong>: small mean differences (&lt; 2.35°), moderate peak deviations during acceleration. Both arms track the same trajectory closely — the phase offset is the limiting factor, not the planning.</p>
+
+<p><strong>Asynchronous</strong>: large mean differences (3–9°) reflecting genuinely different trajectories. Arms are operating independently with no expectation of similarity.</p>
+
+<p>The difference between the two modes is not an accident of experimental parameters — it is the direct consequence of the planning group used. The <code class="language-plaintext highlighter-rouge">dual</code> group produces time-parameterised trajectories where both arms move together; separate groups produce independent trajectories where divergence is expected and correct.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-03-23T00:00:00+00:00">March 23, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  <h4 class="page__share-title">Share on</h4>
+
+  <a href="https://x.com/intent/tweet?text=Sync+and+Async+Tests%20http%3A%2F%2Flocalhost%3A4000%2Fmars_ned2%2F2026%2F03%2F23%2Ftest_sync_n_async.html" class="btn btn--x" aria-label="Share on X" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on X">
+    <i class="fab fa-fw fa-x-twitter" aria-hidden="true"></i><span> X</span>
+  </a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fmars_ned2%2F2026%2F03%2F23%2Ftest_sync_n_async.html" class="btn btn--facebook" aria-label="Share on Facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook">
+    <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span>
+  </a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/mars_ned2/2026/03/23/test_sync_n_async.html" class="btn btn--linkedin" aria-label="Share on LinkedIn" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn">
+    <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span>
+  </a>
+
+  <a href="https://bsky.app/intent/compose?text=Sync+and+Async+Tests%20http%3A%2F%2Flocalhost%3A4000%2Fmars_ned2%2F2026%2F03%2F23%2Ftest_sync_n_async.html" class="btn btn--bluesky" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Bluesky">
+    <i class="fab fa-fw fa-bluesky" aria-hidden="true"></i><span> Bluesky</span>
+  </a>
+</section>
+
+
+      
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+      
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    <li><a href="/marl/"> Abdiwak Debella </a></li>
+  </ul>
+</div>
+<div class="page__footer-copyright">
+  © 2026
+</div>  
+
+
+      </footer>
+    </div>
+
+    
+  <script src="/mars_ned2/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/mars_ned2/assets/js/lunr/lunr.min.js"></script>
+<script src="/mars_ned2/assets/js/lunr/lunr-store.js"></script>
+<script src="/mars_ned2/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+  </body>
+</html>

@@ -57,7 +57,7 @@ Here's why `K` is mandatory:
 Here's the practical workflow:
 ### Step 1: Calibrate Once
 Use a checkerboard or calibration target with known geometry. OpenCV's `calibrateCamera` solves for intrinsics by:
-![Ned2 side view](/mars-ned2/assets/images/camera_calibration.png)
+![Ned2 side view](/mars_ned2/assets/images/camera_calibration.png)
 1. Detecting corners in multiple images
 2. Computing homographies (planar transformations)
 3. Running nonlinear optimization to minimize reprojection error

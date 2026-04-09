@@ -22,7 +22,7 @@ ABB's dual-arm collaborative robot, introduced in 2015, is an exellent standard 
 
 **The cost:** YuMi's coordination architecture is not programmable via standard ROS interfaces. You cannot inspect the joint state fusion logic, modify the collision model, or extend the planner. The entire coordination stack is proprietary. If you need a third arm, a different hardware brand, or custom planning behaviour, you are outside what the system supports.
 
-![ABB YuMi](/mars-ned2/assets/images/ABB_YuMi.png){: .align-center}
+![ABB YuMi](/mars_ned2/assets/images/ABB_YuMi.png){: .align-center}
 
 
 ### Yaskawa Motoman SDA Series
@@ -34,7 +34,7 @@ The Motoman SDA (Slim Dual-Arm) series (SDA5, SDA10, SDA20) covers a 5–20 kg p
 
 **The cost:** Same as YuMi but more acute. The system is fully closed: proprietary controller, proprietary software, no ROS interface. For research purposes, the SDA series is effectively a black box. You can send high-level task commands via Yaskawa's API, but the coordination logic beneath is inaccessible. It also does not translate as patterns learned from the SDA cannot be applied to non-Yaskawa hardware.
 
-![SDA](/mars-ned2/assets/images/SDA.png){: .align-center}
+![SDA](/mars_ned2/assets/images/SDA.png){: .align-center}
 
 
 **The industrial pattern:** coordination works when both arms are managed by the same hardware controller. This provides:

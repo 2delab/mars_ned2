@@ -17,9 +17,9 @@ tf2 manages coordinate frame transformations across time. Think of it as a dynam
 - Interpolating between transforms
 - Managing transform trees
 
-![tf](/mars-ned2/assets/images/tf1.png){: .align-center}
+![tf](/mars_ned2/assets/images/tf1.png){: .align-center}
 
-![tf](/mars-ned2/assets/images/tf2.png){: .align-center}
+![tf](/mars_ned2/assets/images/tf2.png){: .align-center}
 
 ## The Core Architecture
 ### Transform Broadcaster

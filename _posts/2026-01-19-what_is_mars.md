@@ -14,7 +14,7 @@ I started this project with a deceptively simple premise: Get two Niryo Ned2 rob
 Instead of one robot working alone, Multi-Arm Robotic Systems (MARS)  multiple robotic manipulators operating in a shared workspace to collaboratively complete tasks that would be difficult, inefficient, or impossible for a single arm.
 
 <video width="100%" controls autoplay muted loop>>
-  <source src="/mars-ned2/assets/videos/mars.mp4" type="video/mp4">
+  <source src="/mars_ned2/assets/videos/mars.mp4" type="video/mp4">
   Your browser doesn't support HTML5 video.
 </video>
 See more: [MoveIt PR #2810](https://github.com/moveit/moveit/pull/2810)

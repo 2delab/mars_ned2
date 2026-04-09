@@ -1,0 +1,365 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.27.3 by Michael Rose
+  Copyright 2013-2025 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Future Work</title>
+<meta name="description" content="MARS solves a specific problem: coordinated dual-arm manipulation on namespace-isolated ROS2 hardware, with planning-time collision safety and three selectable coordination modes. It does not solve the general multi-arm coordination problem. This post maps the open problems and the directions where the architecture extends naturally versus where new work is needed.">
+
+
+  <meta name="author" content="Abdiwak Debella">
+  
+  <meta property="article:author" content="Abdiwak Debella">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="">
+<meta property="og:title" content="Future Work">
+<meta property="og:url" content="http://localhost:4000/mars_ned2/2026/04/05/future_work.html">
+
+
+  <meta property="og:description" content="MARS solves a specific problem: coordinated dual-arm manipulation on namespace-isolated ROS2 hardware, with planning-time collision safety and three selectable coordination modes. It does not solve the general multi-arm coordination problem. This post maps the open problems and the directions where the architecture extends naturally versus where new work is needed.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-04-05T00:00:00+01:00">
+
+
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/mars_ned2/2026/04/05/future_work.html">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/mars_ned2/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  window.enable_copy_code_button = true;
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/mars_ned2/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    
+<script>
+  window.enable_copy_code_button = true;
+</script>
+
+  </head>
+
+  <body class="layout--single wide" dir="ltr">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/mars_ned2/">
+          
+          
+        </a>
+       
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/mars_ned2/"
+                
+                
+              >Home</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/mars_ned2/blog/"
+                
+                
+              >Blog</a>
+            </li></ul>
+
+         <a href="https://github.com/2delab/mars-ned2" class="masthead__github-link" target="_blank" rel="noopener noreferrer" title="View source on GitHub">
+        <i class="fab fa-github" aria-hidden="true"></i>
+        </a>
+
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Future Work">
+    <meta itemprop="description" content="MARS solves a specific problem: coordinated dual-arm manipulation on namespace-isolated ROS2 hardware, with planning-time collision safety and three selectable coordination modes. It does not solve the general multi-arm coordination problem. This post maps the open problems and the directions where the architecture extends naturally versus where new work is needed.">
+    <meta itemprop="datePublished" content="2026-04-05T00:00:00+01:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">
+            <a href="http://localhost:4000/mars_ned2/2026/04/05/future_work.html" itemprop="url">Future Work
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+  </p>
+
+<div class="page__date-badge">
+            <time datetime="2026-04-05T00:00:00+01:00" itemprop="datePublished">2026-04-05</time>
+          </div></header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>MARS solves a specific problem: coordinated dual-arm manipulation on namespace-isolated ROS2 hardware, with planning-time collision safety and three selectable coordination modes. It does not solve the general multi-arm coordination problem. This post maps the open problems and the directions where the architecture extends naturally versus where new work is needed.</p>
+
+<hr />
+
+<h2 id="the-immediately-solvable">The Immediately Solvable</h2>
+
+<h3 id="driver-level-synchronisation">Driver-Level Synchronisation</h3>
+
+<p>The largest gap between simulation and hardware for synchronised mode is the 20–50 ms inter-arm start offset caused by sequential trajectory dispatch. A synchronisation shim at the driver level — a barrier that releases both hardware controllers simultaneously via a shared signal — would eliminate this offset without changes to the MoveIt2 planning pipeline.</p>
+
+<p>This is well-scoped: implement a <code class="language-plaintext highlighter-rouge">SynchronisedActionClient</code> that sends both trajectory goals and then releases a start signal to both arms simultaneously. The Niryo hardware likely supports this via its internal ROS1 infrastructure; whether the ROSBridge exposes it is the open question.</p>
+
+<h3 id="tighter-safety-margins">Tighter Safety Margins</h3>
+
+<p>The 5 cm per-link padding produces a 14% planning rejection rate for boundary configurations. Calibrating the padding to measured hardware error (positional repeatability + velocity-scaled latency) rather than estimated values would reduce unnecessary rejections. This is one measurement session with a calibration target and a timing analysis of the ROSBridge latency distribution.</p>
+
+<h3 id="pre-dispatch-collision-validation">Pre-Dispatch Collision Validation</h3>
+
+<p>Adding a final collision check to the <code class="language-plaintext highlighter-rouge">TrajectoryProxy</code> — verifying the current robot state against the planned trajectory start state before dispatch — would harden the system against the edge case where the robot moves between planning and execution. This is a 20-line addition to the proxy based on the Stoop et al. (2023) pattern.</p>
+
+<hr />
+
+<h2 id="the-architecturally-natural-extensions">The Architecturally Natural Extensions</h2>
+
+<h3 id="three-or-more-arms">Three or More Arms</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">JointStateManager</code> and <code class="language-plaintext highlighter-rouge">TrajectoryProxy</code> are parameterised by arm count, not hardcoded for two. Adding a third arm requires:</p>
+<ul>
+  <li>Extending the composite URDF with a third arm’s kinematic chain</li>
+  <li>Adding the third arm’s namespace to the JointStateManager configuration</li>
+  <li>Adding a third planning group and cross-arm collision pairs to the SRDF</li>
+</ul>
+
+<p>The computational challenge is 18-DOF planning for the combined group and the exponentially larger collision check set (all cross-arm link pairs). Whether RRTConnect remains tractable at 18-DOF is an empirical question. Shome et al.’s dRRT* (2019) is the natural alternative for higher-DOF multi-robot problems.</p>
+
+<h3 id="dynamic-obstacle-integration">Dynamic Obstacle Integration</h3>
+
+<p>The planning scene monitor supports occupancy map integration via the <code class="language-plaintext highlighter-rouge">PointCloudOctomapUpdater</code> plugin. Connecting a depth camera to the planning scene would extend MARS to handle unmodelled objects in the workspace. The architecture already supports this — the <code class="language-plaintext highlighter-rouge">collision_avoidance.md</code> post documents the octomap configuration. The missing piece is commissioning a depth camera with calibrated transform to the robot base frame.</p>
+
+<h3 id="online-replanning">Online Replanning</h3>
+
+<p>MoveIt2 supports replanning on execution preemption — the planner can regenerate the remainder of a trajectory from the current state if execution is interrupted. Integrating this with the <code class="language-plaintext highlighter-rouge">TrajectoryProxy</code> (detect abort, replan from current state, redispatch) would handle the ROSBridge connection drop failure mode gracefully instead of requiring a manual restart.</p>
+
+<hr />
+
+<h2 id="the-harder-problems">The Harder Problems</h2>
+
+<h3 id="adaptive-safety-margins">Adaptive Safety Margins</h3>
+
+<p>Fixed padding is conservative and uniform. A more principled approach would compute safety margins dynamically based on:</p>
+<ul>
+  <li>Current velocity (higher velocity → larger margin needed)</li>
+  <li>Distance to the other arm (closer → tighter margin, more careful checking)</li>
+  <li>Task type (free motion → standard margin; approach to shared workspace → larger margin)</li>
+</ul>
+
+<p>He (2026) demonstrates risk-aware adaptive margins for MPC systems in dynamic environments. Applying this concept to the MoveIt2 planning scene — dynamically updating link padding based on arm proximity and velocity — would produce a system that is less conservative in free space and more conservative near collision boundaries.</p>
+
+<p>This requires changes to the <code class="language-plaintext highlighter-rouge">PlanningSceneMonitor</code> update cycle, which is currently read-only with respect to padding parameters.</p>
+
+<h3 id="task-adaptive-mode-selection">Task-Adaptive Mode Selection</h3>
+
+<p>Currently, the coordination mode is a user-specified parameter. Automating mode selection — switching to async when arms are in separated zones, hybrid when they approach shared space, sync when precise relative positioning is required — would reduce the configuration burden and prevent the zone-crossing failure mode.</p>
+
+<p>The inputs to this decision are available at runtime: both arms’ current joint configurations (from the JointStateManager), the planned target poses, and the workspace geometry. Building an automaton that maps these inputs to coordination mode selection is a bounded engineering problem with a clear interface.</p>
+
+<h3 id="generalisation-beyond-pick-and-place">Generalisation Beyond Pick-and-Place</h3>
+
+<p>The MARS validation uses pick-and-place as the primary benchmark. This is appropriate for the coordination architecture question but leaves unexplored whether the system performs correctly on tasks requiring continuous path following (welding, painting, deburring) rather than point-to-point motion. Continuous path tasks impose tighter timing requirements on synchronised mode and tighter spatial requirements on asynchronous workspace partitioning.</p>
+
+<hr />
+
+<h2 id="the-case-for-adaptive-safety-margins">The Case for Adaptive Safety Margins</h2>
+
+<p>Of all the future work directions, adaptive safety margins have the highest ratio of impact to engineering cost. The current fixed padding produces correct results at the cost of a 14% planning rejection rate at workspace boundaries. Variable padding — larger near the shared boundary, tighter in free space — would reduce false negatives without compromising safety.</p>
+
+<p>The implementation path is clear: a <code class="language-plaintext highlighter-rouge">PaddingManager</code> node that monitors arm proximity via the planning scene and updates link padding in the SRDF parameters at runtime. The MoveIt2 planning scene supports parameter updates; the challenge is determining the correct padding schedule as a function of arm configuration and task type.</p>
+
+<p>This is the extension that would most directly improve the system’s practical utility for real coordination tasks.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-04-05T00:00:00+01:00">April 5, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  <h4 class="page__share-title">Share on</h4>
+
+  <a href="https://x.com/intent/tweet?text=+Future+Work%20http%3A%2F%2Flocalhost%3A4000%2Fmars_ned2%2F2026%2F04%2F05%2Ffuture_work.html" class="btn btn--x" aria-label="Share on X" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on X">
+    <i class="fab fa-fw fa-x-twitter" aria-hidden="true"></i><span> X</span>
+  </a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fmars_ned2%2F2026%2F04%2F05%2Ffuture_work.html" class="btn btn--facebook" aria-label="Share on Facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook">
+    <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span>
+  </a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/mars_ned2/2026/04/05/future_work.html" class="btn btn--linkedin" aria-label="Share on LinkedIn" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn">
+    <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span>
+  </a>
+
+  <a href="https://bsky.app/intent/compose?text=+Future+Work%20http%3A%2F%2Flocalhost%3A4000%2Fmars_ned2%2F2026%2F04%2F05%2Ffuture_work.html" class="btn btn--bluesky" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Bluesky">
+    <i class="fab fa-fw fa-bluesky" aria-hidden="true"></i><span> Bluesky</span>
+  </a>
+</section>
+
+
+      
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+      
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    <li><a href="/marl/"> Abdiwak Debella </a></li>
+  </ul>
+</div>
+<div class="page__footer-copyright">
+  © 2026
+</div>  
+
+
+      </footer>
+    </div>
+
+    
+  <script src="/mars_ned2/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/mars_ned2/assets/js/lunr/lunr.min.js"></script>
+<script src="/mars_ned2/assets/js/lunr/lunr-store.js"></script>
+<script src="/mars_ned2/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+  </body>
+</html>

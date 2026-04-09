@@ -1,0 +1,429 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.27.3 by Michael Rose
+  Copyright 2013-2025 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>The TrajectoryProxy Pattern</title>
+<meta name="description" content="The collision safety validation is the most straightforward result in MARS: 100 hardware tests across two scenarios, zero unplanned collisions.">
+
+
+  <meta name="author" content="Abdiwak Debella">
+  
+  <meta property="article:author" content="Abdiwak Debella">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="">
+<meta property="og:title" content="The TrajectoryProxy Pattern">
+<meta property="og:url" content="http://localhost:4000/mars_ned2/2026/03/26/test_collision.html">
+
+
+  <meta property="og:description" content="The collision safety validation is the most straightforward result in MARS: 100 hardware tests across two scenarios, zero unplanned collisions.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-03-26T00:00:00+00:00">
+
+
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/mars_ned2/2026/03/26/test_collision.html">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/mars_ned2/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  window.enable_copy_code_button = true;
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/mars_ned2/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    
+<script>
+  window.enable_copy_code_button = true;
+</script>
+
+  </head>
+
+  <body class="layout--single wide" dir="ltr">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/mars_ned2/">
+          
+          
+        </a>
+       
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/mars_ned2/"
+                
+                
+              >Home</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/mars_ned2/blog/"
+                
+                
+              >Blog</a>
+            </li></ul>
+
+         <a href="https://github.com/2delab/mars-ned2" class="masthead__github-link" target="_blank" rel="noopener noreferrer" title="View source on GitHub">
+        <i class="fab fa-github" aria-hidden="true"></i>
+        </a>
+
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="The TrajectoryProxy Pattern">
+    <meta itemprop="description" content="The collision safety validation is the most straightforward result in MARS: 100 hardware tests across two scenarios, zero unplanned collisions.">
+    <meta itemprop="datePublished" content="2026-03-26T00:00:00+00:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">
+            <a href="http://localhost:4000/mars_ned2/2026/03/26/test_collision.html" itemprop="url">The TrajectoryProxy Pattern
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+<div class="page__date-badge">
+            <time datetime="2026-03-26T00:00:00+00:00" itemprop="datePublished">2026-03-26</time>
+          </div></header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>The collision safety validation is the most straightforward result in MARS: 100 hardware tests across two scenarios, zero unplanned collisions.</p>
+
+<hr />
+
+<h2 id="test-setup">Test Setup</h2>
+
+<p>Two collision test scenarios were executed:</p>
+
+<p><strong>Dynamic tests</strong> (50 configurations): arm_2 moves between two configurations while arm_1 is free to move from its position.</p>
+
+<p><strong>Static tests</strong> (50 configurations):  arm_2 moves between two configurations while arm_1 is fixed at its position.</p>
+
+<p>totaling to 100 run times (10 JSON result files per scenario), with 5 configuration pairs per run.</p>
+
+<hr />
+
+<h2 id="results">Results</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Scenario</th>
+      <th>Tests</th>
+      <th>Planning Success</th>
+      <th>Execution Success</th>
+      <th>Collisions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Dynamic</td>
+      <td>50</td>
+      <td>43 / 50 (86%)</td>
+      <td>43 / 43 (100%)</td>
+      <td><strong>0</strong></td>
+    </tr>
+    <tr>
+      <td>Static</td>
+      <td>50</td>
+      <td>43 / 50 (86%)</td>
+      <td>43 / 43 (100%)</td>
+      <td><strong>0</strong></td>
+    </tr>
+    <tr>
+      <td><strong>Total</strong></td>
+      <td><strong>100</strong></td>
+      <td><strong>86 / 100 (86%)</strong></td>
+      <td><strong>86 / 86 (100%)</strong></td>
+      <td><strong>0</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Planning timing:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Metric</th>
+      <th>Dynamic</th>
+      <th>Static</th>
+      <th>Overall</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Mean (ms)</td>
+      <td>26.7</td>
+      <td>21.4</td>
+      <td>24.1</td>
+    </tr>
+    <tr>
+      <td>Std dev (ms)</td>
+      <td>12.4</td>
+      <td>10.0</td>
+      <td>11.5</td>
+    </tr>
+    <tr>
+      <td>Max (ms)</td>
+      <td>85.0</td>
+      <td>50.4</td>
+      <td>85.0</td>
+    </tr>
+    <tr>
+      <td>95% CI (ms)</td>
+      <td>[23.6, 30.4]</td>
+      <td>[18.7, 24.2]</td>
+      <td>[21.9, 26.4]</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="what-the-86-means">What the 86% Means</h2>
+
+<p>The 14 planning failures are not system errors. They are the planner correctly refusing to generate trajectories for unsafe goal configurations.</p>
+
+<p>All 14 failures share the same property: the goal configuration places arm_2’s <code class="language-plaintext highlighter-rouge">joint_1</code> at ±50° while arm_1 holds <code class="language-plaintext highlighter-rouge">joint_1</code> at 0° — configurations where the arms approach the shared workspace boundary and the 5 cm per-link padding causes the padded volumes to overlap.</p>
+
+<p>In these cases:</p>
+<ul>
+  <li>Physical link separation &gt; 0 (the arms would not physically touch)</li>
+  <li>Padded link separation &lt; 0 (the safety volumes overlap)</li>
+  <li>Planner result: <strong>rejected</strong></li>
+</ul>
+
+<p>This is the intended behaviour. The planner is conservative: it treats the padded geometry as the real geometry. Configurations that are physically safe but within the safety margin are rejected. The 14 rejections are false negatives — conservatively rejected safe states — not false positives.</p>
+
+<p>The 0% collision rate across all 86 executed trajectories confirms that every configuration passed by the planner was genuinely safe. The system produces no false positives.</p>
+
+<hr />
+
+<h2 id="planning-time-distribution">Planning Time Distribution</h2>
+
+<p>The planning time distribution for dynamic tests is non-normal, with occasional outliers up to 85 ms. These correspond to configurations where RRTConnect requires additional sampling iterations near the collision boundary.</p>
+
+<p>The 95th percentile planning time is below 60 ms. All planning times are well within the 5-second timeout. For the pick-and-place validation, planning overhead averaged 26.7 ms per movement — less than 0.2% of total task execution time.</p>
+
+<hr />
+
+<h2 id="what-this-proves">What This Proves</h2>
+
+<p>The collision safety result validates two properties simultaneously:</p>
+
+<p><strong>Objective 1.2 (Planning scene management)</strong>: the unified planning scene contains correct geometry for both arms. If the planning scene were incorrect — wrong link positions, missing geometry, incorrect TF frames — the planner would either accept configurations that are physically unsafe (false positives) or reject all configurations (planning failures unrelated to safety). Neither occurred.</p>
+
+<p><strong>Objective 3.1 (Collision-free planning)</strong>: every trajectory dispatched to hardware is free of inter-arm collisions. The 100% execution success rate and 0 collision events confirm this.</p>
+
+<hr />
+
+<h2 id="the-unverified-assumption">The Unverified Assumption</h2>
+
+<p>One important caveat: collision detection in MoveIt2 is passive — it detects whether the planning scene says two objects are in contact, but it does not independently verify this on hardware using contact sensing or torque monitoring.</p>
+
+<p>The 0 collision result is validated by:</p>
+<ul>
+  <li>No mechanical contact events observed during testing</li>
+  <li>No trajectory abort events triggered by hardware error</li>
+  <li>No visible arm interference in recorded test sessions</li>
+</ul>
+
+<p>It is not validated by direct contact sensing. For higher-assurance applications, independent runtime monitoring (torque-based collision detection) would complement the planning-time safety guarantee.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-03-26T00:00:00+00:00">March 26, 2026</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  <h4 class="page__share-title">Share on</h4>
+
+  <a href="https://x.com/intent/tweet?text=The+TrajectoryProxy+Pattern%20http%3A%2F%2Flocalhost%3A4000%2Fmars_ned2%2F2026%2F03%2F26%2Ftest_collision.html" class="btn btn--x" aria-label="Share on X" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on X">
+    <i class="fab fa-fw fa-x-twitter" aria-hidden="true"></i><span> X</span>
+  </a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fmars_ned2%2F2026%2F03%2F26%2Ftest_collision.html" class="btn btn--facebook" aria-label="Share on Facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook">
+    <i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span>
+  </a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/mars_ned2/2026/03/26/test_collision.html" class="btn btn--linkedin" aria-label="Share on LinkedIn" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn">
+    <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span>
+  </a>
+
+  <a href="https://bsky.app/intent/compose?text=The+TrajectoryProxy+Pattern%20http%3A%2F%2Flocalhost%3A4000%2Fmars_ned2%2F2026%2F03%2F26%2Ftest_collision.html" class="btn btn--bluesky" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Bluesky">
+    <i class="fab fa-fw fa-bluesky" aria-hidden="true"></i><span> Bluesky</span>
+  </a>
+</section>
+
+
+      
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+      
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    <li><a href="/marl/"> Abdiwak Debella </a></li>
+  </ul>
+</div>
+<div class="page__footer-copyright">
+  © 2026
+</div>  
+
+
+      </footer>
+    </div>
+
+    
+  <script src="/mars_ned2/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/mars_ned2/assets/js/lunr/lunr.min.js"></script>
+<script src="/mars_ned2/assets/js/lunr/lunr-store.js"></script>
+<script src="/mars_ned2/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+  </body>
+</html>

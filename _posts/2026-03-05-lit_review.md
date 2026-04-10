@@ -2,7 +2,7 @@
 layout: single
 title: "Literature Review: Multi-Arm Coordination in Robotics"
 header:
-  teaser: /assets/images/photo.jpg
+  teaser: /assets/images/posts/lit_review.png
 date: 2026-03-05
 classes: wide
 author_profile: false

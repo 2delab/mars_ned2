@@ -2,7 +2,7 @@
 layout: single
 title: "The Trajectory Proxy "
 header:
-  teaser: /assets/images/photo.jpg
+  teaser: /assets/images/posts/trajectory_proxy.png
 date: 2026-03-20
 classes: wide
 author_profile: false

@@ -2,7 +2,7 @@
 layout: single
 title: "Robot Description"
 header:
-  teaser: /assets/images/photo.jpg
+  teaser: /assets/images/posts/robot_description.png
 date: 2026-02-02
 classes: wide
 author_profile: false

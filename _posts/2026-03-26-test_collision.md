@@ -2,7 +2,7 @@
 layout: single
 title: "Collision tests"
 header:
-  teaser: /assets/images/photo.jpg
+  teaser: /assets/images/posts/collision_tests.png
 date: 2026-03-26
 classes: wide
 author_profile: false

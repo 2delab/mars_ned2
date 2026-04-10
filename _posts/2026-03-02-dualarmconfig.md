@@ -2,7 +2,7 @@
 layout: single
 title: "Dual Arm MoveIt Config"
 header:
-  teaser: /assets/images/photo.jpg
+  teaser: /assets/images/posts/dual_arm_config.png
 date: 2026-03-02
 classes: 
   - wide

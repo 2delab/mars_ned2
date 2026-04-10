@@ -2,7 +2,7 @@
 layout: single
 title: " Trajectory Execution with MoveIt2"
 header:
-  teaser: /assets/images/photo.jpg
+  teaser: /assets/images/posts/trajectory_execution.png
 date: 2026-03-12
 classes: 
   - wide

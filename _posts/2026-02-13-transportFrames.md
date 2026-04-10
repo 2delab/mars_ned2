@@ -2,7 +2,7 @@
 layout: single
 title: "Transport Frames"
 header:
-  teaser: /assets/images/photo.jpg
+  teaser: /assets/images/posts/transport_frames.png
 date: 2026-02-13
 classes: wide
 author_profile: false

@@ -2,7 +2,7 @@
 layout: single
 title: "A Practical Summary"
 header:
-  teaser: /assets/images/photo.jpg
+  teaser: /assets/images/posts/features_and_limits.png
 date: 2026-04-02
 classes: wide
 author_profile: false

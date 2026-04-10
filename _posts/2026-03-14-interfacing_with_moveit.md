@@ -2,7 +2,7 @@
 layout: single
 title: "Interfacing wih Moveit"
 header:
-  teaser: /assets/images/photo.jpg
+  teaser: /assets/images/posts/interfacing_moveit.png
 date: 2026-03-14
 classes: 
   - wide

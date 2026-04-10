@@ -2,7 +2,7 @@
 layout: single
 title: "Collision avoidance"
 header:
-  teaser: /assets/images/photo.jpg
+  teaser: /assets/images/posts/collision_avoidance.png
 date: 2026-03-04
 classes: 
   - wide

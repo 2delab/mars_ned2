@@ -2,7 +2,7 @@
 layout: single
 title: "The Planning Scene"
 header:
-  teaser: /assets/images/photo.jpg
+  teaser: /assets/images/posts/planning_scene.png
 date: 2026-03-15
 classes: wide
 author_profile: false

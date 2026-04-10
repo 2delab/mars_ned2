@@ -2,7 +2,7 @@
 layout: single
 title: "Introduction"
 header:
-  teaser: /assets/images/photo.jpg
+  teaser: /assets/images/posts/what_is_mars.png
 date: 2026-01-19  
 classes: wide
 author_profile: false

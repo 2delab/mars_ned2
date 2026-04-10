@@ -2,7 +2,7 @@
 layout: single
 title: "State Management"
 header:
-  teaser: /assets/images/photo.jpg
+  teaser: /assets/images/posts/state_management.png
 date: 2026-03-16
 classes: wide
 author_profile: false

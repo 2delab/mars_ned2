@@ -2,7 +2,7 @@
 layout: single
 title: "Camera Calibration"
 header:
-  teaser: /assets/images/photo.jpg
+  teaser: /assets/images/posts/camera_calibration.png
 date: 2026-02-10
 classes: wide
 author_profile: false

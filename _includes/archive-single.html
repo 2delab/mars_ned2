@@ -22,10 +22,9 @@
     </h2>
     {% if teaser %}
       <div class="archive__item-teaser">
-        <img src="{{ teaser | relative_url }}" alt="">
+        <a href="{{ post.url | relative_url }}"><img src="{{ teaser | relative_url }}" alt=""></a>
       </div>
     {% endif %}
     {% include page__meta.html locale=locale type=include.type %}
-    {% if post.excerpt %}<p class="archive__item-excerpt p-summary" itemprop="description">{{ post.excerpt | markdownify | strip_html | truncate: 160 }}</p>{% endif %}
   </article>
 </div>

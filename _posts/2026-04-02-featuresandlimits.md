@@ -1,12 +1,12 @@
 ---
 layout: single
-title: "What MARS Can Do and What It Cannot: A Practical Summary"
+title: "A Practical Summary"
 date: 2026-04-02
 classes: wide
 author_profile: false
 ---
 
-## What It Does
+## What MARS Can Do and What It Cannot
 
 ### Three Coordination Modes
 

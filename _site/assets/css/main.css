@@ -1361,6 +1361,12 @@ body { display: -webkit-box; display: -ms-flexbox; display: flex; min-height: 10
 .page__date-badge time { display: inline-block; background-color: #346244; color: #ffffff; padding: 0.4em 0.75em; border-radius: 20px; font-size: 0.875em; font-weight: 500; letter-spacing: 0.5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); transition: all 0.2s ease; }
 .page__date-badge time:hover { background-color: #4a8a5f; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); transform: translateY(-2px); }
 
+/* 2-column layout for collection list */
+.entries-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+@media (max-width: 768px) { .entries-list { grid-template-columns: 1fr; } }
+
+.list__item .archive__item-teaser img { width: 100%; height: auto; }
+
 .masthead__github-link { margin-left: auto; margin-right: 1rem; font-size: 1.5rem; color: #346244; transition: color 0.3s ease; }
 .masthead__github-link:hover { color: #193021; }
 @media (max-width: 600px) { .masthead__github-link { display: none; } }

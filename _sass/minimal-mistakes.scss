@@ -39,16 +39,36 @@
 /* Custom overrides */
 @import "custom-wide-single";
 
-    .masthead__github-link {
-    margin-left: auto;  // Pushes to the right using flexbox (greedy nav is flex)
-    margin-right: 1rem;  // Space from right edge/toggles
-    font-size: 1.5rem;  // Icon size (adjust as needed)
-    color: $primary-color;  // Match theme colors
-    transition: color 0.3s ease;  // Smooth hover
-    &:hover {
-      color: darken($primary-color, 15%);  // Darker on hover
+/* 2-column layout for collection list */
+.entries-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.list__item {
+  .archive__item-teaser {
+    img {
+      width: 100%;
+      height: auto;
     }
-    @media (max-width: 600px) {  // Hide on very small screens to avoid crowding
-      display: none;
-    }
-    }
+  }
+}
+
+.masthead__github-link {
+  margin-left: auto;  // Pushes to the right using flexbox (greedy nav is flex)
+  margin-right: 1rem;  // Space from right edge/toggles
+  font-size: 1.5rem;  // Icon size (adjust as needed)
+  color: $primary-color;  // Match theme colors
+  transition: color 0.3s ease;  // Smooth hover
+  &:hover {
+    color: darken($primary-color, 15%);  // Darker on hover
+  }
+  @media (max-width: 600px) {  // Hide on very small screens to avoid crowding
+    display: none;
+  }
+}

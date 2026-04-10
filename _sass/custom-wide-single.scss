@@ -149,3 +149,18 @@
     transform: translateY(-2px);
   }
 }
+
+/* Hover effect for archive item teaser images */
+.archive__item-teaser a {
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.archive__item-teaser a:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+.archive__item-teaser img {
+  transition: all 0.3s ease;
+}

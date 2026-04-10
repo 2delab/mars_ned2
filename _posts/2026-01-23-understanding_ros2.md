@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "Understanding ROS2 "
+title: "ROS2 "
 header:
   teaser: /assets/images/posts/understanding_ros2.png
 date: 2026-01-23

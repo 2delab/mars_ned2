@@ -1,6 +1,8 @@
 ---
 layout: single
 title: "Understanding ROS2 "
+header:
+  teaser: /assets/images/photo.jpg
 date: 2026-01-23
 classes : wide
 author_profile: false

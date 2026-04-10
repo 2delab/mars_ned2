@@ -1,6 +1,8 @@
 ---
 layout: single
 title: "A Practical Summary"
+header:
+  teaser: /assets/images/photo.jpg
 date: 2026-04-02
 classes: wide
 author_profile: false

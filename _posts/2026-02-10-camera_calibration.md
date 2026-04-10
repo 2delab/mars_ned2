@@ -1,6 +1,8 @@
 ---
 layout: single
 title: "Camera Calibration"
+header:
+  teaser: /assets/images/photo.jpg
 date: 2026-02-10
 classes: wide
 author_profile: false

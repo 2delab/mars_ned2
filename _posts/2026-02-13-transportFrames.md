@@ -1,6 +1,8 @@
 ---
 layout: single
 title: "Transport Frames"
+header:
+  teaser: /assets/images/photo.jpg
 date: 2026-02-13
 classes: wide
 author_profile: false

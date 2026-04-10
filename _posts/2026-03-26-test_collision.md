@@ -1,6 +1,8 @@
 ---
 layout: single
 title: "Collision tests"
+header:
+  teaser: /assets/images/photo.jpg
 date: 2026-03-26
 classes: wide
 author_profile: false

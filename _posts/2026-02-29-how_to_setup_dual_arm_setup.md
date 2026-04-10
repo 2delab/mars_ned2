@@ -1,6 +1,8 @@
 ---
 layout: single
 title: "Multiple Robots in MoveIt2"
+header:
+  teaser: /assets/images/photo.jpg
 date: 2026-02-29
 classes: wide
 author_profile: false

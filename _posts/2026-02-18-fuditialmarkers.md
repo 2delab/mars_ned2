@@ -1,6 +1,8 @@
 ---
 layout: single
 title: "Fiducial Markers"
+header:
+  teaser: /assets/images/photo.jpg
 date: 2026-02-18
 classes:
   - wide

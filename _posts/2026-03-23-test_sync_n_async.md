@@ -1,6 +1,8 @@
 ---
 layout: single
 title: "Sync and Async Tests"
+header:
+  teaser: /assets/images/photo.jpg
 date: 2026-03-23
 classes: wide
 author_profile: false

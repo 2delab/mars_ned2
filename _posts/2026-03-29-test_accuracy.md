@@ -1,6 +1,8 @@
 ---
 layout: single
 title: "Accuracy tests"
+header:
+  teaser: /assets/images/photo.jpg
 date: 2026-03-29
 classes: wide
 author_profile: false

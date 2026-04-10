@@ -1,6 +1,8 @@
 ---
 layout: single
 title: "Collision avoidance"
+header:
+  teaser: /assets/images/photo.jpg
 date: 2026-03-04
 classes: 
   - wide

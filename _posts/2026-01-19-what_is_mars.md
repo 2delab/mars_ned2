@@ -1,6 +1,8 @@
 ---
 layout: single
 title: "Introduction"
+header:
+  teaser: /assets/images/photo.jpg
 date: 2026-01-19  
 classes: wide
 author_profile: false

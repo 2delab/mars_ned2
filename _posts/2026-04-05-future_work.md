@@ -1,6 +1,8 @@
 ---
 layout: single
 title: " Future Work"
+header:
+  teaser: /assets/images/photo.jpg
 date: 2026-04-05
 classes: wide
 author_profile: false

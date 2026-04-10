@@ -6,6 +6,8 @@ classes: wide
 author_profile: false
 ---
 
+## The Planning Scene simplified
+
 The MoveIt 2 planning scene is a simplified, static, approximate model of reality that the motion planner uses to check for collisions.
 
 ## What the Planning Scene Contains

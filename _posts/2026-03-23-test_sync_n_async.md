@@ -6,6 +6,8 @@ classes: wide
 author_profile: false
 ---
 
+# Testing Coordination
+
 MARS has two coordination modes: **synchronised** and **asynchronous** motion. Both modes ran on physical Niryo NED2 hardware with joint state data logged at 15 Hz from `/arm_1/joint_states` and `/arm_2/joint_states`.
 
 The fundamental difference is architectural: the `dual` 12-DOF planning group produces a **single shared trajectory** that moves both arms together; the independent `arm_1`/`arm_2` 6-DOF groups produce **separate schedules** with no shared clock. This choice at planning time determines execution behavior at hardware time.

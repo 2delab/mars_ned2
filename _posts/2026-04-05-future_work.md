@@ -6,11 +6,7 @@ classes: wide
 author_profile: false
 ---
 
-MARS solves a specific problem: coordinated dual-arm manipulation on namespace-isolated ROS2 hardware, with planning-time collision safety and three selectable coordination modes. It does not solve the general multi-arm coordination problem. 
-
----
-
-## The Immediately Solvable
+## Key improvement areas
 
 ### Driver-Level Synchronisation
 

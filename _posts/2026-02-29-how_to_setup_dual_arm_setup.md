@@ -6,7 +6,7 @@ classes: wide
 author_profile: false
 ---
 
-## Choosing how to configure Multiple robots in MoveIt2
+## How to configure Multiple robots for MoveIt2
 
 There is not just a single way to solve the dual arm problem in MoveIt2. here we'll discuss three distinct architectural approaches, each with different tradeoffs for collision awareness, scalability, and implementation complexity. This post documents each approach, when to use it, and the specific constraints that led MARS decision making.
 

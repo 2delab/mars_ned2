@@ -7,7 +7,7 @@ classes:
 author_profile: false
 ---
 
-# How collision aviodance works
+# Collision aviodance in Practice
 
 Collision avoidance in MoveIt 2 operates at planning time only. The planner produces a trajectory that was collision-free against a snapshot of the world at the moment planning ran. What happens during execution is a separate concern. Understanding this distinction requires tracing how collision checking actually works, from the geometry library at the bottom to the trajectory executor at the top.
 

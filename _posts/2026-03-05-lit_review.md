@@ -6,11 +6,9 @@ classes: wide
 author_profile: false
 ---
 
-Coordinating multiple robotic arms in a shared space is a long-standing problem with many existing solutions. However, no single method has been adopted as an open-source standard. 
-
+# The Market and Research approoaches to MARS
 
 ## Industrial Baselines: Proprietary Control
-
 
 ### ABB YuMi (IRB 14000)
 
@@ -231,7 +229,9 @@ No prior system provides **all five** of these simultaneously:
 
 5. **Production-ready execution** — Not a research demo. Real hardware validation. Measurable performance metrics (0 collisions, timing consistency, synchronisation quality).
 
+
 MARS targets exactly this gap: the hardware-agnostic, both-modes-supported, open-source coordination layer that the community has documented as missing.
+
 
 ---
 

@@ -6,7 +6,8 @@ classes: wide
 author_profile: false
 ---
 
-The collision safety validation is the most straightforward result in MARS: 100 hardware tests across two scenarios, zero unplanned collisions.
+
+## Collision safety validation
 
 ---
 

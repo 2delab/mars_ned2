@@ -9,7 +9,7 @@ author_profile: false
 
 ## What Is MARS?
 
-This project explores a deceptively simple premise: Get two Niryo Ned2 robots to **collaborate autonomously**.
+This project started with a deceptively simple premise: Get two Niryo Ned2 robots to **collaborate autonomously**.
 
 Multi-Arm Robotic Systems (MARS) is about multiple robotic manipulators operating in a shared workspace to collaboratively complete tasks that would be difficult, inefficient, or impossible for a single arm.
 

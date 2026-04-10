@@ -6,6 +6,8 @@ classes: wide
 author_profile: false
 ---
 
+# Distributing trajectories 
+
 MoveIt2 generates trajectories for a unified 12-DOF robot. The hardware expects two separate 6-DOF trajectory commands, delivered to independent action servers in different namespaces. The `TrajectoryProxy` is the layer that performs this translation — splitting, stripping, and dispatching planned trajectories to the correct hardware controllers.
 
 ---

@@ -6,7 +6,10 @@ classes: wide
 author_profile: false
 ---
 
-This post measures how accurately the Niryo Ned2 arms execute commanded trajectories. Given a target joint configuration, how close does the actual joint position get? How much does this vary across repeated trials? Accuracy is measured as the range (min-max spread) of achieved positions across 9 test cycles.
+## Accuracy and Repeatabiliy
+
+
+Given a target joint configuration, how close does the actual joint position get? How much does this vary across repeated trials? Accuracy is measured as the range (min-max spread) of achieved positions across 9 test cycles.
 
 ---
 

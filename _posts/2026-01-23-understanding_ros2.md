@@ -8,15 +8,20 @@ author_profile: false
 
 ## What is ROS2?
 
-ROS2 is not an operating system, not firmware, not a standalone application. Instead, it's **middleware**—the connective tissue that enables distributed programs to communicate seamlessly, even across multiple machines.
+Let me introduce you to ROS
+
+However, before any confusion
+
+Let me start with what ros is not
+ros is not an application, ros is not an operating system, ros is not a firmware
+
+ROS is a **middleware** that enables communication between different programs, even across multiple machines.
+**A set of software libraries and tools** for building robot applications
+It's not a standalone application, but rather the backbone that connects your robotic systems. 
+**A communication infrastructure** that provides services like hardware abstraction, message-passing between processes, and package management.
 
 For MARS, this matters because: we need two independent robot control loops, a motion planner, a collision detector, and a perception pipeline all running in parallel. ROS2 provides the standardized communication layer that lets these components talk without tight coupling.
 
-**In practical terms:**
-- A set of software libraries and tools for building robot applications
-- Hardware abstraction layer between the robots' firmware and your control code
-- Message-passing infrastructure for inter-process communication
-- Package and dependency management system
 
 The DDS Layer: Why ROS2 
 Under the hood, it's all **DDS (Data Distribution Service)**

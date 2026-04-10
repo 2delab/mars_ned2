@@ -7,7 +7,7 @@ classes:
 author_profile: false
 ---
 
-# Choosing ArUco Tags Instead of Classical Pose Estimation
+# ArUco Tags vs of Classical Pose Estimation
 
 A dual-arm system requires consensus on object locations. This post documents why classical pose estimation failed in practice and how ArUco fiducial markers solved the problem for MARS. 
 

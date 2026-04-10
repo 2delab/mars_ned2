@@ -6,6 +6,8 @@ classes: wide
 author_profile: false
 ---
 
+# How to manage Multi-arm Robot states
+
 The `JointStateManager` is the node that aggregates two namespace-isolated arms into a single coherent system state. Without it, MoveIt2 cannot plan for both arms simultaneously because it has no unified representation of their joint configurations.
 
 ---

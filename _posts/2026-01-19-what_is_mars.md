@@ -74,6 +74,5 @@ The transition to multi-arm robotic systems represents a fundamental shift in au
 
 This project demonstrates that with proper spatial coordination, synchronized execution, and robust state management, two Niryo Ned2 robots can operate as a unified system. The result: tasks that would be inefficient or impossible for a single arm become manageable—assembly requiring simultaneous access from multiple angles, parallel operations that halve cycle times, and collaborative workflows that mirror human team dynamics.
 
-The key insight is that coordination isn't a single problem to solve, but a layered challenge: collision avoidance in shared space, synchronization across multiple timelines, state management in high-dimensional joint spaces, and planning that orchestrates it all. Each layer is critical; weakness in any breaks the entire system.
+The key insight is that coordination isn't a single problem to solve, but a layered challenge: collision avoidance in shared space, synchronization across multiple timelines, state management in high-dimensional joint spaces, and planning that orchestrates it all.
 
-Multi-arm robotics is no longer theoretical. With proper architecture and careful design, it's achievable with commercial hardware and open-source frameworks.

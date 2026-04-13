@@ -114,6 +114,35 @@ Not recommended where inter-robot collision avoidance is required. Usable for lo
 
 ---
 
+## Physical Setup and Workspace Geometry
+
+Before selecting an architecture, the physical constraints of the hardware must be established. The following figures and values are derived from the Niryo Ned2 User Manual v1.0.0 and the validated physical setup described in the MARS project documentation.
+
+**Figure 1 — Physical Reach Envelopes (Top-Down).** Two Ned2 arms, 700 mm apart, facing each other. Left: advertised spec reach (440 mm). Right: effective reach with standard gripper (350 mm).
+
+![Figure 1 — Physical Reach Envelopes](/mars_ned2/assets/images/robot_layout.png)
+
+### Hardware Parameters
+
+| Quantity | Value | Source |
+|----------|-------|--------|
+| Base-to-base separation | **700 mm** | Physically measured; validated hardware setup |
+| Spec reach per arm | 440 mm | Ned2 User Manual v1.0.0 §2.2 |
+| Effective reach (standard gripper) | ~350 mm | Spec reach minus ~90 mm gripper body |
+| Overlap depth at spec reach | **180 mm** | 2 × 440 − 700; 90 mm each side of world centre |
+| Overlap boundary (X) | −90 mm to +90 mm | arm\_1 extends to +90 mm; arm\_2 to −90 mm |
+| Overlap lens max width | ~533 mm | Chord width at world centre |
+| Overlap area (spec reach, top-down) | ~654 cm² | ~10.8% of one arm's full circle |
+| Overlap at effective reach | **0 mm / 0 cm²** | 2 × 350 = 700 mm — envelopes just touch, zero area |
+
+### Key Geometric Result
+
+The critical asymmetry is between spec reach and effective reach. With the standard gripper attached (effective reach ~350 mm), the two envelopes *just touch* at 700 mm separation but share **zero area** — spatial independence is guaranteed by geometry alone. At full extension or without a gripper (spec reach 440 mm), the overlap is **180 mm deep, 533 mm wide, and ~654 cm²**, centred on the world origin, and must be actively managed.
+
+Joint J2 has an asymmetric range (−119.8° to +35.0°), producing an upward-biased reach envelope. The overlap zone is accessible across a wide height band, which is relevant for planning scene design.
+
+---
+
 ## Why MARS Uses Approach 1
 
 Collision-aware coordinated motion in a shared workspace imposes four specific requirements:

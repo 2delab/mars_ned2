@@ -103,6 +103,9 @@ This ensures the test suite exhaustively exercises the shared workspace region w
 
 **Key Result**: Every trajectory approved by the planner executed without physical collision. Zero false positives across all 86 executed trajectories.
 
+
+![Ned2 side view](/mars_ned2/assets/images/collsion_results.png){: .align-center}
+
 ### Planning Performance
 
 Planning time distribution shows static tests complete faster on average (less configuration space to explore):
@@ -113,6 +116,7 @@ Planning time distribution shows static tests complete faster on average (less c
 | Std dev (ms) | 12.4 | 10.0 | 11.5 |
 | Max (ms) | 85.0 | 50.4 | 85.0 |
 | 95th percentile (ms) | 30.4 | 24.2 | 26.4 |
+
 
 **Interpretation**: 
 - Mean planning time **24.1 ms** — well below the 5-second per-configuration timeout
@@ -125,14 +129,10 @@ Planning time distribution shows static tests complete faster on average (less c
 
 The 14 planning failures (out of 100 test configurations) are **not system errors**. They represent the planner correctly refusing to generate trajectories for configurations that violate safety constraints.
 
-### Failure Pattern Analysis
 
-All 14 failures share an identical geometric signature:
-- **arm_2 goal configuration**: `joint_1` at ±50° (far workspace boundary)
-- **arm_1 position**: `joint_1` at 0° (center zone)
-- **Physical separation**: The actual link surfaces are 2–4 cm apart (would not contact)
-- **Padded separation**: The 5 cm safety volumes overlap by 1–2 cm
-- **Planner result**: REJECTED (conservative, correct behavior)
+
+![Ned2 side view](/mars_ned2/assets/images/collision_runs.png){: .align-center}
+
 
 ### Conservative Safety by Design
 
@@ -171,9 +171,6 @@ For real-world operation, this means:
 
 ## What This Proves
 
-The collision safety result validates two critical properties:
-
-### Objective 1.2: Planning Scene Correctness
 
 The unified planning scene (containing both `arm_1` and `arm_2` under the same `move_group`) has correct geometry. Evidence:
 
@@ -183,7 +180,6 @@ The unified planning scene (containing both `arm_1` and `arm_2` under the same `
 - **What actually happened**: Selective rejection at the geometric boundary (14 failures, all at the same joint configuration signature) + 100% execution safety
 - **Conclusion**: The planning scene reflects the real hardware geometry accurately
 
-### Objective 3.1: Collision-Free Trajectory Execution
 
 Every trajectory dispatched to hardware remained collision-free. Evidence:
 
@@ -243,4 +239,3 @@ For higher-assurance applications, complementary runtime monitoring (torque-base
 | **Hardware execution** | No observed contact | Time-parameterized trajectory tracking | 86 executed trajectories over ~1 hour of testing |
 | **Execution time** | NOT monitored | No collision checking during FollowJointTrajectory | After plan dispatch; planning scene disconnected |
 
-This is the distinction MoveIt2 architecture enforces: planning-time guarantees, execution-time open-loop.

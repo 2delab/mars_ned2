@@ -24,7 +24,9 @@
   { "slug": "sync_async_tests",        "title": "Sync & Async Tests",        "subtitle": "Synchronisation Validation" },
   { "slug": "collision_tests",         "title": "Collision Tests",           "subtitle": "Safety Verification" },
   { "slug": "accuracy_tests",          "title": "Accuracy Tests",            "subtitle": "Repeatability Analysis" },
+  { "slug": "picknplace_val",           "title": "Pick & Place",             "subtitle": "Cycle Validation" },
   { "slug": "features_and_limits",     "title": "A Practical Summary",       "subtitle": "Features & Limitations" },
   { "slug": "future_work",             "title": "Future Work",               "subtitle": "Next Steps for MARS" },
-  { "slug": "demo",                    "title": "Demos",                     "subtitle": "System in Action" }
+  { "slug": "retrospective",           "title": "Retrospective",             "subtitle": "Plan vs Implementation" },
+  { "slug": "demo",                    "title": "Demo",                      "subtitle": "System in Action" }
 ]

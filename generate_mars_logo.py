@@ -15,7 +15,7 @@ HEIGHT = 900
 # Color palette — dark tech
 BG_TOP = (8, 12, 20)  # near-black navy
 BG_BOT = (14, 22, 38)  # slightly lighter deep blue
-ACCENT = (0, 200, 140)  # cyan-green glow (robotic/tech)
+ACCENT = (0, 200, 140)  # cyan-green glow 
 ACCENT2 = (0, 140, 220)  # electric blue secondary
 DIM_LINE = (0, 180, 120, 40)  # faint circuit trace
 GLOW_COL = (0, 220, 160)  # bright glow node color

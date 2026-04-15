@@ -6,7 +6,7 @@ title: ""
 
 # Base URL
 baseurl: "/mars_ned2" 
-url: "https://2delab.github.io/mars-ned2" 
+url: "https://2delab.github.io/mars_ned2" 
 
 
 plugins:
@@ -36,7 +36,7 @@ author:
   links:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/2delab/mars-ned2"
+      url: "https://github.com/2delab/mars_ned2"
 
 
 
@@ -55,4 +55,4 @@ minimal_mistakes_skin: "dark"
 search: true
 enable_copy_code_button: true
 
-repository_url: "https://github.com/2delab/mars-ned2"
+repository_url: "https://github.com/2delab/mars_ned2"

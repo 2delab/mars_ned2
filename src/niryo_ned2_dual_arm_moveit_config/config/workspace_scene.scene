@@ -1,0 +1,12 @@
+workspace_scene
+* workspace_platform
+0 0 0
+0 0 0 1
+1
+box
+3.0 3.0 0.01
+0 0 -0.015
+0 0 0 1
+0 0 0 1
+0
+.
